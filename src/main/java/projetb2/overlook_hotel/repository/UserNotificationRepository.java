@@ -3,9 +3,9 @@ package projetb2.overlook_hotel.repository;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import projetb2.overlook_hotel.model.Notification;
+import projetb2.overlook_hotel.model.UserNotification;
 
 @Repository
-public interface NotificationRepository extends JpaRepository<Notification, Long> {
-    
+public interface UserNotificationRepository extends JpaRepository<UserNotification, Long> {
+
 }

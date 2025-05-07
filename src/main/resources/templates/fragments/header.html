@@ -1,23 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Header Fragment</title>
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
+    <header class="header">
+        <!-- Top header -->
+        <div class="top-header">
+            <div class="container">
+                <!-- Logo -->
+                <a href="/" class="logo">
+                    <img src="https://via.placeholder.com/40" alt="Logo">
+                    <span class="logo-text">Suite Dream</span>
+                </a>
 
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-        </nav>
+                <!-- Right side items -->
+                <div class="right-items">
+                    <!-- Language selector -->
+                    <div class="dropdown">
+                        <button class="dropdown-button">
+                            <img src="https://via.placeholder.com/24x16" alt="Français" class="flag-icon">
+                            <span class="language-text">Français</span>
+                            <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <div class="dropdown-item">
+                                <img src="https://via.placeholder.com/24x16" alt="Français" class="flag-icon">
+                                <span>Français</span>
+                            </div>
+                            <div class="dropdown-item">
+                                <img src="https://via.placeholder.com/24x16" alt="English" class="flag-icon">
+                                <span>English</span>
+                            </div>
+                            <div class="dropdown-item">
+                                <img src="https://via.placeholder.com/24x16" alt="Español" class="flag-icon">
+                                <span>Español</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact icon -->
+                    <button class="contact-button" aria-label="Contact">
+                        <i class="fas fa-question-circle" style="font-size: 1.25rem;"></i>
+                    </button>
+
+                    <!-- Authentication - Logged Out State -->
+                    <div class="auth-buttons logged-out">
+                        <button id="loginButton" class="button button-primary">
+                            Login/Register
+                        </button>
+                    </div>
+
+                    <!-- Authentication - Logged In State -->
+                    <div class="auth-buttons logged-in">
+                        <div class="dropdown">
+                            <button class="button button-outline">
+                                <i class="fas fa-user" style="font-size: 0.875rem;"></i>
+                                <span>Mon profil</span>
+                                <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i>
+                            </button>
+                            <div class="dropdown-content">
+                                <div class="dropdown-item">
+                                    <i class="fas fa-user" style="margin-right: 8px; font-size: 0.875rem;"></i>
+                                    <span>Mon profil</span>
+                                </div>
+                                <div class="dropdown-item">
+                                    <i class="fas fa-sign-out-alt" style="margin-right: 8px; font-size: 0.875rem;"></i>
+                                    <span>Se déconnecter</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom header -->
+        <div class="bottom-header">
+            <div class="container">
+                <!-- Add bottom header content here if needed -->
+            </div>
+        </div>
     </header>
-</body>
+        const loginButton = document.getElementById('loginButton');
+        const loginModal = document.getElementById('loginModal');
+        const closeModal = document.getElementById('closeModal');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
 
-</html>
+        // Open modal when login button is clicked
+        loginButton.addEventListener('click', function() {
+            loginModal.style.display = 'flex';
+        });
+
+        // Close modal when close button is clicked
+        closeModal.addEventListener('click', function() {
+            loginModal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside the modal content
+        window.addEventListener('click', function(event) {
+            if (event.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+
+        // Tab functionality
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                tabs.forEach(t => t.classList.remove('active'));
+
+                // Add active class to clicked tab
+                this.classList.add('active');
+
+                // Hide all tab contents
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Show the corresponding tab content
+                const tabId = this.getAttribute('data-tab');
+                if (tabId === 'customer') {
+                    document.getElementById('customerTab').classList.add('active');
+                } else if (tabId === 'employee') {
+                    document.getElementById('employeeTab').classList.add('active');
+                }
+            });
+        });
+
+        // Toggle login state (for demo purposes)
+        function toggleLoginState() {
+            const loggedOutElements = document.querySelectorAll('.logged-out');
+            const loggedInElements = document.querySelectorAll('.logged-in');
+ 
+            loggedOutElements.forEach(el => {
+                el.style.display = el.style.display === 'none' ? 'flex' : 'none';
+            });
+            
+            loggedInElements.forEach(el => {
+                el.style.display = el.style.display === 'flex' ? 'none' : 'flex';
+            });
+        }

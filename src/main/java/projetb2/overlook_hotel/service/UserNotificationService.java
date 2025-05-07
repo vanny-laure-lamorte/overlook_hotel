@@ -3,12 +3,12 @@ package projetb2.overlook_hotel.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import projetb2.overlook_hotel.repository.NotificationRepository;
+import projetb2.overlook_hotel.repository.UserNotificationRepository;
 
 @Service
-public class NotificationService {
+public class UserNotificationService {
     @Autowired
-    private NotificationRepository notificationRepository;
+    private UserNotificationRepository notificationRepository;
 
     // Example method to send a notification
     public void sendNotification(String message) {

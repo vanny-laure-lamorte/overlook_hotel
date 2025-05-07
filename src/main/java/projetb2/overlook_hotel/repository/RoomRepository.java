@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import projetb2.overlook_hotel.model.Room;
 
 @Repository
-public interface RoomRepository extends JpaRepository<Room, Long>  {
+public interface RoomRepository extends JpaRepository<Room, Long> {
 
 }
-

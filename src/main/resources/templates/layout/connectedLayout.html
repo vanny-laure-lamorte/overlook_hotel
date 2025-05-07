@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Overlook Hotel</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/custom-style.css">
+  <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+
+  <!-- JSS -->
+  <script src="js/bootstrap/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+  <!-- Include header -->
+  <header th:replace="fragments/header :: header"></header>
+
+  <!-- Main content -->
+  <!-- <main class="main-content" th:replace="~{::content}"></main> -->
+  <main class="main-content" th:replace="${fragmentPath} :: ${fragmentName}"></main>
+
+  <!-- Include footer -->
+  <!-- <footer th:replace="fragments/footer :: footer"></footer> -->
+
+</body>
+</html>

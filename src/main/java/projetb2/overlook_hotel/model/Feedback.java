@@ -16,9 +16,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="feedback")
 public class Feedback {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private int user_id;
     private String booking_id;
     private int rating;

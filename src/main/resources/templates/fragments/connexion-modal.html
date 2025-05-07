@@ -1,0 +1,88 @@
+
+    <!-- Login/Register Modal -->
+    <div th:fragment="connexion-modal" id="loginModal" class="modal">
+        <div class="modal-content">
+            <button id="closeModal" class="close-button">&times;</button>
+
+            <div class="tabs">
+                <div class="tab active" data-tab="customer">Login/Register</div>
+                <div class="tab" data-tab="employee">Employee/Admin</div>
+            </div>
+
+            <!-- Customer Tab -->
+            <div id="customerTab" class="tab-content active">
+                <div class="split-content">
+                    <div class="split-left">
+                        <div class="form-title">Login</div>
+                        <form>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" placeholder="your@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" placeholder="••••••••">
+                            </div>
+                            <button type="submit" class="button button-primary" style="width: 100%;">Login</button>
+                            <div style="text-align: center; margin-top: 16px;">
+                                <a href="#" style="color: #2563eb; text-decoration: none; font-size: 0.875rem;">Forgot password?</a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="split-right">
+                        <div class="form-title">Register</div>
+                        <form>
+                            <div class="form-group">
+                                <label for="registerName">Full Name</label>
+                                <input type="text" id="registerName" placeholder="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label for="registerEmail">Email</label>
+                                <input type="email" id="registerEmail" placeholder="your@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="registerPassword">Password</label>
+                                <input type="password" id="registerPassword" placeholder="••••••••">
+                            </div>
+                            <button type="submit" class="button button-primary" style="width: 100%;">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employee Tab -->
+            <div id="employeeTab" class="tab-content">
+                <div class="split-content">
+                    <div class="split-left">
+                        <div class="form-title">Employee Login</div>
+                        <form>
+                            <div class="form-group">
+                                <label for="employeeId">Employee ID</label>
+                                <input type="text" id="employeeId" placeholder="EMP12345">
+                            </div>
+                            <div class="form-group">
+                                <label for="employeePassword">Password</label>
+                                <input type="password" id="employeePassword" placeholder="••••••••">
+                            </div>
+                            <button type="submit" class="button button-primary" style="width: 100%;">Login</button>
+                        </form>
+                    </div>
+                    <!-- Admin Login -->
+                    <div class="split-right">
+                        <div class="form-title">Admin Login</div>
+                        <form>
+                            <div class="form-group">
+                                <label for="adminId">Admin ID</label>
+                                <input type="text" id="adminId" placeholder="ADM12345">
+                            </div>
+                            <div class="form-group">
+                                <label for="adminPassword">Password</label>
+                                <input type="password" id="adminPassword" placeholder="••••••••">
+                            </div>
+                            <button type="submit" class="button button-primary" style="width: 100%;">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
