@@ -227,6 +227,12 @@
     color: var(--gray-600);
     border-color: var(--gray-600);
 }
+/*** CUSTOM BUTTON ***/
+
+/* btn connexion */
+.btn-connexion {
+    width: 100%;
+}
 
 /* btn white outline */
 .btn-outline-white {
