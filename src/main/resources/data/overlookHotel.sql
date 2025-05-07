@@ -1,15 +1,15 @@
-DROP DATABASE overlookhotel;
+-- DROP DATABASE overlookhotel;
 
-CREATE DATABASE hotel;
-USE hotel;
+-- CREATE DATABASE hotel;
+-- USE hotel;
 
 -- Drop tables in the correct order
-DROP TABLE IF EXISTS feedbacks CASCADE;
-DROP TABLE IF EXISTS notifications CASCADE;
-DROP TABLE IF EXISTS bookings CASCADE;
-DROP TABLE IF EXISTS rooms CASCADE;
-DROP TABLE IF EXISTS hotel_users CASCADE;
-DROP TABLE IF EXISTS "roles" CASCADE;
+DROP TABLE IF EXISTS feedback CASCADE;
+DROP TABLE IF EXISTS user_notification CASCADE;
+DROP TABLE IF EXISTS booking CASCADE;
+DROP TABLE IF EXISTS room CASCADE;
+DROP TABLE IF EXISTS hotel_user CASCADE;
+DROP TABLE IF EXISTS "role" CASCADE;
 
 -- Drop types
 DROP TYPE IF EXISTS room_type CASCADE;
@@ -17,12 +17,12 @@ DROP TYPE IF EXISTS state_reservation CASCADE;
 
 
 -- Role
-CREATE TABLE IF NOT EXISTS "roles" (
+CREATE TABLE IF NOT EXISTS "role" (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255)
+    role_name VARCHAR(255)
 );
 
-INSERT INTO "roles" (name) VALUES
+INSERT INTO "role" (role_name) VALUES
 ('customer'),
 ('employee'),
 ('admin');
@@ -59,18 +59,18 @@ INSERT INTO hotel_user (first_name, last_name, dob, user_address, phone_number, 
 ('Vanny', 'Lamorte', '1993-12-25', '2 Boulevard de la République, Paris', '0987654321', 'bob.martin@example.com', 'password123', 3);
 
 -- room_type ENUM type for rooms
-CREATE TYPE room_type AS ENUM ('Room', 'Meeting', 'Spa');
+CREATE TYPE ROOM_TYPE AS ENUM ('Room', 'Meeting', 'Spa');
 
--- Rooms
+-- Room
 CREATE TABLE IF NOT EXISTS room (
     id SERIAL PRIMARY KEY,
-    type room_type,
+    accommodation_type ROOM_TYPE,
     price INT,
     capacity INT,
-    description TEXT
+    room_description TEXT
 );
 
-INSERT INTO room (type, price, capacity, description) VALUES
+INSERT INTO room (accommodation_type, price, capacity, room_description) VALUES
 ('Room', 120, 2, 'Standard room with a queen-sized bed'),
 ('Room', 150, 2, 'Superior room with a king-sized bed and a sea view'),
 ('Room', 100, 1, 'Basic room with a single bed'),
@@ -79,12 +79,12 @@ INSERT INTO room (type, price, capacity, description) VALUES
 ('Room', 110, 1, 'Cozy room with a single bed and city view');
 
 -- Meeting rooms
-INSERT INTO room (type, price, capacity, description) VALUES
+INSERT INTO room (accommodation_type, price, capacity, room_description) VALUES
 ('Meeting', 250, 20, 'Conference room with projector and seating for 20 people'),
 ('Meeting', 300, 30, 'Large meeting room with a video conferencing system');
 
 -- Spa rooms
-INSERT INTO room (type, price, capacity, description) VALUES
+INSERT INTO room (accommodation_type, price, capacity, room_description) VALUES
 ('Spa', 200, 2, 'Luxury spa room with a private jacuzzi'),
 ('Spa', 220, 2, 'Exclusive spa room with sauna and massage table');
 
@@ -102,8 +102,8 @@ CREATE TABLE IF NOT EXISTS booking (
     confirmation_number INT,
     guests INT,
     bill INT,
-    FOREIGN KEY (user_id) REFERENCES hotel_users(id),
-    FOREIGN KEY (room_id) REFERENCES rooms(id)
+    FOREIGN KEY (user_id) REFERENCES hotel_user(id),
+    FOREIGN KEY (room_id) REFERENCES room(id)
 );
 
 INSERT INTO booking (user_id, room_id, arriving_date, departure_date, booking_status, confirmation_number, guests, bill) VALUES
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS feedback (
     user_comment TEXT,
     response TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES hotel_users(id),
+    FOREIGN KEY (user_id) REFERENCES hotel_user(id),
     FOREIGN KEY (booking_id) REFERENCES booking(id)
 );
 
@@ -135,15 +135,15 @@ INSERT INTO feedback (user_id, booking_id, rating, user_comment, response, creat
 (5, 5, 4, 'Nice room, a bit more attention to detail would make it perfect.', 'We appreciate the feedback!', '2025-06-28 14:00:00');
 
 -- Notification
-CREATE TABLE IF NOT EXISTS notification (
+CREATE TABLE IF NOT EXISTS user_notification (
     id SERIAL PRIMARY KEY,
     user_id INT,
     user_message TEXT,
     created_at DATE,
-    FOREIGN KEY (user_id) REFERENCES hotel_users(id)
+    FOREIGN KEY (user_id) REFERENCES hotel_user(id)
 );
 
-INSERT INTO notification (user_id, user_message, created_at) VALUES
+INSERT INTO user_notification (user_id, user_message, created_at) VALUES
 (1, 'Your booking confirmation is pending. Please check back later.', '2025-06-10'),
 (2, 'Your booking has been confirmed. We look forward to seeing you!', '2025-06-15'),
 (3, 'Your booking has been accepted. Please enjoy your stay!', '2025-06-20'),
