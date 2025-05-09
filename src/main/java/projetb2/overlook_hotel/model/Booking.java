@@ -1,13 +1,11 @@
 package projetb2.overlook_hotel.model;
 
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -19,10 +17,27 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "user_id")
     private int userId;
+
+    @Column(name = "room_id")
     private int roomId;
-    private String startDate;
-    private String endDate;
-    private String status;
-    private double totalPrice;
+
+    @Column(name = "arriving_date")
+    private LocalDate arrivingDate;
+
+    @Column(name = "departure_date")
+    private LocalDate departureDate;
+
+    @Column(name = "booking_status")
+    private String bookingStatus;
+
+    @Column(name = "confirmation_number")
+    private int confirmationNumber;
+
+    private int guests;
+
+    @Column(name = "bill")
+    private int bill;
 }

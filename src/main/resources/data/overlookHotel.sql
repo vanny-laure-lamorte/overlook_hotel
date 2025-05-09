@@ -67,26 +67,28 @@ CREATE TABLE IF NOT EXISTS room (
     accommodation_type ROOM_TYPE,
     price INT,
     capacity INT,
-    room_description TEXT
+    room_description TEXT,
+    room_title VARCHAR(255) DEFAULT 'Room',
+    room_image VARCHAR(255) DEFAULT 'room.jpg'
 );
 
-INSERT INTO room (accommodation_type, price, capacity, room_description) VALUES
-('Room', 120, 2, 'Standard room with a queen-sized bed'),
-('Room', 150, 2, 'Superior room with a king-sized bed and a sea view'),
-('Room', 100, 1, 'Basic room with a single bed'),
-('Room', 130, 3, 'Family room with a queen-sized bed and a bunk bed'),
-('Room', 180, 2, 'Deluxe room with a king-sized bed and balcony'),
-('Room', 110, 1, 'Cozy room with a single bed and city view');
+INSERT INTO room (accommodation_type, price, capacity, room_description, room_title, room_image) VALUES
+('Room', 120, 2, 'Standard room with a queen-sized bed', 'Standard Queen Room', 'standard.jpg'),
+('Room', 150, 2, 'Superior room with a king-sized bed and a sea view', 'Superior Sea View', 'superior.jpg'),
+('Room', 100, 1, 'Basic room with a single bed', 'Basic Single Room', 'basic.jpg'),
+('Room', 130, 3, 'Family room with a queen-sized bed and a bunk bed', 'Family Room', 'family.jpg'),
+('Room', 180, 2, 'Deluxe room with a king-sized bed and balcony', 'Deluxe King Room', 'deluxe.jpg'),
+('Room', 110, 1, 'Cozy room with a single bed and city view', 'Cozy City Room', 'cozy.jpg');
 
 -- Meeting rooms
-INSERT INTO room (accommodation_type, price, capacity, room_description) VALUES
-('Meeting', 250, 20, 'Conference room with projector and seating for 20 people'),
-('Meeting', 300, 30, 'Large meeting room with a video conferencing system');
+INSERT INTO room (accommodation_type, price, capacity, room_description, room_title, room_image) VALUES
+('Meeting', 250, 20, 'Conference room with projector and seating for 20 people', 'Conference Room', 'conference.jpg'),
+('Meeting', 300, 30, 'Large meeting room with a video conferencing system', 'Large Meeting Room', 'meeting_large.jpg');
 
--- Spa rooms
-INSERT INTO room (accommodation_type, price, capacity, room_description) VALUES
-('Spa', 200, 2, 'Luxury spa room with a private jacuzzi'),
-('Spa', 220, 2, 'Exclusive spa room with sauna and massage table');
+-- Spa
+INSERT INTO room (accommodation_type, price, capacity, room_description, room_title, room_image) VALUES
+('Spa', 200, 2, 'Luxury spa room with a private jacuzzi', 'Spa with Jacuzzi', 'spa1.jpg'),
+('Spa', 220, 2, 'Exclusive spa room with sauna and massage table', 'Spa Sauna & Massage', 'spa2.jpg');
 
 -- state_reservation ENUM type for booking status
 CREATE TYPE state_reservation AS ENUM ('PENDING', 'ACCEPTED', 'DECLINED', 'CANCELLED', 'COMPLETED');

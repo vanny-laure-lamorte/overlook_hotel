@@ -1,5 +1,6 @@
 package projetb2.overlook_hotel.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
@@ -19,8 +20,19 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String type;
+
+    @Column(name = "accommodation_type")
+    private String accommodationType;
+
     private double price;
     private int capacity;
-    private String description;
+
+    @Column(name = "room_description")
+    private String roomDescription;
+
+    @Column(name = "room_title")
+    private String roomTitle;
+
+    @Column(name = "room_image")
+    private String roomImage;
 }

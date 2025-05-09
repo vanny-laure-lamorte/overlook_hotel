@@ -1,29 +1,37 @@
 package projetb2.overlook_hotel.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="feedback")
+@Table(name = "feedback")
 public class Feedback {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private int user_id;
-    private String booking_id;
+
+    @Column(name = "user_id")
+    private int userId;
+
+    @ManyToOne
+    @JoinColumn(name = "booking_id", referencedColumnName = "id")
+    private Booking booking;
+
     private int rating;
-    private String created_at;
+
+    @Column(name = "user_comment")
     private String comment;
+
     private String response;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 }
