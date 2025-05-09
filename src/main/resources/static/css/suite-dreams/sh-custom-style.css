@@ -1,0 +1,22 @@
+/* Icones & Logo */
+.flag-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 2px;
+}
+
+.btn-container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-container button {
+    margin: 0.5rem;
+  }
+
+  .fa-question-circle{
+    color: white;
+
+  }
