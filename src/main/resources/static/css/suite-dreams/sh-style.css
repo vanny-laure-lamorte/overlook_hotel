@@ -377,6 +377,7 @@ a {
     list-style: none;
     padding: 0;
     margin: 0;
+    font-size: 14px
 }
 
 .menu-list li {
@@ -460,7 +461,7 @@ a {
 
 .footer-legal span, .footer-legal a, .footer-links a {
     color: rgba(255, 255, 255, 0.7);
-    font-size: 14px;
+    font-size: 12px;
     text-decoration: none;
 }
 
@@ -515,7 +516,7 @@ a {
 
 .app-content p {
     margin-bottom: 8px;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.4;
     color: rgba(255, 255, 255, 0.9);
 }
@@ -537,7 +538,7 @@ a {
 }
 
 .store-badge {
-    height: 45px;
+    height: 35px;
     width: auto;
 }
 

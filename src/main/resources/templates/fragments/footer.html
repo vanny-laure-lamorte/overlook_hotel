@@ -21,16 +21,15 @@
     <!-- Second Section: Five Columns of Links -->
     <div class="footer-middle">
         <div class="footer-column">
-            <h3>Our Hotels</h3>
+            <h3>Our Facilities</h3>
             <ul>
-                <li><a th:href="@{/hotels}">Our Hotel’s Story</a></li>
                 <li><a th:href="@{/breakfast}">Our unlimited breakfast</a></li>
                 <li><a th:href="@{/super-rooms}">Our SuperRooms</a></li>
-                <li><a th:href="@{/new-look}">Our new look Suite Dreams</a></li>
                 <li><a th:href="@{/stay-smart}">Our StaySmart Hotel experience</a></li>
                 <li><a th:href="@{/rooms}">Our rooms</a></li>
+                <li><a th:href="@{/meeting-rooms}">Our meeting rooms</a></li>
+                <li><a th:href="@{/spa}">Our spas</a></li>
                 <li><a th:href="@{/restaurants}">Our restaurants</a></li>
-                <li><a th:href="@{/dinner}">Dinner</a></li>
             </ul>
         </div>
         <div class="footer-column">
@@ -55,17 +54,14 @@
                 <li><a th:href="@{/check-in}">Early check in/Late check out</a></li>
                 <li><a th:href="@{/deals}">Deals</a></li>
                 <li><a th:href="@{/wifi}">WiFi</a></li>
-                <li><a th:href="@{/trips}">Trips by Suite Dreams</a></li>
             </ul>
         </div>
         <div class="footer-column">
             <h3>Find out more</h3>
             <ul>
-                <li><a th:href="@{/careers}">Careers</a></li>
-                <li><a th:href="@{/press}">Press centre</a></li>
                 <li><a th:href="@{/company}">Our company</a></li>
+                <li><a th:href="@{/careers}">Our job offers</a></li>
                 <li><a th:href="@{/integrity}">Integrity statement</a></li>
-                <li><a th:href="@{/modern-slavery}">Modern Slavery Act statement</a></li>
                 <li><a th:href="@{/accessibility-guide}">Accessibility Guide</a></li>
                 <li><a th:href="@{/sustainability}">Sustainability</a></li>
                 <li><a th:href="@{/levelling-up}">Levelling Up report</a></li>
@@ -79,7 +75,7 @@
                 <div class="app-image">
                     <img th:src="@{/images/app-mobile/app-phone.png}" alt="Suite Dreams Mobile App" class="mobile-app-img">
                 </div>
-                <div>
+                <div classs="app-text">
                     <p>Find, book and explore our upgraded rooms in moments - even when you're on the go.</p>
                     <p>Get the best value prices at your fingertips.</p>
                     <p class="app-free">Free for iOS and Android.</p>
@@ -100,7 +96,7 @@
         <div class="footer-bottom-content">
             <div class="footer-bottom-row">
                 <div class="footer-legal">
-                    <span>&copy;Suite Dreams <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2025</span></span>
+                    <span>&copy;<b>Suite Dreams</b> <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2025</span></span>
                     <a th:href="@{/privacy}">Privacy policy</a>
                     <a th:href="@{/booking-terms}">Booking T&Cs</a>
                     <a th:href="@{/promo-terms}">Promotional T&Cs</a>
