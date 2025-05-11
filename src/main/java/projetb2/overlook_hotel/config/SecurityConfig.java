@@ -15,18 +15,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    "/api/auth/**",
-                    "/login", "/login/**", "/change-tab",
-                    "/css/**", "/js/**", "/images/**", "/",  "/error/**"
-                )
-                .permitAll()
-                .anyRequest().authenticated())
-            .exceptionHandling(exception -> exception
-                .accessDeniedPage("/error/403")
-            );
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/api/auth/**",
+                                "/login", "/login/**",
+                                "/css/**", "/js/**", "/images/**", "/", "/error/**")
+                        .permitAll()
+                        .requestMatchers("/test").authenticated()
+                        .anyRequest().authenticated())
+                .exceptionHandling(exception -> exception
+                        .accessDeniedPage("/error/403"));
 
         return http.build();
     }

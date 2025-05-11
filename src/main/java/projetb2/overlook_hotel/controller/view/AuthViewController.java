@@ -54,8 +54,8 @@ public class AuthViewController {
                     "http://localhost:8080/api/auth/login",
                     request,
                     String.class);
-
-            return "redirect:/dashboard";
+        model.addAttribute("fragmentPath", "fragments/test.html");
+        model.addAttribute("fragmentName", "test");            return "layout/connectedLayout";
 
         } catch (HttpClientErrorException e) {
             model.addAttribute("loginError", e.getResponseBodyAsString());
