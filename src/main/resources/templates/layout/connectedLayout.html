@@ -23,11 +23,10 @@
 <body>
 
   <!-- Include header -->
-  <header th:replace="fragments/header :: header"></header>
+  <header th:replace="~{fragments/header :: header}"></header>
 
   <!-- Main content -->
-  <!-- <main class="main-content" th:replace="~{::content}"></main> -->
-  <main class="main-content" th:replace="${fragmentPath} :: ${fragmentName}"></main>
+  <main class="main-content" th:replace="~{${fragmentPath} :: ${fragmentName}}"></main>
 
   <!-- Include footer -->
   <footer th:replace="fragments/footer :: footer"></footer>
