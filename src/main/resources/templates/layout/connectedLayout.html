@@ -2,35 +2,30 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Overlook Hotel</title>
-
+  <title>Suite Dreams</title>
   <!-- CSS -->
   <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
   <!-- Suite Dreams CSS -->
   <link rel="stylesheet" href="css/suite-dreams/sh-colors.css">
   <link rel="stylesheet" href="css/suite-dreams/sh-buttons.css">
   <link rel="stylesheet" href="css/suite-dreams/sh-fonts.css">
   <link rel="stylesheet" href="css/suite-dreams/sh-style.css">
   <link rel="stylesheet" href="css/suite-dreams/sh-custom-style.css">
-
   <!-- JSS -->
   <script src="js/bootstrap/bootstrap.min.js"></script>
   <script src="js/fontawesome/fontawesome.min.js"></script>
-
 </head>
 <body>
-
   <!-- Include header -->
   <header th:replace="fragments/header :: header"></header>
 
   <!-- Main content -->
-  <!-- <main class="main-content" th:replace="~{::content}"></main> -->
-  <main class="main-content" th:replace="${fragmentPath} :: ${fragmentName}"></main>
-
+  <main>
+    <div th:insert="fragments/booking-search-widget :: booking-search-widget"></div>
+    <div class="main-content" th:replace="${fragmentPath} :: ${fragmentName}"></div>
+  </main>
   <!-- Include footer -->
   <footer th:replace="fragments/footer :: footer"></footer>
-
 </body>
 </html>

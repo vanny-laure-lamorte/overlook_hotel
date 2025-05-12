@@ -1,0 +1,100 @@
+<!-- Hotel Search Bar - Horizontal Layout -->
+<div th:fragment="booking-search-widget" id="booking-search-widget">
+    <div class="search-inner">
+        <h2 class="search-title">Book your hotel</h2>
+        <form th:action="@{/search}" method="get" class="search-form">
+            <div class="search-fields-container">
+                <!-- Destination Field -->
+                <div class="search-field destination-field">
+                    <label for="destination">Destination / Hotel</label>
+                    <div class="input-container">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-map-marker-alt field-icon"></i>
+                            <span class="separator-line"></span>
+                        </div>
+                        <input
+                            type="text"
+                            id="destination"
+                            name="destination"
+                            placeholder="City, town or hotel name"
+                            required
+                        >
+                    </div>
+                </div>
+                <!-- Check-in Field -->
+                <div class="search-field date-field">
+                    <label for="check-in">Check in</label>
+                    <div class="input-container">
+                        <div class="icon-wrapper">
+                            <i class="far fa-calendar-alt field-icon"></i>
+                            <span class="separator-line"></span>
+                        </div>
+                        <input
+                            type="text"
+                            id="check-in"
+                            name="checkIn"
+                            class="datepicker"
+                            placeholder="Add date"
+                            readonly
+                            required
+                        >
+                    </div>
+                </div>
+                <!-- Check-out Field -->
+                <div class="search-field date-field">
+                    <label for="check-out">Check out</label>
+                    <div class="input-container">
+                        <div class="icon-wrapper">
+                            <i class="far fa-calendar-alt field-icon"></i>
+                            <span class="separator-line"></span>
+                        </div>
+                        <input
+                            type="text"
+                            id="check-out"
+                            name="checkOut"
+                            class="datepicker"
+                            placeholder="Add date"
+                            readonly
+                            required
+                        >
+                    </div>
+                </div>
+                <!-- Two-Part: Rooms & Guests -->
+                <div class="search-field rooms-guests-field">
+                    <label for="rooms-guests">Rooms & guests</label>
+                    <div class="input-container dual-input" id="rooms-dropdown-container">
+                        <!-- Rooms Field -->
+                        <div class="dual-part rooms-part">
+                            <div class="icon-wrapper">
+                                <i class="fas fa-bed field-icon"></i>
+                                <span class="separator-line"></span>
+                            </div>
+                            <span class="dual-value" id="rooms-display">1</span>
+                        </div>
+                        <!-- Guests Field -->
+                        <div class="dual-part guests-part">
+                            <div class="icon-wrapper">
+                                <i class="fas fa-user field-icon"></i>
+                                <span class="separator-line"></span>
+                            </div>
+                            <span class="dual-value" id="guests-display">2 Adults, 0 Children</span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </div>
+                        <!-- Rooms & Guests Dropdown -->
+                        <div th:insert="fragments/booking-search-room-guest-form :: fgt-booking-search-room-guest-form"></div>
+                    </div>
+                </div>
+                <!-- Search Button -->
+                <div class="search-field button-field">
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+            </div>
+            <!-- Hidden fields for form submission -->
+            <input type="hidden" name="roomCount" id="room-count" value="1">
+            <input type="hidden" name="adultCount" id="adult-count" value="2">
+            <input type="hidden" name="childCount" id="child-count" value="0">
+        </form>
+    </div>
+</div>
