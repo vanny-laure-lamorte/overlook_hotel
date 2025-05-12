@@ -1,4 +1,5 @@
-/*** GENERAL ***/
+/*** GLOBAL ***/
+
 * {
     margin: 0;
     padding: 0;
@@ -43,6 +44,13 @@ p {
 
 a {
     text-decoration: none;
+}
+
+/* Error message */
+.error-message {
+    color: var(--red-900);
+
+    text-align: center;
 }
 
 /*** HEADER ***/
