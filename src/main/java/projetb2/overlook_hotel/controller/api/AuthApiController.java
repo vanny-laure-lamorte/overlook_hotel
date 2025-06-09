@@ -6,9 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import projetb2.overlook_hotel.model.Role;
-import projetb2.overlook_hotel.model.UserHotel;
+import projetb2.overlook_hotel.model.HotelUser;
 import projetb2.overlook_hotel.repository.RoleRepository;
-import projetb2.overlook_hotel.repository.UserHotelRepository;
+import projetb2.overlook_hotel.repository.HotelUserRepository;
 
 import java.util.Optional;
 
@@ -17,7 +17,7 @@ import java.util.Optional;
 public class AuthApiController {
 
     @Autowired
-    private UserHotelRepository userRepo;
+    private HotelUserRepository userRepo;
 
     @Autowired
     private RoleRepository roleRepo;
@@ -42,7 +42,7 @@ public class AuthApiController {
         Role customerRole = roleRepo.findByRoleName("customer").orElseThrow();
         System.out.println("-----> Role for customer: " + customerRole.getRoleName());
 
-        UserHotel user = new UserHotel();
+        HotelUser user = new HotelUser();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
@@ -63,13 +63,13 @@ public class AuthApiController {
                 System.out.println("Encoded : "+encoder.encode("password123"));
         System.out.println("-----> Login request: " + email + " | employeeTab: " + employeeTab);
 
-        Optional<UserHotel> userOpt = userRepo.findByEmail(email);
+        Optional<HotelUser> userOpt = userRepo.findByEmail(email);
         if (userOpt.isEmpty()) {
             System.out.println("-----> No account found with this email: " + email);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No account found with this email");
         }
 
-        UserHotel user = userOpt.get();
+        HotelUser user = userOpt.get();
         System.out.println("-----> User found: " + user.getEmail());
 
         System.out.println("-----> password: " + password + " | user.password: " + user.getUserPassword());

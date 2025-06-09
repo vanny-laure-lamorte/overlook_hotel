@@ -1,28 +1,30 @@
 package projetb2.overlook_hotel.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
+import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
+@Entity
+@Table(name="booking")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name="booking")
 public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "user_id")
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private HotelUser user;
 
-    @Column(name = "room_id")
-    private int roomId;
+    @ManyToOne
+    @JoinColumn(name = "room_id", referencedColumnName = "id")
+    private Room room;
 
     @Column(name = "arriving_date")
     private LocalDate arrivingDate;
@@ -36,8 +38,9 @@ public class Booking {
     @Column(name = "confirmation_number")
     private int confirmationNumber;
 
-    private int guests;
+    private int adults;
+    private int children;
 
-    @Column(name = "bill")
     private int bill;
+
 }

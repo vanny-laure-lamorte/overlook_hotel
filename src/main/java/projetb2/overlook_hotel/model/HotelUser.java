@@ -18,7 +18,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "hotel_user")
-public class UserHotel {
+public class HotelUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

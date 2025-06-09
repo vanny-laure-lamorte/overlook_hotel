@@ -102,19 +102,20 @@ CREATE TABLE IF NOT EXISTS booking (
     departure_date DATE,
     booking_status state_reservation DEFAULT 'PENDING',
     confirmation_number INT,
-    guests INT,
+    adults INT,
+    children INT,
     bill INT,
     FOREIGN KEY (user_id) REFERENCES hotel_user(id),
     FOREIGN KEY (room_id) REFERENCES room(id)
 );
 
-INSERT INTO booking (user_id, room_id, arriving_date, departure_date, booking_status, confirmation_number, guests, bill) VALUES
-(1, 1, '2025-06-10', '2025-06-12', 'PENDING', 1001, 2, 200),
-(2, 2, '2025-06-15', '2025-06-16', 'ACCEPTED', 1002, 10, 2500),
-(3, 3, '2025-06-20', '2025-06-22', 'PENDING', 1003, 4, 600),
-(4, 4, '2025-06-05', '2025-06-07', 'DECLINED', 1004, 2, 240),
-(5, 5, '2025-06-25', '2025-06-28', 'PENDING', 1005, 2, 360),
-(6, 6, '2025-06-30', '2025-07-02', 'ACCEPTED', 1006, 2, 400);
+INSERT INTO booking (user_id, room_id, arriving_date, departure_date, booking_status, confirmation_number, adults, children, bill) VALUES
+(1, 1, '2025-06-10', '2025-06-12', 'PENDING', 1001, 2, 1, 200),
+(2, 2, '2025-06-15', '2025-06-16', 'ACCEPTED', 1002, 10, 2, 2500),
+(3, 3, '2025-06-20', '2025-06-22', 'PENDING', 1003, 4, 0, 600),
+(4, 4, '2025-06-05', '2025-06-07', 'DECLINED', 1004, 2, 0, 240),
+(5, 5, '2025-06-25', '2025-06-28', 'PENDING', 1005, 2, 0, 360),
+(6, 6, '2025-06-30', '2025-07-02', 'ACCEPTED', 1006, 2, 3, 400);
 
 -- Feedback
 CREATE TABLE IF NOT EXISTS feedback (
