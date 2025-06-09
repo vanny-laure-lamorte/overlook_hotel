@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/suite-dreams/sh-custom-style.css">
   <!-- JSS -->
   <script src="js/bootstrap/bootstrap.min.js"></script>
-  <script src="js/fontawesome/fontawesome.min.js"></script>
+  <!-- <script src="js/fontawesome/fontawesome.min.js"></script> -->
 </head>
 <body>
   <!-- Include header -->
@@ -22,10 +22,12 @@
 
   <!-- Main content -->
   <main>
-    <div th:insert="fragments/booking-search-widget :: booking-search-widget"></div>
-    <div class="main-content" th:replace="${fragmentPath} :: ${fragmentName}"></div>
+    <!-- <div th:insert="fragments/booking-search-widget :: booking-search-widget"></div> -->
+    <!-- <div th:insert="fragments/rooms-list :: fgt-room-list"></div> -->
+
+    <div class="main-content" th:replace="~{${fragmentPath} :: ${fragmentName}}"></div>
   </main>
   <!-- Include footer -->
-  <footer th:replace="fragments/footer :: footer"></footer>
+  <footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
 </html>

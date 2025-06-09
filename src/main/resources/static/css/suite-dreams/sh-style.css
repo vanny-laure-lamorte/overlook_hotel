@@ -889,6 +889,260 @@ a {
     background-color: #2a0b3a;
 }
 
+/*** OUR ROOMS ***/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #5a287d;
+    margin-bottom: 0.5rem;
+}
+
+.page-description {
+    font-size: 1.1rem;
+    color: #6b7280;
+}
+
+.rooms-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.room-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease;
+}
+
+.room-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (min-width: 768px) {
+    .room-card {
+        flex-direction: row;
+    }
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .image-container {
+        width: 33.333%;
+        height: auto;
+        min-height: 300px;
+    }
+}
+
+.room-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background: rgba(255, 255, 255, 1);
+}
+
+.nav-button.prev {
+    left: 10px;
+}
+
+.nav-button.next {
+    right: 10px;
+}
+
+.image-counter {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+}
+
+.room-details {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.room-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.room-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #5a287d;
+    margin: 0;
+}
+
+.rating-container {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.star {
+    color: #fbbf24;
+    font-size: 1.2rem;
+}
+
+.rating-score {
+    font-weight: 500;
+    color: #374151;
+}
+
+.review-count {
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+.room-description {
+    color: #6b7280;
+    margin-bottom: 1rem;
+}
+
+.amenities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.badge {
+    background: #f3f4f6;
+    color: #6b7280;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    border: 1px solid #e5e7eb;
+}
+
+.room-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.price-section {
+    text-align: right;
+}
+
+.price-display {
+    display: none;
+}
+
+.price-display.show {
+    display: block;
+}
+
+.price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #5a287d;
+}
+
+.price-label {
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+.show-price-btn {
+    background: none;
+    border: none;
+    color: #5a287d;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.book-btn {
+    background: #5a287d;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.book-btn:hover {
+    background: #4a1f6b;
+}
+
+@media (max-width: 640px) {
+    .room-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .book-btn {
+        width: 100%;
+    }
+}
+
 
 /*** RESPONSIVE ADJUSTEMENTS ***/
 

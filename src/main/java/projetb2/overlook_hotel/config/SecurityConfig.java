@@ -20,7 +20,8 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/auth/**",
                                 "/login", "/login/**",
-                                "/css/**", "/js/**", "/images/**", "/", "/error/**")
+                                "/css/**", "/js/**", "/images/**", "/fonts/roboto/**", "/", "/error/**", "api/admin/**",
+                                "/rooms-list")
                         .permitAll()
                         .requestMatchers("/test").authenticated()
                         .anyRequest().authenticated())
