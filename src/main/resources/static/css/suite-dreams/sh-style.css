@@ -763,7 +763,7 @@ strong {
     position: relative;
 }
 
-#booking-search-room-guest-form {
+#dropdown-room-guest {
     display: none;
     position: absolute;
     top: calc(100% + 4px);
@@ -778,8 +778,8 @@ strong {
     box-sizing: border-box;
 }
 
-#rooms-dropdown-container:hover #booking-search-room-guest-form,
-#rooms-dropdown-container:focus-within #booking-search-room-guest-form {
+#rooms-dropdown-container:hover #dropdown-room-guest,
+#rooms-dropdown-container:focus-within #dropdown-room-guest {
   display: block;
 }
 

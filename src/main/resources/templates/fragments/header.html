@@ -1,81 +1,75 @@
+<header class="header">
+    <!-- Top header -->
+    <div class="top-header">
+        <div class="container">
+            <!-- Logo -->
+            <a href="/" class="logo">
+                <img th:src="@{/images/icone-logo/suite-dreams-logo-trans.png}" alt="Logo">
+                <span class="logo-text">Suite Dream</span>
+            </a>
+            <div class="right-items">
+                <!-- Language selector -->
+                <div class="dropdown">
+                    <button class="dropdown-button">
+                        <img th:src="@{/images/icone-logo/icons8-france-circulaire.png}" alt="Français" class="flag-icon"/>
+                    </button>
+                    <div class="dropdown-content">
+                        <div class="dropdown-item">
+                            <img th:src="@{/images/icone-logo/icons8-france-circulaire.png}" alt="Français" class="flag-icon">
+                            <span>Français</span>
+                        </div>
+                        <div class="dropdown-item">
+                            <img th:src="@{/images/icone-logo/icons8-uk-circulaire.png}" alt="English" class="flag-icon">
+                            <span>English</span>
+                        </div>
+                        <div class="dropdown-item">
+                            <img th:src="@{/images/icone-logo/icons8-espagne-circulaire.png}" alt="Español" class="flag-icon">
+                            <span>Español</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Contact icon -->
+                <button class="contact-button" aria-label="Contact">
+                    <i class="fas fa-question-circle" style="font-size: 25px;"></i>
+                </button>
 
-    <header class="header">
-        <!-- Top header -->
-        <div class="top-header">
-            <div class="container">
-                <!-- Logo -->
-                <a href="/" class="logo">
-                    <img src="images/icone-logo/suite-dreams-logo-trans.png" alt="Logo">
-                    <span class="logo-text">Suite Dream</span>
-                </a>
+                <!-- Authentication - Logged Out State -->
+                <div class="auth-buttons logged-out">
+                    <button id="loginButton" class="btn btn-outline-white">
+                        Login/Register
+                    </button>
+                </div>
 
-                <div class="right-items">
-                    <!-- Language selector -->
+                <!-- Authentication - Logged In State -->
+                <div class="auth-buttons logged-in">
                     <div class="dropdown">
-                        <button class="dropdown-button">
-                            <img src="images/icone-logo/icons8-france-circulaire.png" alt="Français" class="flag-icon"/>
+                        <button class="btn button-outline">
+                            <i class="fas fa-user" style="font-size: 0.875rem;"></i>
+                            <span>Mon profil</span>
+                            <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i>
                         </button>
                         <div class="dropdown-content">
                             <div class="dropdown-item">
-                                <img src="images/icone-logo/icons8-france-circulaire.png" alt="Français" class="flag-icon">
-                                <span>Français</span>
-                            </div>
-                            <div class="dropdown-item">
-                                <img src="images/icone-logo/icons8-uk-circulaire.png" alt="English" class="flag-icon">
-                                <span>English</span>
-                            </div>
-                            <div class="dropdown-item">
-                                <img src="images/icone-logo/icons8-espagne-circulaire.png" alt="Espanol" class="flag-icon">
-                                <span>Español</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Contact icon -->
-                    <button class="contact-button" aria-label="Contact">
-                        <i class="fas fa-question-circle" style="font-size: 25px;"></i>
-                    </button>
-
-                    <!-- Authentication - Logged Out State -->
-                    <div class="auth-buttons logged-out">
-                        <button id="loginButton" class="btn btn-outline-white ">
-                            Login/Register
-                        </button>
-                    </div>
-
-                    <!-- Authentication - Logged In State -->
-                    <div class="auth-buttons logged-in">
-                        <div class="dropdown">
-                            <button class="btn button-outline">
-                                <i class="fas fa-user" style="font-size: 0.875rem;"></i>
+                                <i class="fas fa-user" style="margin-right: 8px; font-size: 0.875rem;"></i>
                                 <span>Mon profil</span>
-                                <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i>
-                            </button>
-                            <div class="dropdown-content">
-                                <div class="dropdown-item">
-                                    <i class="fas fa-user" style="margin-right: 8px; font-size: 0.875rem;"></i>
-                                    <span>Mon profil</span>
-                                </div>
-                                <div class="dropdown-item">
-                                    <i class="fas fa-sign-out-alt" style="margin-right: 8px; font-size: 0.875rem;"></i>
-                                    <span>Se déconnecter</span>
-                                </div>
+                            </div>
+                            <div class="dropdown-item">
+                                <i class="fas fa-sign-out-alt" style="margin-right: 8px; font-size: 0.875rem;"></i>
+                                <span>Se déconnecter</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Bottom header -->
-        <div class="bottom-header">
-            <div class="container">
-                <!-- Add bottom header content here if needed -->
-            </div>
+    <!-- Bottom header -->
+    <div class="bottom-header">
+        <div class="container">
+            <!-- Add bottom header content here if needed -->
         </div>
-
-        <div>
-        </div>
+    </div>
     </header>
         const loginButton = document.getElementById('loginButton');
         const loginModal = document.getElementById('loginModal');
