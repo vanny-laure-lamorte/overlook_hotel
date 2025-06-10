@@ -1,7 +1,7 @@
 <!-- Switch tabs buttons -->
 <div th:fragment="connexion-modal" id="loginModal" class="modal">
     <div class="modal-content">
-        <button id="closeModal" class="close-button">&times;</button>
+        <a th:href=@{/} id="closeModal" class="close-button">&times;</a>
         <div class="tabs">
             <form method="post" action="/login" class="form-tab"
                 th:classappend="${selectedTab} == 'customer' ? ' active' : ''">

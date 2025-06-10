@@ -11,19 +11,23 @@
                 <!-- Language selector -->
                 <div class="dropdown">
                     <button class="dropdown-button">
-                        <img th:src="@{/images/icone-logo/icons8-france-circulaire.png}" alt="Français" class="flag-icon"/>
+                        <img th:src="@{/images/icone-logo/icons8-france-circulaire.png}" alt="Français"
+                            class="flag-icon" />
                     </button>
                     <div class="dropdown-content">
                         <div class="dropdown-item">
-                            <img th:src="@{/images/icone-logo/icons8-france-circulaire.png}" alt="Français" class="flag-icon">
+                            <img th:src="@{/images/icone-logo/icons8-france-circulaire.png}" alt="Français"
+                                class="flag-icon">
                             <span>Français</span>
                         </div>
                         <div class="dropdown-item">
-                            <img th:src="@{/images/icone-logo/icons8-uk-circulaire.png}" alt="English" class="flag-icon">
+                            <img th:src="@{/images/icone-logo/icons8-uk-circulaire.png}" alt="English"
+                                class="flag-icon">
                             <span>English</span>
                         </div>
                         <div class="dropdown-item">
-                            <img th:src="@{/images/icone-logo/icons8-espagne-circulaire.png}" alt="Español" class="flag-icon">
+                            <img th:src="@{/images/icone-logo/icons8-espagne-circulaire.png}" alt="Español"
+                                class="flag-icon">
                             <span>Español</span>
                         </div>
                     </div>
@@ -35,9 +39,7 @@
 
                 <!-- Authentication - Logged Out State -->
                 <div class="auth-buttons logged-out">
-                    <button id="loginButton" class="btn btn-outline-white">
-                        Login/Register
-                    </button>
+                    <a th:href="@{/login}" class="btn btn-outline-white">Login/Register</a>
                 </div>
 
                 <!-- Authentication - Logged In State -->
@@ -70,62 +72,62 @@
             <!-- Add bottom header content here if needed -->
         </div>
     </div>
-    </header>
-        const loginButton = document.getElementById('loginButton');
-        const loginModal = document.getElementById('loginModal');
-        const closeModal = document.getElementById('closeModal');
-        const tabs = document.querySelectorAll('.tab');
-        const tabContents = document.querySelectorAll('.tab-content');
+</header>
+const loginButton = document.getElementById('loginButton');
+const loginModal = document.getElementById('loginModal');
+const closeModal = document.getElementById('closeModal');
+const tabs = document.querySelectorAll('.tab');
+const tabContents = document.querySelectorAll('.tab-content');
 
-        // Open modal when login button is clicked
-        loginButton.addEventListener('click', function() {
-            loginModal.style.display = 'flex';
-        });
+// Open modal when login button is clicked
+loginButton.addEventListener('click', function() {
+loginModal.style.display = 'flex';
+});
 
-        // Close modal when close button is clicked
-        closeModal.addEventListener('click', function() {
-            loginModal.style.display = 'none';
-        });
+// Close modal when close button is clicked
+closeModal.addEventListener('click', function() {
+loginModal.style.display = 'none';
+});
 
-        // Close modal when clicking outside the modal content
-        window.addEventListener('click', function(event) {
-            if (event.target === loginModal) {
-                loginModal.style.display = 'none';
-            }
-        });
+// Close modal when clicking outside the modal content
+window.addEventListener('click', function(event) {
+if (event.target === loginModal) {
+loginModal.style.display = 'none';
+}
+});
 
-        // Tab functionality
-        tabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                // Remove active class from all tabs
-                tabs.forEach(t => t.classList.remove('active'));
+// Tab functionality
+tabs.forEach(tab => {
+tab.addEventListener('click', function() {
+// Remove active class from all tabs
+tabs.forEach(t => t.classList.remove('active'));
 
-                // Add active class to clicked tab
-                this.classList.add('active');
+// Add active class to clicked tab
+this.classList.add('active');
 
-                // Hide all tab contents
-                tabContents.forEach(content => content.classList.remove('active'));
+// Hide all tab contents
+tabContents.forEach(content => content.classList.remove('active'));
 
-                // Show the corresponding tab content
-                const tabId = this.getAttribute('data-tab');
-                if (tabId === 'customer') {
-                    document.getElementById('customerTab').classList.add('active');
-                } else if (tabId === 'employee') {
-                    document.getElementById('employeeTab').classList.add('active');
-                }
-            });
-        });
+// Show the corresponding tab content
+const tabId = this.getAttribute('data-tab');
+if (tabId === 'customer') {
+document.getElementById('customerTab').classList.add('active');
+} else if (tabId === 'employee') {
+document.getElementById('employeeTab').classList.add('active');
+}
+});
+});
 
-        // Toggle login state (for demo purposes)
-        function toggleLoginState() {
-            const loggedOutElements = document.querySelectorAll('.logged-out');
-            const loggedInElements = document.querySelectorAll('.logged-in');
- 
-            loggedOutElements.forEach(el => {
-                el.style.display = el.style.display === 'none' ? 'flex' : 'none';
-            });
-            
-            loggedInElements.forEach(el => {
-                el.style.display = el.style.display === 'flex' ? 'none' : 'flex';
-            });
-        }
+// Toggle login state (for demo purposes)
+function toggleLoginState() {
+const loggedOutElements = document.querySelectorAll('.logged-out');
+const loggedInElements = document.querySelectorAll('.logged-in');
+
+loggedOutElements.forEach(el => {
+el.style.display = el.style.display === 'none' ? 'flex' : 'none';
+});
+
+loggedInElements.forEach(el => {
+el.style.display = el.style.display === 'flex' ? 'none' : 'flex';
+});
+}
