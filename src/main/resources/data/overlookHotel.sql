@@ -1,5 +1,4 @@
 -- DROP DATABASE overlookhotel;
-
 -- CREATE DATABASE hotel;
 -- USE hotel;
 
@@ -68,17 +67,18 @@ CREATE TABLE IF NOT EXISTS room (
     price INT,
     capacity INT,
     room_description TEXT,
+    amenities TEXT,
     room_title VARCHAR(255) DEFAULT 'Room',
     room_image VARCHAR(255) DEFAULT 'room.jpg'
 );
 
-INSERT INTO room (accommodation_type, price, capacity, room_description, room_title, room_image) VALUES
-('Room', 120, 2, 'Standard room with a queen-sized bed', 'Standard Queen Room', 'standard.jpg'),
-('Room', 150, 2, 'Superior room with a king-sized bed and a sea view', 'Superior Sea View', 'superior.jpg'),
-('Room', 100, 1, 'Basic room with a single bed', 'Basic Single Room', 'basic.jpg'),
-('Room', 130, 3, 'Family room with a queen-sized bed and a bunk bed', 'Family Room', 'family.jpg'),
-('Room', 180, 2, 'Deluxe room with a king-sized bed and balcony', 'Deluxe King Room', 'deluxe.jpg'),
-('Room', 110, 1, 'Cozy room with a single bed and city view', 'Cozy City Room', 'cozy.jpg');
+INSERT INTO room (accommodation_type, price, capacity, room_description, amenities, room_title, room_image) VALUES
+('Room', 250, 2, 'A cozy standard room featuring a comfortable queen-sized bed for restful nights. Perfect for couples or solo travelers seeking a relaxing stay.  Enjoy modern comforts in a bright and welcoming atmosphere.', 'Wi-Fi, Air conditioning, Private bathroom, TV', 'Standard Queen Room', 'standard-room-'),
+('Room', 390, 2, 'Our superior room offers a spacious layout with a luxurious king-sized bed.  Take in the breathtaking sea view from your private balcony. Ideal for guests looking for elegance, comfort, and serenity.', 'Wi-Fi, King bed, Sea view, Balcony, Mini-bar, Flat-screen TV', 'Superior Sea View', 'superior-room-'),
+('Room', 210, 1, 'Simple yet functional, this basic room includes a single bed for solo travelers. Perfect for short stays or business trips on a budget.', 'Wi-Fi, Single bed, Shared bathroom, Desk', 'Basic Single Room', 'basic-room-'),
+('Room', 320, 6, 'Designed for families, this spacious room includes a queen-sized bed and bunk beds. Fun, safe, and functional – perfect for parents traveling with kids. All the essentials plus thoughtful touches for a family-friendly stay.', 'Wi-Fi, Family bed setup, Private bathroom, TV, Kids-friendly', 'Family Room', 'family-room-'),
+('Room', 450, 2, 'Experience luxury in our deluxe room with a plush king-sized bed and private balcony. Unwind with a drink from the mini-bar or soak in the elegant bath tub. Ideal for romantic getaways or special occasions.', 'Wi-Fi, King bed, Balcony, Mini-bar, Bath tub, Coffee maker', 'Deluxe King Room', 'deluxe-room-'),
+('Room', 240, 1, 'A charming single room offering a stunning city view from your window. Equipped with a cozy bed and warm atmosphere to help you relax. Perfect for solo travelers looking for comfort and peace.', 'Wi-Fi, City view, Single bed, Private bathroom, Heating', 'Cozy City Room', 'cosy-room-');
 
 -- Meeting rooms
 INSERT INTO room (accommodation_type, price, capacity, room_description, room_title, room_image) VALUES

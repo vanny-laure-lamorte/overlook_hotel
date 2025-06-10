@@ -1,8 +1,12 @@
 package projetb2.overlook_hotel.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import projetb2.overlook_hotel.model.Room;
 import projetb2.overlook_hotel.repository.RoomRepository;
 
 @Service
@@ -10,25 +14,36 @@ public class RoomService {
     @Autowired
     private RoomRepository roomRepository;
 
-    // Example method to get all rooms
-    public void getAllRooms() {
-
+    /**
+    * Retrieves all rooms from the repository.
+    * @return a List<Room> containing all rooms.
+    */
+    public List<Room> getAllRooms() {
+        return roomRepository.findAll();
     }
 
-    // Example method to get a room by ID
+    /**
+     * Retrieves a room by its ID.
+     * @param id
+     */
     public void getRoomById(Long id) {
-    }
+        }
 
-    // Example method to create a new room
+    /**
+     * Creates a new room in the repository.
+     */
     public void createRoom() {
     }
 
-    // Example method to update an existing room
+    /**
+     * Updates an existing room in the repository.
+     */
     public void updateRoom() {
     }
 
-    // Example method to delete a room
+    /**
+     * Deletes a room from the repository.
+     */
     public void deleteRoom() {
     }
-    
 }

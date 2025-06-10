@@ -1,227 +1,60 @@
-
-<div th:fragment="fgt-rooms-list" class="container">
-    <header class="page-header">
-        <h1 class="page-title">Nos Chambres</h1>
-        <p class="page-description">Découvrez nos chambres confortables et élégantes pour votre séjour parfait</p>
-    </header>
-
+<div th:fragment="fgt-rooms-list" id="our-rooms">
+    <div class="page-title">
+        <h1 class="h1-purple">Nos Chambres</h1>
+        <p class="page-description">
+            We are delighted to offer a range of <strong>comfortable</strong> and <strong>stylish</strong> rooms to suit every <strong>traveler</strong>.
+            Whether you're here for business or leisure, you'll find the perfect space to relax and unwind.
+            Check our <strong>available rooms</strong> below and <strong>book now </strong>to enjoy a <strong>welcoming stay</strong> with us!
+        </p>
+    </div>
     <div class="rooms-list">
-        <!-- Chambre Deluxe -->
-        <div class="room-card">
+        <div class="room-card" th:each="room, stat : ${rooms}">
+            <!-- Image -->
             <div class="image-container">
-                <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&h=300&fit=crop" alt="Chambre Deluxe" class="room-image" data-room="0">
-                <button class="nav-button prev" onclick="prevImage(0)">‹</button>
-                <button class="nav-button next" onclick="nextImage(0)">›</button>
-                <div class="image-counter" id="counter-0">1/3</div>
+                <img
+                    th:each="i : ${#numbers.sequence(1, 3)}"
+                    th:src="@{'/images/rooms/' + ${room.roomImage} + ${i} + '.jpg'}"
+                    th:alt="${room.roomTitle + ' image ' + i}"
+                    class="room-image"/>
             </div>
+            <!-- Room title and description -->
             <div class="room-details">
                 <div class="room-header">
-                    <h2 class="room-name">Chambre Deluxe</h2>
+                    <h2 class="room-name" th:text="${room.roomTitle}">Room Title</h2>
                     <div class="rating-container">
                         <span class="star">★</span>
                         <span class="rating-score">4.8</span>
                         <span class="review-count">(124 avis)</span>
                     </div>
                 </div>
-                <p class="room-description">
-                    Chambre spacieuse avec vue sur la ville, lit king-size et salle de bain privative avec baignoire et douche.
-                </p>
+                <!-- room capacity and amenities -->
+                <div class="room-description">
+                    <p th:text="${room.roomDescription}"></p>
+                </div>
                 <div class="amenities">
-                    <span class="badge">30m²</span>
-                    <span class="badge">👥 Max 2 personnes</span>
-                    <span class="badge">Wi-Fi gratuit</span>
-                    <span class="badge">Climatisation</span>
-                    <span class="badge">Minibar</span>
-                    <span class="badge">+2 services</span>
+                    <div>
+                        <span class="badge">
+                            👥 capacity:
+                            <span th:text="${room.capacity}"></span>
+                        </span>
+                    </div>
+                    <div>
+                       <span th:each="amenity : ${room.amenitiesWords}"
+                            class="badge"
+                            th:text="${amenity}"></span>
+                    </div>
                 </div>
+                <!-- price and booking button -->
                 <div class="room-footer">
-                    <div class="price-section">
-                        <button class="show-price-btn" onclick="showPrice(0)">Afficher le prix</button>
-                        <div class="price-display" id="price-0">
-                            <div class="price">€180</div>
-                            <div class="price-label">par nuit</div>
-                        </div>
+                    <div class="price price-section">
+                        <span th:text="${room.price}"></span>
+                        € per night
                     </div>
-                    <button class="book-btn">Réserver maintenant</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Suite Junior -->
-        <div class="room-card">
-            <div class="image-container">
-                <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=500&h=300&fit=crop" alt="Suite Junior" class="room-image" data-room="1">
-                <button class="nav-button prev" onclick="prevImage(1)">‹</button>
-                <button class="nav-button next" onclick="nextImage(1)">›</button>
-                <div class="image-counter" id="counter-1">1/3</div>
-            </div>
-            <div class="room-details">
-                <div class="room-header">
-                    <h2 class="room-name">Suite Junior</h2>
-                    <div class="rating-container">
-                        <span class="star">★</span>
-                        <span class="rating-score">4.9</span>
-                        <span class="review-count">(86 avis)</span>
+                    <div class="book-now-section">
+                        <button class="book-btn">Book Now</button>
                     </div>
-                </div>
-                <p class="room-description">
-                    Suite élégante avec salon séparé, lit queen-size et vue panoramique sur le jardin de l'hôtel.
-                </p>
-                <div class="amenities">
-                    <span class="badge">40m²</span>
-                    <span class="badge">👥 Max 2 personnes</span>
-                    <span class="badge">Wi-Fi gratuit</span>
-                    <span class="badge">Climatisation</span>
-                    <span class="badge">Minibar</span>
-                    <span class="badge">+2 services</span>
-                </div>
-                <div class="room-footer">
-                    <div class="price-section">
-                        <button class="show-price-btn" onclick="showPrice(1)">Afficher le prix</button>
-                        <div class="price-display" id="price-1">
-                            <div class="price">€250</div>
-                            <div class="price-label">par nuit</div>
-                        </div>
-                    </div>
-                    <button class="book-btn">Réserver maintenant</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Chambre Familiale -->
-        <div class="room-card">
-            <div class="image-container">
-                <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=500&h=300&fit=crop" alt="Chambre Familiale" class="room-image" data-room="2">
-                <button class="nav-button prev" onclick="prevImage(2)">‹</button>
-                <button class="nav-button next" onclick="nextImage(2)">›</button>
-                <div class="image-counter" id="counter-2">1/3</div>
-            </div>
-            <div class="room-details">
-                <div class="room-header">
-                    <h2 class="room-name">Chambre Familiale</h2>
-                    <div class="rating-container">
-                        <span class="star">★</span>
-                        <span class="rating-score">4.7</span>
-                        <span class="review-count">(92 avis)</span>
-                    </div>
-                </div>
-                <p class="room-description">
-                    Chambre idéale pour les familles avec deux lits doubles et espace de jeu pour enfants.
-                </p>
-                <div class="amenities">
-                    <span class="badge">45m²</span>
-                    <span class="badge">👥 Max 4 personnes</span>
-                    <span class="badge">Wi-Fi gratuit</span>
-                    <span class="badge">Climatisation</span>
-                    <span class="badge">Réfrigérateur</span>
-                    <span class="badge">+2 services</span>
-                </div>
-                <div class="room-footer">
-                    <div class="price-section">
-                        <button class="show-price-btn" onclick="showPrice(2)">Afficher le prix</button>
-                        <div class="price-display" id="price-2">
-                            <div class="price">€220</div>
-                            <div class="price-label">par nuit</div>
-                        </div>
-                    </div>
-                    <button class="book-btn">Réserver maintenant</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Suite Présidentielle -->
-        <div class="room-card">
-            <div class="image-container">
-                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=500&h=300&fit=crop" alt="Suite Présidentielle" class="room-image" data-room="3">
-                <button class="nav-button prev" onclick="prevImage(3)">‹</button>
-                <button class="nav-button next" onclick="nextImage(3)">›</button>
-                <div class="image-counter" id="counter-3">1/3</div>
-            </div>
-            <div class="room-details">
-                <div class="room-header">
-                    <h2 class="room-name">Suite Présidentielle</h2>
-                    <div class="rating-container">
-                        <span class="star">★</span>
-                        <span class="rating-score">5.0</span>
-                        <span class="review-count">(38 avis)</span>
-                    </div>
-                </div>
-                <p class="room-description">
-                    Notre suite la plus luxueuse avec salon, salle à manger, jacuzzi privé et service de majordome.
-                </p>
-                <div class="amenities">
-                    <span class="badge">80m²</span>
-                    <span class="badge">👥 Max 2 personnes</span>
-                    <span class="badge">Wi-Fi gratuit</span>
-                    <span class="badge">Climatisation</span>
-                    <span class="badge">Bar privé</span>
-                    <span class="badge">+2 services</span>
-                </div>
-                <div class="room-footer">
-                    <div class="price-section">
-                        <button class="show-price-btn" onclick="showPrice(3)">Afficher le prix</button>
-                        <div class="price-display" id="price-3">
-                            <div class="price">€450</div>
-                            <div class="price-label">par nuit</div>
-                        </div>
-                    </div>
-                    <button class="book-btn">Réserver maintenant</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-    <!-- <script>
-        // Images pour chaque chambre
-        const roomImages = [
-            [
-                'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&h=300&fit=crop',
-                'https://images.unsplash.com/photo-1631049035182-249067d7618e?w=500&h=300&fit=crop',
-                'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&h=300&fit=crop'
-            ],
-            [
-                'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=500&h=300&fit=crop',
-                'https://images.unsplash.com/photo-1631049035182-249067d7618e?w=500&h=300&fit=crop',
-                'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=500&h=300&fit=crop'
-            ],
-            [
-                'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=500&h=300&fit=crop',
-                'https://images.unsplash.com/photo-1631049035182-249067d7618e?w=500&h=300&fit=crop',
-                'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=500&h=300&fit=crop'
-            ],
-            [
-                'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=500&h=300&fit=crop',
-                'https://images.unsplash.com/photo-1631049035182-249067d7618e?w=500&h=300&fit=crop',
-                'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=500&h=300&fit=crop'
-            ]
-        ];
-
-        let currentImageIndexes = [0, 0, 0, 0];
-
-        function nextImage(roomIndex) {
-            currentImageIndexes[roomIndex] = (currentImageIndexes[roomIndex] + 1) % roomImages[roomIndex].length;
-            updateImage(roomIndex);
-        }
-
-        function prevImage(roomIndex) {
-            currentImageIndexes[roomIndex] = (currentImageIndexes[roomIndex] - 1 + roomImages[roomIndex].length) % roomImages[roomIndex].length;
-            updateImage(roomIndex);
-        }
-
-        function updateImage(roomIndex) {
-            const img = document.querySelector(`img[data-room="${roomIndex}"]`);
-            const counter = document.getElementById(`counter-${roomIndex}`);
-            
-            img.src = roomImages[roomIndex][currentImageIndexes[roomIndex]];
-            counter.textContent = `${currentImageIndexes[roomIndex] + 1}/${roomImages[roomIndex].length}`;
-        }
-
-        function showPrice(roomIndex) {
-            const button = document.querySelector(`#price-${roomIndex}`).previousElementSibling;
-            const priceDisplay = document.getElementById(`price-${roomIndex}`);
-            
-            button.style.display = 'none';
-            priceDisplay.classList.add('show');
-        }
-    </script> -->

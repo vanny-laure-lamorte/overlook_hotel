@@ -19,13 +19,20 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/auth/**",
-                                "/login", "/login/**",
-                                "/css/**", "/js/**", "/images/**", "/fonts/roboto/**", "/", "/error/**", "api/admin/**",
+                                "/login",
+                                "/login/**",
+                                "/css/**",
+                                "/js/**",
+                                "/images/**",
+                                "/fonts/roboto/**",
+                                "/", "/error/**",
+                                "api/admin/**",
+                                "api/rooms/**",
                                 "/rooms-list")
                         .permitAll()
                         .requestMatchers("/test").authenticated()
                         .anyRequest().authenticated())
-                .exceptionHandling(exception -> exception
+                        .exceptionHandling(exception -> exception
                         .accessDeniedPage("/error/403"));
 
         return http.build();

@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import projetb2.overlook_hotel.model.Booking;
 import projetb2.overlook_hotel.service.AdminBookingService;
-
-
 @RestController
 @RequestMapping("/api/admin")
 public class AdminBookingApiController {
