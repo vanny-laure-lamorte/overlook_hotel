@@ -1,0 +1,157 @@
+<!-- Hero Section -->
+<div th:fragment="fgt-home" id="home">
+    <!-- Welcome Message -->
+    <div class="welcome-message">
+        <div class="hero-content">
+            <h1>Welcome to Suite Dreams</h1>
+            <p>Experience comfort, luxury, and exceptional service at our premier hotel. Where every stay becomes a cherished memory.</p>
+        </div>
+        <div>
+            <a href="#rooms" class="cta-button">Explore Our Rooms</a>
+        </div>
+        <div class="booking-form">
+            <form th:action="@{/booking}" method="post">
+                <div class="form-group">
+                    <label for="checkin">Check-in</label>
+                    <input type="date" id="checkin" name="checkinDate" th:value="${checkinDate}" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkout">Check-out</label>
+                    <input type="date" id="checkout" name="checkoutDate" th:value="${checkoutDate}" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Guests</label>
+                    <select id="guests" name="guests">
+                        <option value="1">1 Guest</option>
+                        <option value="2" selected>2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="rooms">Rooms</label>
+                    <select id="rooms" name="roomCount">
+                        <option value="1" selected>1 Room</option>
+                        <option value="2">2 Rooms</option>
+                        <option value="3">3 Rooms</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="cta-button">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Rooms Section -->
+    <div class="allrooms">
+        <div>
+            <h2 class="section-title">Our Comfortable Rooms</h2>
+        </div>
+        <div class="rooms-grid">
+            <!-- Standard Room -->
+            <div class="room-card-home">
+                <div class="room-image"></div>
+                <div class="room-content">
+                    <h3 class="room-title">Standard Room</h3>
+                    <p>Comfortable and modern room with all essential amenities for a perfect stay.</p>
+                    <ul>
+                        <li>Free Wi-Fi</li>
+                        <li>Flat-screen TV</li>
+                        <li>Air conditioning</li>
+                        <li>Private bathroom</li>
+                    </ul>
+                    <div class="room-price">From £79 per night</div>
+                </div>
+            </div>
+            <!-- Deluxe rooms -->
+            <div class="room-card-home">
+                <div class="room-image"></div>
+                <div class="room-content">
+                    <h3 class="room-title">Deluxe Room</h3>
+                    <p>Spacious room with premium amenities and stunning city views for an enhanced experience.</p>
+                    <ul>
+                        <li>City view</li>
+                        <li>Mini-bar</li>
+                        <li>Work desk</li>
+                        <li>Premium bedding</li>
+                    </ul>
+                    <div class="room-price">From £129 per night</div>
+                </div>
+            </div>
+            <!-- Family Suite -->
+            <div class="room-card-home">
+                <div class="room-image"></div>
+                <div class="room-content">
+                    <h3 class="room-title">Family Suite</h3>
+                    <p>Perfect for families with separate sleeping areas and additional space for everyone to relax.</p>
+                    <ul>
+                        <li>Separate living area</li>
+                        <li>Sofa bed</li>
+                        <li>Kitchenette</li>
+                        <li>Family-friendly amenities</li>
+                    </ul>
+                    <div class="room-price">From £189 per night</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- amenities Section -->
+    <div class="amenities-home">
+        <div>
+            <h2 class="section-title">Hotel Amenities</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">🍽️</div>
+                <h3>Restaurant & Bar</h3>
+                <p>Enjoy delicious meals and refreshing drinks at our on-site restaurant and bar.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🏊</div>
+                <h3>Swimming Pool</h3>
+                <p>Relax and unwind in our heated indoor swimming pool, open year-round.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">💪</div>
+                <h3>Fitness Center</h3>
+                <p>Stay active with our fully equipped 24-hour fitness center and modern equipment.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🚗</div>
+                <h3>Free Parking</h3>
+                <p>Complimentary parking available for all guests throughout your stay.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">📶</div>
+                <h3>Free Wi-Fi</h3>
+                <p>Stay connected with high-speed internet access throughout the hotel.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🛎️</div>
+                <h3>24/7 Reception</h3>
+                <p>Our friendly staff is available around the clock to assist with your needs.</p>
+            </div>
+        </div>
+    </div>
+    <!-- Location Section -->
+    <div class="location-home">
+        <div>
+            <h2 class="section-title">Prime Location</h2>
+        </div>
+        <div class="map">
+            <div class="location-list" >
+                <h3>Conveniently Located</h3>
+                <p>Suite Dreams is perfectly positioned in the heart of the city, offering easy access to major attractions, business districts, and transportation hubs.</p>
+                <ul>
+                    <li style="margin-bottom: 0.5rem;">📍 5 minutes from city center</li>
+                    <li style="margin-bottom: 0.5rem;">🚇 2 minutes walk to metro station</li>
+                    <li style="margin-bottom: 0.5rem;">✈️ 20 minutes from airport</li>
+                    <li style="margin-bottom: 0.5rem;">🛍️ Shopping district nearby</li>
+                </ul>
+            </div>
+            <div class="map-placeholder">
+                <img src="images/maps/maps.png" alt="Map of Suite Dreams Location" class="map-img">
+            </div>
+        </div>
+    </div>
+</div>
