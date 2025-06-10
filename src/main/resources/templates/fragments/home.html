@@ -3,18 +3,20 @@
     <!-- Welcome Message -->
     <div class="welcome-message">
         <div class="hero-content">
-            <h1 class="h1-purple">Welcome to Suite Dreams</h1>
+            <h1>Welcome to Suite Dreams</h1>
             <p>Experience comfort, luxury, and exceptional service at our premier hotel. Where every stay becomes a cherished memory.</p>
-            <a href="#rooms" class="cta-button">Explore Our Rooms</a>
         </div>
         <div>
-            <form class="booking-form" th:action="@{/booking}" method="post">
+            <a href="#rooms" class="cta-button">Explore Our Rooms</a>
+        </div>
+        <div class="booking-form">
+            <form th:action="@{/booking}" method="post">
                 <div class="form-group">
-                    <label for="checkin">Check-in Date</label>
+                    <label for="checkin">Check-in</label>
                     <input type="date" id="checkin" name="checkinDate" th:value="${checkinDate}" required>
                 </div>
                 <div class="form-group">
-                    <label for="checkout">Check-out Date</label>
+                    <label for="checkout">Check-out</label>
                     <input type="date" id="checkout" name="checkoutDate" th:value="${checkoutDate}" required>
                 </div>
                 <div class="form-group">
@@ -35,7 +37,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="cta-button">Search Rooms</button>
+                    <button type="submit" class="cta-button">Search</button>
                 </div>
             </form>
         </div>
@@ -94,7 +96,7 @@
         </div>
     </div>
     <!-- amenities Section -->
-    <div class="amenities-home ">
+    <div class="amenities-home">
         <div>
             <h2 class="section-title">Hotel Amenities</h2>
         </div>
@@ -148,7 +150,7 @@
                 </ul>
             </div>
             <div class="map-placeholder">
-                Map Placeholder
+                <img src="images/maps/maps.png" alt="Map of Suite Dreams Location" class="map-img">
             </div>
         </div>
     </div>
