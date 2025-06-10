@@ -936,10 +936,10 @@ strong {
 .room-card {
   background: white;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
 }
 
@@ -1285,6 +1285,11 @@ strong {
   height: auto;
 }
 
+.room-card-home:hover{
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
 .room-card:hover {
   transform: translateY(-5px);
 }
@@ -1330,6 +1335,11 @@ strong {
   border-radius: 10px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   width:300px ;
+}
+
+.feature-item:hover {
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
 }
 
 .feature-icon {
