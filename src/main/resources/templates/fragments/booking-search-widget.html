@@ -12,13 +12,8 @@
                             <i class="fas fa-map-marker-alt field-icon"></i>
                             <span class="separator-line"></span>
                         </div>
-                        <input
-                            type="text"
-                            id="destination"
-                            name="destination"
-                            placeholder="City, town or hotel name"
-                            required
-                        >
+                        <input type="text" id="destination" name="destination" placeholder="City, town or hotel name"
+                            required>
                     </div>
                 </div>
                 <!-- Check-in Field -->
@@ -29,15 +24,8 @@
                             <i class="far fa-calendar-alt field-icon"></i>
                             <span class="separator-line"></span>
                         </div>
-                        <input
-                            type="text"
-                            id="check-in"
-                            name="checkIn"
-                            class="datepicker"
-                            placeholder="Add date"
-                            readonly
-                            required
-                        >
+                        <input type="text" id="check-in" name="checkIn" class="datepicker" placeholder="Add date"
+                            readonly required>
                     </div>
                 </div>
                 <!-- Check-out Field -->
@@ -48,15 +36,8 @@
                             <i class="far fa-calendar-alt field-icon"></i>
                             <span class="separator-line"></span>
                         </div>
-                        <input
-                            type="text"
-                            id="check-out"
-                            name="checkOut"
-                            class="datepicker"
-                            placeholder="Add date"
-                            readonly
-                            required
-                        >
+                        <input type="text" id="check-out" name="checkOut" class="datepicker" placeholder="Add date"
+                            readonly required>
                     </div>
                 </div>
                 <!-- Two-Part: Rooms & Guests -->
@@ -77,11 +58,14 @@
                                 <i class="fas fa-user field-icon"></i>
                                 <span class="separator-line"></span>
                             </div>
-                            <span class="dual-value" id="guests-display">2 Adults, 0 Children</span>
+                            <span class="dual-value" id="guests-display"
+                                th:text="|${adultsCount ?: 2} Adults, ${childrenCount ?: 0} Children|">
+                                2 Adults, 0 Children
+                            </span>
                             <i class="fas fa-chevron-down dropdown-arrow"></i>
                         </div>
                         <!-- Rooms & Guests Dropdown -->
-                        <div th:insert="fragments/booking-search-room-guest-form :: fgt-booking-search-room-guest-form"></div>
+                        <div th:insert="~{fragments/dropdown-room-guest :: fgt-dropdown-room-guest}"></div>
                     </div>
                 </div>
                 <!-- Search Button -->

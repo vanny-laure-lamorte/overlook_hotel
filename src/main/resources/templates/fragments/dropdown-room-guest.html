@@ -1,0 +1,60 @@
+<div th:fragment="fgt-dropdown-room-guest" id="dropdown-room-guest" class="search-field rooms-guests-field">
+    <!-- Rooms & Guests Dropdown -->
+    <div class="rooms-dropdown active">
+        <div class="room-panel">
+            <div class="room-header">
+                <h3>Room 1</h3>
+            </div>
+            <!-- Adults -->
+            <div class="guest-counter">
+                <span class="counter-label">Adults</span>
+                <div class="search-field counter-controls">
+                    <form th:action="@{/view/search/decrement-rooms}" method="post" style="display: inline;">
+                        <input type="hidden" name="roomId" value="1" />
+                        <input type="hidden" name="type" value="adults" />
+                        <input type="hidden" name="count" th:value="${adultsCount ?: 2}" />
+                        <button type="submit" class="counter-btn minus">−</button>
+                    </form>
+                    <span class="counter-value" id="adults-count-1" th:text="${adultsCount} ?: 2">2</span>
+                    <form th:action="@{/view/search/increment-rooms}" method="post" style="display: inline;">
+                        <input type="hidden" name="roomId" value="1" />
+                        <input type="hidden" name="type" value="adults" />
+                        <input type="hidden" name="count" th:value="${adultsCount ?: 2}" />
+                        <button type="submit" class="counter-btn plus">+</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Children -->
+            <div class="guest-counter">
+                <span class="counter-label">Children <span class="age-note">(0-15 years)</span></span>
+                <div class="search-field counter-controls">
+                    <form th:action="@{/view/search/decrement-rooms}" method="post" style="display: inline;">
+                        <input type="hidden" name="roomId" value="1" />
+                        <input type="hidden" name="type" value="children" />
+                        <input type="hidden" name="count" th:value="${childrenCount} ?: 0" />
+                        <button type="submit" class="counter-btn minus">−</button>
+                    </form>
+                    <span class="counter-value" id="children-count-1" th:text="${childrenCount} ?: 0">0</span>
+                    <form th:action="@{/view/search/increment-rooms}" method="post" style="display: inline;">
+                        <input type="hidden" name="roomId" value="1" />
+                        <input type="hidden" name="type" value="children" />
+                        <input type="hidden" name="count" th:value="${childrenCount} ?: 0" />
+                        <button type="submit" class="counter-btn plus">+</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Child Ages Container -->
+            <div class="child-ages" id="child-ages-1"></div>
+        </div>
+        <!-- Add Room Button -->
+        <div class="add-room-container">
+            <button type="button" class="add-room-btn">
+                <i class="fas fa-plus-circle"></i> Add another room
+            </button>
+        </div>
+        <!-- Apply Button -->
+        <div class="dropdown-footer">
+            <button type="button" class="apply-btn" id="apply-rooms">Apply</button>
+        </div>
+    </div>
+</div>

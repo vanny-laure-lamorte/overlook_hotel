@@ -18,10 +18,19 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
+                            "/favicon.ico",
                                 "/api/auth/**",
-                                "/login", "/login/**",
-                                "/css/**", "/js/**", "/images/**", "/fonts/roboto/**", "/", "/error/**", "api/admin/**",
-                                "/rooms-list")
+                                "/login",
+                                "/login/**",
+                                "/css/**",
+                                "/js/**",
+                                "/images/**",
+                                "/fonts/roboto/**",
+                                "/",
+                                "/error/**",
+                                "api/admin/**",
+                                "/rooms-list",
+                                "/view/search/**")
                         .permitAll()
                         .requestMatchers("/test").authenticated()
                         .anyRequest().authenticated())
