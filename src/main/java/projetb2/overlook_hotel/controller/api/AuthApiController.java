@@ -1,8 +1,7 @@
 package projetb2.overlook_hotel.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import projetb2.overlook_hotel.model.Role;
@@ -25,8 +24,17 @@ public class AuthApiController {
     @Autowired
     private PasswordEncoder encoder;
 
+    /**
+     * Handles user registration.
+     *
+     * @param firstName User's first name
+     * @param lastName User's last name
+     * @param email User's email
+     * @param password User's password
+     * @return ResponseEntity with registration status
+     */
     @PostMapping("/register")
-    public ResponseEntity<?> register(
+    public ResponseEntity<String> register(
             @RequestParam String firstName,
             @RequestParam String lastName,
             @RequestParam String email,
@@ -36,11 +44,13 @@ public class AuthApiController {
 
         if (userRepo.findByEmail(email).isPresent()) {
             System.out.println("-----> Email already exists: " + email);
-            return ResponseEntity.badRequest().body("Email already exists");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .contentType(MediaType.TEXT_PLAIN)
+                    .body("An account already exists with this email.");
         }
 
-        Role customerRole = roleRepo.findByRoleName("customer").orElseThrow();
-        System.out.println("-----> Role for customer: " + customerRole.getRoleName());
+        Role customerRole = roleRepo.findByRoleName("customer")
+                .orElseThrow(() -> new RuntimeException("Customer role not found"));
 
         HotelUser user = new HotelUser();
         user.setFirstName(firstName);
@@ -51,59 +61,51 @@ public class AuthApiController {
 
         userRepo.save(user);
         System.out.println("-----> User registered successfully: " + user.getEmail());
+
         return ResponseEntity.ok("Registration successful");
     }
-
+    /**
+     * Handles user login.
+     *
+     * @param email User's email
+     * @param password User's password
+     * @param employeeTab Whether the request is for employee access
+     * @return ResponseEntity with login status
+     */
     @PostMapping("/login")
-    public ResponseEntity<?> login(
+    public ResponseEntity<String> login(
             @RequestParam String email,
             @RequestParam String password,
             @RequestParam(defaultValue = "false") boolean employeeTab) {
 
-                System.out.println("Encoded : "+encoder.encode("password123"));
         System.out.println("-----> Login request: " + email + " | employeeTab: " + employeeTab);
 
         Optional<HotelUser> userOpt = userRepo.findByEmail(email);
         if (userOpt.isEmpty()) {
             System.out.println("-----> No account found with this email: " + email);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No account found with this email");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .contentType(MediaType.TEXT_PLAIN)
+                    .body("No account found with this email.");
         }
 
         HotelUser user = userOpt.get();
-        System.out.println("-----> User found: " + user.getEmail());
-
-        System.out.println("-----> password: " + password + " | user.password: " + user.getUserPassword());
-        System.out.println("-----> password: " + encoder.encode("password123") + " | user.password: " + user.getUserPassword());
         if (!encoder.matches(password, user.getUserPassword())) {
             System.out.println("-----> Invalid credentials for user: " + email);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .contentType(MediaType.TEXT_PLAIN)
+                    .body("Incorrect email or password.");
         }
 
         String role = user.getRole().getRoleName();
-        System.out.println("-----> User role: " + role);
+        System.out.println("-----> Authenticated role: " + role);
 
-        if (employeeTab) {
-            if (!(role.equalsIgnoreCase("admin") || role.equalsIgnoreCase("employee"))) {
-                System.out.println("-----> Access denied for non-employee/admin: " + role);
-                return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                        .body("Access denied: Not an employee or admin");
-            }
+        if (employeeTab && !(role.equalsIgnoreCase("employee") || role.equalsIgnoreCase("admin"))) {
+            System.out.println("-----> Access denied for role: " + role);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .contentType(MediaType.TEXT_PLAIN)
+                    .body("Access denied. You are not an employee or admin.");
         }
 
-        if (role.equalsIgnoreCase("customer")) {
-            return ResponseEntity.ok("Login successful as Customer");
-        }
-
-        if (role.equalsIgnoreCase("employee")) {
-            return ResponseEntity.ok("Login successful as Employee");
-        }
-
-        if (role.equalsIgnoreCase("admin")) {
-            return ResponseEntity.ok("Login successful as Admin");
-        }
-
-        System.out.println("-----> Access denied: Unknown role for user: " + email);
-        return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                .body("Access denied: Unknown role");
+        return ResponseEntity.ok("Login successful as " + role.substring(0, 1).toUpperCase() + role.substring(1));
     }
 }

@@ -1,4 +1,4 @@
-<header class="header">
+<header th:fragment="header">
     <!-- Top header -->
     <div class="top-header">
         <div class="container">
@@ -39,7 +39,7 @@
 
                 <!-- Authentication - Logged Out State -->
                 <div class="auth-buttons logged-out">
-                    <a th:href="@{/login}" class="btn btn-outline-white">Login/Register</a>
+                    <button id="loginButton" class="btn btn-outline-white">Login/Register</button>
                 </div>
 
                 <!-- Authentication - Logged In State -->
@@ -69,6 +69,7 @@
     <!-- Bottom header -->
     <div class="bottom-header">
         <div class="container">
+
             <!-- Add bottom header content here if needed -->
         </div>
     </div>
