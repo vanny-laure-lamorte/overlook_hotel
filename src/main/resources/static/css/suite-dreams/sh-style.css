@@ -266,6 +266,14 @@ strong {
   overflow: hidden;
 }
 
+.modal.hidden {
+    display: none;
+}
+
+.modal.visible {
+    display: flex;
+}
+
 /* Form as tab */
 .form-tab {
   flex: 1;
@@ -785,7 +793,7 @@ strong {
 
 #rooms-dropdown-container:hover #dropdown-room-guest,
 #rooms-dropdown-container:focus-within #dropdown-room-guest {
-  display: block;
+    display: block;
 }
 
 .room-panel {
