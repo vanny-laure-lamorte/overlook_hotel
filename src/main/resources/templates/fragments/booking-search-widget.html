@@ -44,7 +44,7 @@
                 <div class="search-field rooms-guests-field">
                     <label for="rooms-guests">Rooms & guests</label>
                     <div class="input-container dual-input" id="rooms-dropdown-container">
-                        <!-- Rooms Field -->
+                        <!-- Rooms Part -->
                         <div class="dual-part rooms-part">
                             <div class="icon-wrapper">
                                 <i class="fas fa-bed field-icon"></i>
@@ -52,7 +52,7 @@
                             </div>
                             <span class="dual-value" id="rooms-display">1</span>
                         </div>
-                        <!-- Guests Field -->
+                        <!-- Guests Part -->
                         <div class="dual-part guests-part">
                             <div class="icon-wrapper">
                                 <i class="fas fa-user field-icon"></i>
@@ -68,6 +68,11 @@
                         <div th:insert="~{fragments/dropdown-room-guest :: fgt-dropdown-room-guest}"></div>
                     </div>
                 </div>
+                <!-- Hidden fields to submit updated values -->
+                <input type="hidden" name="roomCount" id="room-count" value="1">
+                <input type="hidden" name="adultCount" id="adult-count" th:value="${adultsCount ?: 2}">
+                <input type="hidden" name="childCount" id="child-count" th:value="${childrenCount ?: 0}">
+
                 <!-- Search Button -->
                 <div class="search-field button-field">
                     <button type="submit" class="search-btn">

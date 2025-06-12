@@ -2,14 +2,14 @@ package projetb2.overlook_hotel.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import projetb2.overlook_hotel.model.Role;
-import projetb2.overlook_hotel.model.HotelUser;
-import projetb2.overlook_hotel.repository.RoleRepository;
-import projetb2.overlook_hotel.repository.HotelUserRepository;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
+import projetb2.overlook_hotel.model.HotelUser;
+import projetb2.overlook_hotel.model.Role;
+import projetb2.overlook_hotel.repository.HotelUserRepository;
+import projetb2.overlook_hotel.repository.RoleRepository;
+import projetb2.overlook_hotel.service.AuthService;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -22,16 +22,10 @@ public class AuthApiController {
     private RoleRepository roleRepo;
 
     @Autowired
-    private PasswordEncoder encoder;
+    private AuthService authService;
 
     /**
      * Handles user registration.
-     *
-     * @param firstName User's first name
-     * @param lastName User's last name
-     * @param email User's email
-     * @param password User's password
-     * @return ResponseEntity with registration status
      */
     @PostMapping("/register")
     public ResponseEntity<String> register(
@@ -40,10 +34,7 @@ public class AuthApiController {
             @RequestParam String email,
             @RequestParam String password) {
 
-        System.out.println("-----> Register request: " + firstName + " " + lastName + " | " + email);
-
         if (userRepo.findByEmail(email).isPresent()) {
-            System.out.println("-----> Email already exists: " + email);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .contentType(MediaType.TEXT_PLAIN)
                     .body("An account already exists with this email.");
@@ -56,21 +47,15 @@ public class AuthApiController {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
-        user.setUserPassword(encoder.encode(password));
+        user.setUserPassword(authService.encodePassword(password));
         user.setRole(customerRole);
 
         userRepo.save(user);
-        System.out.println("-----> User registered successfully: " + user.getEmail());
-
         return ResponseEntity.ok("Registration successful");
     }
+
     /**
-     * Handles user login.
-     *
-     * @param email User's email
-     * @param password User's password
-     * @param employeeTab Whether the request is for employee access
-     * @return ResponseEntity with login status
+     * Handles user login via API.
      */
     @PostMapping("/login")
     public ResponseEntity<String> login(
@@ -78,34 +63,26 @@ public class AuthApiController {
             @RequestParam String password,
             @RequestParam(defaultValue = "false") boolean employeeTab) {
 
-        System.out.println("-----> Login request: " + email + " | employeeTab: " + employeeTab);
+        try {
+            HotelUser user = authService.authenticate(email, password);
 
-        Optional<HotelUser> userOpt = userRepo.findByEmail(email);
-        if (userOpt.isEmpty()) {
-            System.out.println("-----> No account found with this email: " + email);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            String role = user.getRole().getRoleName();
+            if (employeeTab && !(role.equalsIgnoreCase("employee") || role.equalsIgnoreCase("admin"))) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                        .contentType(MediaType.TEXT_PLAIN)
+                        .body("Access denied. You are not an employee or admin.");
+            }
+
+            return ResponseEntity.ok("Login successful as " + capitalize(role));
+
+        } catch (ResponseStatusException e) {
+            return ResponseEntity.status(e.getStatusCode())
                     .contentType(MediaType.TEXT_PLAIN)
-                    .body("No account found with this email.");
+                    .body(e.getReason()); // Utilise le message personnalisé depuis AuthService
         }
+    }
 
-        HotelUser user = userOpt.get();
-        if (!encoder.matches(password, user.getUserPassword())) {
-            System.out.println("-----> Invalid credentials for user: " + email);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .contentType(MediaType.TEXT_PLAIN)
-                    .body("Incorrect email or password.");
-        }
-
-        String role = user.getRole().getRoleName();
-        System.out.println("-----> Authenticated role: " + role);
-
-        if (employeeTab && !(role.equalsIgnoreCase("employee") || role.equalsIgnoreCase("admin"))) {
-            System.out.println("-----> Access denied for role: " + role);
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .contentType(MediaType.TEXT_PLAIN)
-                    .body("Access denied. You are not an employee or admin.");
-        }
-
-        return ResponseEntity.ok("Login successful as " + role.substring(0, 1).toUpperCase() + role.substring(1));
+    private String capitalize(String role) {
+        return role.substring(0, 1).toUpperCase() + role.substring(1).toLowerCase();
     }
 }

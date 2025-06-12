@@ -5,56 +5,60 @@
             <div class="room-header">
                 <h3>Room 1</h3>
             </div>
+
             <!-- Adults -->
             <div class="guest-counter">
                 <span class="counter-label">Adults</span>
                 <div class="search-field counter-controls">
-                    <form th:action="@{/view/search/decrement-rooms}" method="post" style="display: inline;">
-                        <input type="hidden" name="roomId" value="1" />
-                        <input type="hidden" name="type" value="adults" />
-                        <input type="hidden" name="count" th:value="${adultsCount ?: 2}" />
-                        <button type="submit" class="counter-btn minus">−</button>
-                    </form>
+                    <button type="button" class="counter-btn minus" onclick="updateGuestCount('adults', -1)">−</button>
                     <span class="counter-value" id="adults-count-1" th:text="${adultsCount} ?: 2">2</span>
-                    <form th:action="@{/view/search/increment-rooms}" method="post" style="display: inline;">
-                        <input type="hidden" name="roomId" value="1" />
-                        <input type="hidden" name="type" value="adults" />
-                        <input type="hidden" name="count" th:value="${adultsCount ?: 2}" />
-                        <button type="submit" class="counter-btn plus">+</button>
-                    </form>
+                    <button type="button" class="counter-btn plus" onclick="updateGuestCount('adults', 1)">+</button>
                 </div>
             </div>
+
             <!-- Children -->
             <div class="guest-counter">
                 <span class="counter-label">Children <span class="age-note">(0-15 years)</span></span>
                 <div class="search-field counter-controls">
-                    <form th:action="@{/view/search/decrement-rooms}" method="post" style="display: inline;">
-                        <input type="hidden" name="roomId" value="1" />
-                        <input type="hidden" name="type" value="children" />
-                        <input type="hidden" name="count" th:value="${childrenCount} ?: 0" />
-                        <button type="submit" class="counter-btn minus">−</button>
-                    </form>
+                    <button type="button" class="counter-btn minus"
+                        onclick="updateGuestCount('children', -1)">−</button>
                     <span class="counter-value" id="children-count-1" th:text="${childrenCount} ?: 0">0</span>
-                    <form th:action="@{/view/search/increment-rooms}" method="post" style="display: inline;">
-                        <input type="hidden" name="roomId" value="1" />
-                        <input type="hidden" name="type" value="children" />
-                        <input type="hidden" name="count" th:value="${childrenCount} ?: 0" />
-                        <button type="submit" class="counter-btn plus">+</button>
-                    </form>
+                    <button type="button" class="counter-btn plus" onclick="updateGuestCount('children', 1)">+</button>
                 </div>
             </div>
+
             <!-- Child Ages Container -->
             <div class="child-ages" id="child-ages-1"></div>
         </div>
+
         <!-- Add Room Button -->
         <div class="add-room-container">
             <button type="button" class="add-room-btn">
                 <i class="fas fa-plus-circle"></i> Add another room
             </button>
         </div>
+
         <!-- Apply Button -->
         <div class="dropdown-footer">
             <button type="button" class="apply-btn" id="apply-rooms">Apply</button>
         </div>
     </div>
+    <script>
+        let adults = parseInt(document.getElementById("adults-count-1").textContent) || 2;
+        let children = parseInt(document.getElementById("children-count-1").textContent) || 0;
+
+        function updateGuestCount(type, change) {
+            if (type === 'adults') {
+                adults = Math.max(0, adults + change);
+                document.getElementById("adults-count-1").textContent = adults;
+                document.getElementById("adult-count").value = adults;
+            } else if (type === 'children') {
+                children = Math.max(0, children + change);
+                document.getElementById("children-count-1").textContent = children;
+                document.getElementById("child-count").value = children;
+            }
+
+            document.getElementById("guests-display").textContent = `${adults} Adults, ${children} Children`;
+        }
+    </script>
 </div>

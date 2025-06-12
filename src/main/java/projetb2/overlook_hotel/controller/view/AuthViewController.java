@@ -1,70 +1,78 @@
+// --- AuthViewController.java ---
 package projetb2.overlook_hotel.controller.view;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
+import projetb2.overlook_hotel.service.CustomUserDetailsService;
+
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @Controller
 public class AuthViewController {
 
     @Autowired
     private RestTemplate restTemplate;
-    /**
-     * Handles user registration.
-     *
-     * @param model Model to add attributes for the view
-     * @param firstName User's first name
-     * @param lastName User's last name
-     * @param email User's email
-     * @param password User's password
-     * @return Redirects to the home page with a success or error message
-     */
-    @PostMapping("/login")
-    public String handleLogin(Model model,
-            @RequestParam(required = false) String email,
-            @RequestParam(required = false) String password,
-            @RequestParam(required = false) String tab) {
 
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
+
+    @PostMapping("/login")
+    public String handleLogin(
+            @RequestParam String email,
+            @RequestParam String password,
+            @RequestParam(required = false) String tab,
+            HttpSession session) {
         try {
-            MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
-            requestBody.add("email", email);
-            requestBody.add("password", password);
-            requestBody.add("employeeTab", String.valueOf("employee".equals(tab)));
+            MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+            body.add("email", email);
+            body.add("password", password);
+            body.add("employeeTab", String.valueOf("employee".equalsIgnoreCase(tab)));
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-            HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(requestBody, headers);
+            HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, headers);
 
-            restTemplate.postForEntity("http://localhost:8080/api/auth/login", request, String.class);
+            ResponseEntity<String> response = restTemplate.postForEntity(
+                    "http://localhost:8080/api/auth/login",
+                    request,
+                    String.class);
+
+            // Spring Security login session
+            UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null,
+                    userDetails.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authToken);
 
             return "redirect:/";
 
-        } catch (HttpClientErrorException e) {
-            String errorMsg = e.getResponseBodyAsString();
-            System.out.println("Erreur reçue : " + errorMsg);
-            String message = e.getResponseBodyAsString();
-            if (message == null || message.isBlank()) {
-                if (e.getStatusCode() == HttpStatus.UNAUTHORIZED) {
-                    message = "Unauthorized access - Invalid email or password";
-                } else if (e.getStatusCode() == HttpStatus.FORBIDDEN) {
-                    message = "Forbidden access";
-                } else {
-                    message = "Unexpected error occurred";
-                }
+        } catch (RestClientResponseException e) {
+            String msg;
+            switch (e.getRawStatusCode()) {
+                case 401 -> msg = "Invalid email or password";
+                case 403 -> msg = "Access denied";
+                default -> msg = "Login failed";
             }
-
-            return "redirect:/?modal=true&tab=" + tab + "&loginError=" +
-                    URLEncoder.encode(message, StandardCharsets.UTF_8);
+            String safeTab = (tab == null || tab.isBlank()) ? "customer" : tab;
+            return "redirect:/?modal=true&tab=" + safeTab + "&loginError=" +
+                    URLEncoder.encode(msg, StandardCharsets.UTF_8);
         }
     }
 
+    @GetMapping("/logout")
+    public String handleLogout(HttpSession session) {
+        session.invalidate();
+        SecurityContextHolder.clearContext();
+        return "redirect:/";
+    }
 }
