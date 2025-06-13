@@ -69,8 +69,15 @@
     <!-- Bottom header -->
     <div class="bottom-header">
         <div class="container">
-
-            <!-- Add bottom header content here if needed -->
+            <div th:if="${isAuthenticated}">
+                <p class="user-info">
+                    👋 Hello, <span th:text="${user.firstName + ' ' + user.lastName}">User</span><br>
+                    📅 DOB: <span th:text="${#dates.format(user.dob, 'dd/MM/yyyy')}">dob</span><br>
+                    🏠 Address: <span th:text="${user.userAddress}">address</span><br>
+                    📞 Phone: <span th:text="${user.phoneNumber}">phone</span><br>
+                    <span th:text="'(Role: ' + ${user.role.roleName} + ')'"></span>
+                </p>
+            </div>
         </div>
     </div>
 </header>

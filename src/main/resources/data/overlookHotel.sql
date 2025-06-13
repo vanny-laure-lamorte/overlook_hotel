@@ -41,9 +41,9 @@ CREATE TABLE IF NOT EXISTS hotel_user (
 );
 
 INSERT INTO hotel_user (first_name, last_name, dob, user_address, phone_number, email, user_password, role_id) VALUES
-('Prenom', 'Nom', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'c', 'c', 1),
-('Prenom', 'Nom', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'e', 'e', 2),
-('Prenom', 'Nom', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'a', 'a', 3),
+('CustomerFirstName', 'CustomerLastName', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'c', 'c', 1),
+('EmployeeFirstName', 'EmployeeLastName', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'e', 'e', 2),
+('AdminFirstName', 'AdminLastName', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'a', 'a', 3),
 ('Charlie', 'Dupont', '1982-03-30', '3 Avenue des Tuileries, Lyon', '0601020304', 'charlie.dupont@example.com', 'password123', 1),
 ('Diana', 'Lemoine', '1995-09-10', '4 Rue de la Paix, Marseille', '0712345678', 'diana.lemoine@example.com', 'password123', 1),
 ('Eve', 'Blanchard', '1987-11-05', '5 Place de la Liberté, Toulouse', '0812345678', 'eve.blanchard@example.com', 'password123', 1);

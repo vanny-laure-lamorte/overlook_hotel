@@ -90,7 +90,7 @@ strong {
 }
 
 .bottom-header {
-  height: 64px;
+  height: auto;
   background-color: var(--purple-900);
 }
 
@@ -1495,14 +1495,13 @@ strong {
   }
 }
 
-    @media (max-width: 640px) {
-        .room-footer {
-            flex-direction: column;
-            align-items: stretch;
-        }
+@media (max-width: 640px) {
+    .room-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
 
-        .book-btn {
-            width: 100%;
-        }
+    .book-btn {
+        width: 100%;
     }
 }

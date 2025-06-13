@@ -18,27 +18,22 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                            "/favicon.ico",
-                                "/api/auth/**",
-                                "/login",
-                                "/login/**",
-                                "/css/**",
-                                "/js/**",
-                                "/images/**",
-                                "/fonts/roboto/**",
-                                "/",
-                                "/error/**",
-                                "api/admin/**",
-                                "api/rooms/**",
-                                "/rooms-list",
-                                "/home",
-                                "/view/search/**")
+                                "/", "/favicon.ico", "/css/**", "/js/**", "/images/**", "/fonts/**",
+                                "/api/auth/register")
                         .permitAll()
-                        .requestMatchers("/test").authenticated()
                         .anyRequest().authenticated())
-                        .exceptionHandling(exception -> exception
-                        .accessDeniedPage("/error/403"));
-
+                .formLogin(form -> form
+                        .loginPage("/auth")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/", true)
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                        .failureUrl("/auth?error=true")
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout=true")
+                        .permitAll());
         return http.build();
     }
 
