@@ -1,14 +1,10 @@
 package projetb2.overlook_hotel.controller.api;
 
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import projetb2.overlook_hotel.security.CustomUserDetails;
 
 @Controller
 public class AuthApiController {
@@ -24,8 +20,8 @@ public class AuthApiController {
             model.addAttribute("logoutMessage", "Sucessfully disconnected.");
         }
 
-        model.addAttribute("fragmentPath", "fragments/test");
-        model.addAttribute("fragmentName", "home");
+        model.addAttribute("fragmentPath", "fragments/home");
+        model.addAttribute("fragmentName", "fgt-home");
 
         return "layout/connectedLayout";
     }

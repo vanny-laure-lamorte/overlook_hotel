@@ -14,10 +14,10 @@ public class BookingSearchViewController {
     @ModelAttribute
     public void initFragmentDefaults(Model model) {
         if (!model.containsAttribute("fragmentPath")) {
-            model.addAttribute("fragmentPath", "fragments/test");
+            model.addAttribute("fragmentPath", "fragments/home");
         }
         if (!model.containsAttribute("fragmentName")) {
-            model.addAttribute("fragmentName", "home");
+            model.addAttribute("fragmentName", "fgt-home");
         }
         if (!model.containsAttribute("adultsCount")) {
             model.addAttribute("adultsCount", 2);

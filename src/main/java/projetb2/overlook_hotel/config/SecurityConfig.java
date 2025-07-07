@@ -19,7 +19,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/", "/favicon.ico", "/css/**", "/js/**", "/images/**", "/fonts/**",
-                                "/api/auth/register")
+                                "/api/auth/register", "/home")
                         .permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form

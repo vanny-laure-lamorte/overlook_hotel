@@ -46,21 +46,22 @@
                 <!-- Authentication - Logged In State -->
                 <div class="auth-buttons logged-in" th:if="${isAuthenticated}">
                     <div class="dropdown">
-                        <button class="btn button-outline">
+                        <button class="btn btn-outline-white">
                             <i class="fas fa-user" style="font-size: 0.875rem;"></i>
-                            <span>Mon profil</span>
+                            <span>My profil</span>
                             <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i>
                         </button>
                         <div class="dropdown-content">
                             <div class="dropdown-item">
-                                <i class="fas fa-user" style="margin-right: 8px; font-size: 0.875rem;"></i>
-                                <span>Mon profil</span>
+                                <form th:action="@{/profile}" method="get">
+                                    <button type="submit" class="btn btn-link auth-buttons">
+                                        <i class="fas fa-user" style="margin-right: 8px; font-size: 0.875rem;"></i>
+                                        <span>My profil</span> </button></form>
                             </div>
                             <div class="dropdown-item">
                                 <form th:action="@{/logout}" method="post">
-                                    <button type="submit" class="btn btn-link logout-button">
-                                        <i class="fas fa-sign-out-alt"
-                                            style="margin-right: 8px; font-size: 0.875rem;"></i>
+                                    <button type="submit" class="btn btn-link logout-button  auth-buttons">
+                                        <i class="fas fa-user" style="margin-right: 8px; font-size: 0.875rem;"></i>
                                         <span>Se déconnecter</span>
                                     </button>
                                 </form>

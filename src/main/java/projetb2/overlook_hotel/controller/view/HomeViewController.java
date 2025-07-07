@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeViewController {
-    @GetMapping("/home")
+    @GetMapping("/")
     public String showHome(Model model) {
-        model.addAttribute("fragmentPath", "fragments/home.html");
+        model.addAttribute("fragmentPath", "fragments/home");
         model.addAttribute("fragmentName", "fgt-home");
         return "layout/connectedLayout";
     }
