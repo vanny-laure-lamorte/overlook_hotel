@@ -18,10 +18,9 @@ public interface HotelUserRepository extends JpaRepository<HotelUser, Integer> {
     Optional<HotelUser> findByEmail(String email);
 
     /**
-     * Finds a list of HotelUsers by their role name.
+     * Finds all HotelUsers with a specific role.
      *
-     * @param roleName the name of the role
-     * @return a list of HotelUsers with the specified role name
+     * @return a list of HotelUsers
      */
     List<HotelUser> findByRole_RoleName(String roleName);
 

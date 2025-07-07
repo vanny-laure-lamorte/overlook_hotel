@@ -21,6 +21,8 @@ public class SecurityConfig {
                                 "/", "/favicon.ico", "/css/**", "/js/**", "/images/**", "/fonts/**", "/profil",
                                 "/api/auth/register", "/home")
                         .permitAll()
+                        .requestMatchers("/admin/employees")
+                        .hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/auth")
