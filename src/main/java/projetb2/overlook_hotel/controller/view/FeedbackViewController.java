@@ -36,7 +36,7 @@ public class FeedbackViewController {
      */
     @GetMapping("/feedback")
     public String showFeedback(Model model) {
-
+            System.out.println("test");
         Feedback feedback = new Feedback();
         model.addAttribute("hotelUserId", 1);
         model.addAttribute("bookingId", 1);
