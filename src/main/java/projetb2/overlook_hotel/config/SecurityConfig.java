@@ -32,6 +32,12 @@ public class SecurityConfig {
                                 "api/rooms/**",
                                 "/rooms-list",
                                 "/home",
+                                "/feedback",
+                                "/feedback/**",
+                                "/api/feedback/**",
+                                "/payment",
+                                "/spa",
+                                "/meeting-room**",
                                 "/view/search/**")
                         .permitAll()
                         .requestMatchers("/test").authenticated()

@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import projetb2.overlook_hotel.model.HotelUser;
 
 @Repository
-public interface HotelUserRepository extends JpaRepository<HotelUser, Long> {
+public interface HotelUserRepository extends JpaRepository<HotelUser, Integer> {
+
     Optional<HotelUser> findByEmail(String email);
+
 }

@@ -18,6 +18,9 @@ public class RoomsApiController {
         this.roomService = roomService;
     }
 
+    /*
+     * Retrieves all rooms
+     */
     @GetMapping("/all-rooms")
     public List<Room> getAllRooms() {
         for (Room room : roomService.getAllRooms()) {
@@ -25,5 +28,4 @@ public class RoomsApiController {
         }
         return roomService.getAllRooms();
     }
-
 }

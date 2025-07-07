@@ -16,6 +16,9 @@ public class AuthViewController {
     @Autowired
     private RestTemplate restTemplate;
 
+    /*
+     * Handles the default tab for the login modal.
+     */
     @GetMapping("/login")
     public String defaultTab(Model model) {
         model.addAttribute("selectedTab", "customer");
@@ -24,6 +27,9 @@ public class AuthViewController {
         return "layout/connectedLayout";
     }
 
+    /*
+     * Handles login or tab change in the login modal.
+     */
     @PostMapping("/login")
     public String handleLoginOrTabChange(
             @RequestParam(required = false) String email,

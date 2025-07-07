@@ -16,12 +16,12 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="user_notification")
+@Table(name = "user_notification")
 public class UserNotification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private int user_id;
+    private int customer_id;
     private Date created_at;
     private String user_message;
 }

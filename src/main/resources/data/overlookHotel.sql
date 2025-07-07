@@ -9,8 +9,6 @@ DROP TABLE IF EXISTS booking CASCADE;
 DROP TABLE IF EXISTS room CASCADE;
 DROP TABLE IF EXISTS hotel_user CASCADE;
 DROP TABLE IF EXISTS "role" CASCADE;
-
--- Drop types
 DROP TYPE IF EXISTS room_type CASCADE;
 DROP TYPE IF EXISTS state_reservation CASCADE;
 
@@ -26,7 +24,7 @@ INSERT INTO "role" (role_name) VALUES
 ('employee'),
 ('admin');
 
--- Hotel user
+-- Hotel_user
 CREATE TABLE IF NOT EXISTS hotel_user (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(255),
@@ -96,7 +94,7 @@ CREATE TYPE state_reservation AS ENUM ('PENDING', 'ACCEPTED', 'DECLINED', 'CANCE
 -- Bookings
 CREATE TABLE IF NOT EXISTS booking (
     id SERIAL PRIMARY KEY,
-    user_id INT,
+    customer_id INT,
     room_id INT,
     arriving_date DATE,
     departure_date DATE,
@@ -105,11 +103,11 @@ CREATE TABLE IF NOT EXISTS booking (
     adults INT,
     children INT,
     bill INT,
-    FOREIGN KEY (user_id) REFERENCES hotel_user(id),
+    FOREIGN KEY (customer_id) REFERENCES hotel_user(id),
     FOREIGN KEY (room_id) REFERENCES room(id)
 );
 
-INSERT INTO booking (user_id, room_id, arriving_date, departure_date, booking_status, confirmation_number, adults, children, bill) VALUES
+INSERT INTO booking (customer_id, room_id, arriving_date, departure_date, booking_status, confirmation_number, adults, children, bill) VALUES
 (1, 1, '2025-06-10', '2025-06-12', 'PENDING', 1001, 2, 1, 200),
 (2, 2, '2025-06-15', '2025-06-16', 'ACCEPTED', 1002, 10, 2, 2500),
 (3, 3, '2025-06-20', '2025-06-22', 'PENDING', 1003, 4, 0, 600),
@@ -117,36 +115,41 @@ INSERT INTO booking (user_id, room_id, arriving_date, departure_date, booking_st
 (5, 5, '2025-06-25', '2025-06-28', 'PENDING', 1005, 2, 0, 360),
 (6, 6, '2025-06-30', '2025-07-02', 'ACCEPTED', 1006, 2, 3, 400);
 
--- Feedback
 CREATE TABLE IF NOT EXISTS feedback (
     id SERIAL PRIMARY KEY,
-    user_id INT,
-    booking_id INT,
+    customer_id INT,
+    booking_id INTEGER,
+    travel_for_work BOOLEAN,
+    travel_companions TEXT,
+    expectation_met TEXT,
     rating INT,
-    user_comment TEXT,
+    likes TEXT,
+    dislikes TEXT,
+    summary TEXT,
     response TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES hotel_user(id),
+    FOREIGN KEY (customer_id) REFERENCES hotel_user(id),
     FOREIGN KEY (booking_id) REFERENCES booking(id)
 );
 
-INSERT INTO feedback (user_id, booking_id, rating, user_comment, response, created_at) VALUES
-(1, 1, 4, 'Great room, very clean and comfortable.', 'Thank you for your feedback!', '2025-06-12 10:00:00'),
-(2, 2, 5, 'Perfect for our team meeting, very spacious.', 'We are glad to hear it was helpful!', '2025-06-16 15:00:00'),
-(3, 3, 3, 'Room was decent, but a bit too small for 4 people.', 'We will work on improving space.', '2025-06-22 12:00:00'),
-(4, 4, 2, 'Room was not available when we arrived, very disappointing.', 'We apologize for the inconvenience.', '2025-06-07 09:00:00'),
-(5, 5, 4, 'Nice room, a bit more attention to detail would make it perfect.', 'We appreciate the feedback!', '2025-06-28 14:00:00');
+INSERT INTO feedback (customer_id, booking_id, travel_for_work, travel_companions, expectation_met, rating, likes, dislikes, summary, response, created_at) VALUES
+(1, 1, TRUE, 'colleagues', 'yes', 4, 'Clean room, comfortable bed.', 'Noisy hallway at night.', 'Business-friendly stay.', 'Thank you for your feedback!', '2025-06-12 10:00:00'),
+(2, 2, TRUE, 'team', 'yes', 5, 'Spacious meeting area.', 'Limited food options.', 'Excellent for work trips.', 'We are glad to hear it was helpful!', '2025-06-16 15:00:00'),
+(3, 3, FALSE, 'family', 'no', 3, 'Nice location.', 'Too small for 4 people.', 'Average stay overall.', 'We will work on improving space.', '2025-06-22 12:00:00'),
+(4, 4, FALSE, 'partner', 'no', 2, 'Nothing in particular.', 'Room was not available.', 'Disappointing experience.', 'We apologize for the inconvenience.', '2025-06-07 09:00:00'),
+(5, 5, FALSE, 'alone', 'exceeded', 4, 'Quiet and clean.', 'Some details overlooked.', 'Very close to perfect.', 'We appreciate the feedback!', '2025-06-28 14:00:00');
+
 
 -- Notification
 CREATE TABLE IF NOT EXISTS user_notification (
     id SERIAL PRIMARY KEY,
-    user_id INT,
+    customer_id INT,
     user_message TEXT,
     created_at DATE,
-    FOREIGN KEY (user_id) REFERENCES hotel_user(id)
+    FOREIGN KEY (customer_id) REFERENCES hotel_user(id)
 );
 
-INSERT INTO user_notification (user_id, user_message, created_at) VALUES
+INSERT INTO user_notification (customer_id, user_message, created_at) VALUES
 (1, 'Your booking confirmation is pending. Please check back later.', '2025-06-10'),
 (2, 'Your booking has been confirmed. We look forward to seeing you!', '2025-06-15'),
 (3, 'Your booking has been accepted. Please enjoy your stay!', '2025-06-20'),
