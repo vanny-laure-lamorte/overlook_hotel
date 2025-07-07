@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/profil")
-public class ProfilApiController {
+@RequestMapping("/api/profile")
+public class ProfileApiController {
 
     
 }

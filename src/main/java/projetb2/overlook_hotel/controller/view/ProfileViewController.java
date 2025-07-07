@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 
 @Controller
-public class ProfilViewController {
+public class ProfileViewController {
 
-    @GetMapping("/profil")
-    public String showUserHotelProfil(Model model) {
-        model.addAttribute("fragmentPath", "fragments/profil.html");
-        model.addAttribute("fragmentName", "fgt-profil");
+    @GetMapping("/profile")
+    public String showUserHotelProfile(Model model) {
+        model.addAttribute("fragmentPath", "fragments/profile.html");
+        model.addAttribute("fragmentName", "fgt-profile");
         return "layout/connectedLayout";
     }
 }

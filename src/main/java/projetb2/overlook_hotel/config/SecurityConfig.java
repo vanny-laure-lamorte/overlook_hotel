@@ -18,7 +18,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/", "/favicon.ico", "/css/**", "/js/**", "/images/**", "/fonts/**", "/profil",
+                                "/", "/favicon.ico", "/css/**", "/js/**", "/images/**", "/fonts/**", "/profile",
                                 "/api/auth/register", "/home")
                         .permitAll()
                         .requestMatchers("/admin/employees")
