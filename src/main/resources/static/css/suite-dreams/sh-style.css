@@ -236,10 +236,10 @@ strong {
   background-color: #f1f5f9;
 }
 
-/* Toggle for logged in/out states */
+/* Toggle for logged in/out states
 .logged-in {
   display: none;
-}
+} */
 
 /* Modal styles */
 .modal {

@@ -38,12 +38,12 @@
                 </button>
 
                 <!-- Authentication - Logged Out State -->
-                <div class="auth-buttons logged-out">
+                <div class="auth-buttons logged-out" th:if="${!isAuthenticated}">
                     <button id="loginButton" class="btn btn-outline-white">Login/Register</button>
                 </div>
 
                 <!-- Authentication - Logged In State -->
-                <div class="auth-buttons logged-in">
+                <div class="auth-buttons logged-in" th:if="${isAuthenticated}">
                     <div class="dropdown">
                         <button class="btn button-outline">
                             <i class="fas fa-user" style="font-size: 0.875rem;"></i>

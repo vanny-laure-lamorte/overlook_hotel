@@ -1,11 +1,11 @@
 package projetb2.overlook_hotel.repository;
 
+import java.util.List;
 import java.util.Optional;
-import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import projetb2.overlook_hotel.model.HotelUser;
-
 
 @Repository
 public interface HotelUserRepository extends JpaRepository<HotelUser, Long> {
@@ -16,4 +16,13 @@ public interface HotelUserRepository extends JpaRepository<HotelUser, Long> {
      * @return an Optional containing the HotelUser if found, or empty if not found
      */
     Optional<HotelUser> findByEmail(String email);
+
+    /**
+     * Finds a list of HotelUsers by their role name.
+     *
+     * @param roleName the name of the role
+     * @return a list of HotelUsers with the specified role name
+     */
+    List<HotelUser> findByRole_RoleName(String roleName);
+
 }
