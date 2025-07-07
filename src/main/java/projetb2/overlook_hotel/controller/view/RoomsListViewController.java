@@ -25,7 +25,7 @@ public class RoomsListViewController {
         .filter(room -> "Room".equalsIgnoreCase(room.getAccommodationType()))
         .toList();
 
-    model.addAttribute("rooms", onlyRooms);
+        model.addAttribute("rooms", onlyRooms);
         model.addAttribute("fragmentPath", "fragments/rooms_list.html");
         model.addAttribute("fragmentName", "fgt-rooms-list");
 

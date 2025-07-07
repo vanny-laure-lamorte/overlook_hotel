@@ -37,7 +37,7 @@ public class BookingService {
      * If the booking is successfully accepted, it returns true.
      */
     @Transactional
-    public boolean acceptBooking(Long bookingId) {
+    public boolean acceptBooking(Integer bookingId) {
         return bookingRepo.findById(bookingId).map(booking -> {
             if (booking.getBookingStatus() != BookingStatus.PENDING)
                 return false;
@@ -52,7 +52,7 @@ public class BookingService {
      * If the booking is successfully declined, it returns true.
      */
     @Transactional
-    public boolean declineBooking(Long bookingId) {
+    public boolean declineBooking(Integer bookingId) {
         return bookingRepo.findById(bookingId).map(booking -> {
             if (booking.getBookingStatus() != BookingStatus.PENDING)
                 return false;
@@ -67,7 +67,7 @@ public class BookingService {
      * If the booking is successfully updated, it returns true.
      */
     @Transactional
-    public boolean updateBooking(Long bookingId, LocalDate arrival, LocalDate departure, BookingStatus status) {
+    public boolean updateBooking(Integer bookingId, LocalDate arrival, LocalDate departure, BookingStatus status) {
         return bookingRepo.findById(bookingId).map(booking -> {
             booking.setArrivingDate(arrival);
             booking.setDepartureDate(departure);

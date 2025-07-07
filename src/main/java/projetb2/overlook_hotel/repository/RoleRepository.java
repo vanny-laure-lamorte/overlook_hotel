@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import projetb2.overlook_hotel.model.Role;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface RoleRepository extends JpaRepository<Role, Integer> {
+
     Optional<Role> findByRoleName(String roleName);
+
 }

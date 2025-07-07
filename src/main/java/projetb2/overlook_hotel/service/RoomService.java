@@ -26,7 +26,7 @@ public class RoomService {
      * Retrieves a room by its ID.
      * @param id
      */
-    public void getRoomById(Long id) {
+    public void getRoomById(Integer id) {
         }
 
     /**
