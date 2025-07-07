@@ -18,32 +18,25 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-<<<<<<< HEAD
-                                "/", "/favicon.ico", "/css/**", "/js/**", "/images/**", "/fonts/**",
-                                "/api/auth/register")
-=======
                             "/favicon.ico",
-                                "/api/auth/**",
-                                "/login",
-                                "/login/**",
-                                "/css/**",
-                                "/js/**",
-                                "/images/**",
-                                "/fonts/roboto/**",
-                                "/",
-                                "/error/**",
-                                "api/admin/**",
-                                "api/rooms/**",
-                                "/rooms-list",
-                                "/home",
-                                "/feedback",
-                                "/feedback/**",
-                                "/api/feedback/**",
-                                "/payment",
-                                "/spa",
-                                "/meeting-room**",
-                                "/view/search/**")
->>>>>>> 7235656 (✨ <feat> add files for feedback form.)
+                            "/api/auth/**",
+                            "/css/**",
+                            "/js/**",
+                            "/images/**",
+                            "/fonts/roboto/**",
+                            "/",
+                            "/error/**",
+                            "api/admin/**",
+                            "api/rooms/**",
+                            "/rooms-list",
+                            "/home",
+                            "/feedback",
+                            "/feedback/**",
+                            "/api/feedback/**",
+                            "/payment",
+                            "/spa",
+                            "/meeting-room**",
+                            "/view/search/**")
                         .permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form

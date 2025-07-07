@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import projetb2.overlook_hotel.model.HotelUser;
 
 @Repository
-public interface HotelUserRepository extends JpaRepository<HotelUser, Long> {
+public interface HotelUserRepository extends JpaRepository<HotelUser, Integer> {
     /**
      * Finds a HotelUser by their email.
      *
@@ -24,5 +24,4 @@ public interface HotelUserRepository extends JpaRepository<HotelUser, Long> {
      * @return a list of HotelUsers with the specified role name
      */
     List<HotelUser> findByRole_RoleName(String roleName);
-
 }
