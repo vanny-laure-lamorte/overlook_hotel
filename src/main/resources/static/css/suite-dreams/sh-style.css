@@ -1519,9 +1519,7 @@ th {
 .form-group {
   display: flex;
   flex-direction: column;
-  min-width: 100px;
-  min-width: 100px;
-  min-width: 100px;
+   min-width: 100px;
   flex: 1;
 }
 
@@ -2091,9 +2089,9 @@ input[type="date"]::-moz-calendar-picker-indicator {
     align-items: stretch;
   }
 
-  .book-btn {
-    width: 100%;
-  }
+    .book-btn {
+        width: 100%;
+    }
 }
 
 @media (max-width: 768px) {

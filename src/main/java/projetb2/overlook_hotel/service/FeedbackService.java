@@ -25,7 +25,10 @@ public class FeedbackService {
         }
     }
 
-    public void deleteFeedback(Integer id) {
-        feedbackRepository.deleteById(id);
+    public void viewFeedback() {
+        System.out.println("Viewing feedback...");
+        // Logic to retrieve and display feedback
     }
+
+
 }
