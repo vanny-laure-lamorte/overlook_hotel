@@ -28,7 +28,7 @@ public class BookingApiController {
      * with an error message.
      */
     @PostMapping("/accept")
-    public RedirectView acceptBooking(@RequestParam("bookingId") Long bookingId,
+    public RedirectView acceptBooking(@RequestParam("bookingId") Integer bookingId,
             RedirectAttributes redirectAttributes) {
         boolean result = bookingService.acceptBooking(bookingId);
         redirectAttributes.addFlashAttribute("message", result ? "Booking accepted" : "Could not accept booking");
@@ -43,8 +43,7 @@ public class BookingApiController {
      * with an error message.
      */
     @PostMapping("/decline")
-    public RedirectView declineBooking(
-            @RequestParam("bookingId") Long bookingId,
+    public RedirectView declineBooking(@RequestParam("bookingId") Integer bookingId,
             RedirectAttributes redirectAttributes) {
         boolean result = bookingService.declineBooking(bookingId);
         redirectAttributes.addFlashAttribute("message", result ? "Booking declined" : "Could not decline booking");
@@ -59,8 +58,8 @@ public class BookingApiController {
      */
     @PostMapping("/edit")
     public RedirectView editBooking(
-            @RequestParam Long bookingId,
-            @RequestParam(required = false) Long roomId,
+            @RequestParam Integer bookingId,
+            @RequestParam Integer roomId,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate arrivingDate,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate departureDate,
             @RequestParam(required = false) BookingStatus bookingStatus,

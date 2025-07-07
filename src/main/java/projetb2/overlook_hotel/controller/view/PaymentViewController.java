@@ -5,16 +5,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeViewController {
+public class PaymentViewController {
 
     /*
-     * Handles the home page view.
-     * Displays the home fragment in the connected layout.
+     * Handles the payment page view.
      */
-    @GetMapping("/")
+    @GetMapping("/payment")
     public String showHome(Model model) {
-        model.addAttribute("fragmentPath", "fragments/home");
-        model.addAttribute("fragmentName", "fgt-home");
+        model.addAttribute("fragmentPath", "fragments/payment.html");
+        model.addAttribute("fragmentName", "fgt-payment");
         return "layout/connectedLayout";
     }
 }

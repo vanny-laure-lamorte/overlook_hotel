@@ -16,7 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="user_notification")
+@Table(name = "user_notification")
 public class UserNotification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

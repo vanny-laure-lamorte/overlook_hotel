@@ -11,7 +11,7 @@ import lombok.Data;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
@@ -19,7 +19,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "hotel_user")
-public class HotelUser {
+public class HotelUser implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

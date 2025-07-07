@@ -25,7 +25,7 @@ public class RoomService {
      * Retrieves a room by its ID.
      * @param id
      */
-    public Room getRoomById(Long id) {
+    public Room getRoomById(Integer id) {
         return roomRepository.findById(id).orElse(null);
     }
 
