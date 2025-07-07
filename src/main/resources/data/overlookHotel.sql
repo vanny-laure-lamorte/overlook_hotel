@@ -106,7 +106,7 @@ CREATE TYPE state_reservation AS ENUM ('PENDING', 'ACCEPTED', 'DECLINED', 'CANCE
 -- Bookings
 CREATE TABLE IF NOT EXISTS booking (
     id SERIAL PRIMARY KEY,
-    user_id INT,
+    customer_id INT,
     room_id INT,
     arriving_date DATE,
     departure_date DATE,
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS booking (
     adults INT,
     children INT,
     bill INT,
-    FOREIGN KEY (user_id) REFERENCES hotel_user(id),
+    FOREIGN KEY (customer_id) REFERENCES hotel_user(id),
     FOREIGN KEY (room_id) REFERENCES room(id)
 );
 
@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS feedback (
     summary TEXT,
     response TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES hotel_user(id),
+    FOREIGN KEY (customer_id) REFERENCES hotel_user(id),
     FOREIGN KEY (booking_id) REFERENCES booking(id)
 );
 
@@ -155,13 +155,13 @@ INSERT INTO feedback (user_id, booking_id, travel_for_work, travel_companions, e
 -- Notification
 CREATE TABLE IF NOT EXISTS user_notification (
     id SERIAL PRIMARY KEY,
-    user_id INT,
+    customer_id INT,
     user_message TEXT,
     created_at DATE,
-    FOREIGN KEY (user_id) REFERENCES hotel_user(id)
+    FOREIGN KEY (customer_id) REFERENCES hotel_user(id)
 );
 
-INSERT INTO user_notification (user_id, user_message, created_at) VALUES
+INSERT INTO user_notification (customer_id, user_message, created_at) VALUES
 (1, 'Your booking confirmation is pending. Please check back later.', '2025-06-10'),
 (2, 'Your booking has been confirmed. We look forward to seeing you!', '2025-06-15'),
 (3, 'Your booking has been accepted. Please enjoy your stay!', '2025-06-20'),

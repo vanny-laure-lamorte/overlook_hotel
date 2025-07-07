@@ -26,6 +26,12 @@ public class SecurityConfig {
                                 "/profile",
                                 "/api/auth/register",
                                 "/home",
+                                "/feedback",
+                                "/feedback/**",
+                                "/api/feedback/**",
+                                "/payment",
+                                "/spa",
+                                "/meeting-room**",
                                 "/header/***")
                         .permitAll()
                         .requestMatchers("/admin/employees").hasRole("ADMIN")

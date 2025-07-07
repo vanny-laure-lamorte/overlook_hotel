@@ -51,20 +51,20 @@ public class FeedbackViewController {
     @PostMapping("/feedback/submit")
     public String submitFeedback(
             @RequestParam("feedback") Feedback feedback,
-            @RequestParam(value = "booking") Integer bookingId,
-            @RequestParam(value = "hotelUser") Integer userId,
+            @RequestParam(value ="booking") Integer bookingId,
+            @RequestParam(value ="hotelUser") Integer userId,
             Model model) {
 
-        Booking booking = bookingRepository.findById(bookingId).orElse(null);
-        HotelUser hotelUser = userRepository.findById(userId).orElse(null);
+            Booking booking = bookingRepository.findById(bookingId).orElse(null);
+            HotelUser hotelUser = userRepository.findById(userId).orElse(null);
 
-        feedback.setBooking(booking);
-        feedback.setHotelUser(hotelUser);
-        feedback.setCreatedAt(LocalDateTime.now());
+            feedback.setBooking(booking);
+            feedback.setHotelUser(hotelUser);
+            feedback.setCreatedAt(LocalDateTime.now());
 
-        System.out.println("Submitting feedback: " + feedback);
+            System.out.println("Submitting feedback: " + feedback);
 
-        feedbackService.saveFeedback(feedback);
+            feedbackService.saveFeedback(feedback);
 
         return "layout/connectedLayout";
     }
