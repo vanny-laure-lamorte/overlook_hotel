@@ -18,14 +18,14 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/", "/favicon.ico", "/css/**", "/js/**", "/images/**", "/fonts/**",
+                                "/", "/favicon.ico", "/css/**", "/js/**", "/images/**", "/fonts/**", "/profil",
                                 "/api/auth/register", "/home")
                         .permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/auth")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/", true)
+                        .defaultSuccessUrl("/profil", true)
                         .usernameParameter("email")
                         .passwordParameter("password")
                         .failureUrl("/auth?error=true")

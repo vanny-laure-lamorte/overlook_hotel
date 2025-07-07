@@ -16,4 +16,8 @@ public class UserHotelService {
     public List<HotelUser> getAllUsers() {
         return userHotelRepository.findAll();
     }
+
+
+
+    
 }
