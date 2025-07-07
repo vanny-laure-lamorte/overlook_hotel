@@ -13,13 +13,15 @@ body {
 }
 
 main {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
-h1,h2,h3 {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    color: var(--gray-1000);
+h1,
+h2,
+h3 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  color: var(--gray-1000);
 }
 
 .h1-purple {
@@ -29,18 +31,18 @@ h1,h2,h3 {
 }
 
 h1 {
-    font-size: 2.5rem;
-    margin-bottom: 16px;
+  font-size: 2.5rem;
+  margin-bottom: 16px;
 }
 
 h2 {
-    font-size: 2rem;
-    margin-bottom: 16px;
+  font-size: 2rem;
+  margin-bottom: 16px;
 }
 
 h3 {
-    font-size: 1.5rem;
-    margin-bottom: 16px;
+  font-size: 1.5rem;
+  margin-bottom: 16px;
 }
 
 p {
@@ -236,10 +238,24 @@ strong {
   background-color: #f1f5f9;
 }
 
-/* Toggle for logged in/out states
-.logged-in {
-  display: none;
-} */
+/* Logout message style*/
+.fade-out {
+  opacity: 1;
+  transition: opacity 1s ease-out;
+}
+
+.fade-out.hidden {
+  opacity: 0;
+}
+
+.alert-info {
+  text-align: center;
+  color: white;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border-color: transparent;
+}
 
 /* Modal styles */
 .modal {
@@ -265,11 +281,11 @@ strong {
 }
 
 .modal.hidden {
-    display: none;
+  display: none;
 }
 
 .modal.visible {
-    display: flex;
+  display: flex;
 }
 
 /* Form as tab */
@@ -340,8 +356,8 @@ strong {
 
 .split-left,
 .split-right {
-    flex: 1;
-    padding: 24px;
+  flex: 1;
+  padding: 24px;
 }
 
 .split-left {
@@ -422,9 +438,9 @@ strong {
 }
 
 .menu-list a {
-    text-decoration: none;
-    color: var(--white);
-    font-weight: 500;
+  text-decoration: none;
+  color: var(--white);
+  font-weight: 500;
 }
 
 .menu-list a:hover {
@@ -492,23 +508,23 @@ strong {
 
 .footer-legal,
 .footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .footer-legal span,
 .footer-legal a,
 .footer-links a {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 12px;
-    text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  text-decoration: none;
 }
 
 .footer-legal a:hover,
 .footer-links a:hover {
-    color: var(--white);
-    text-decoration: underline;
+  color: var(--white);
+  text-decoration: underline;
 }
 
 .social-media {
@@ -536,8 +552,8 @@ strong {
 
 /* App Column Styles */
 .app-column {
-    flex: 1.2;
-    /* Slightly wider than other columns */
+  flex: 1.2;
+  /* Slightly wider than other columns */
 }
 
 .app-content {
@@ -593,9 +609,9 @@ strong {
 }
 
 .search-container {
-    background-color: #3c1053;
-    padding: 30px 15px;
-    font-family: Arial, sans-serif;
+  background-color: #3c1053;
+  padding: 30px 15px;
+  font-family: Arial, sans-serif;
 }
 
 .search-inner {
@@ -776,23 +792,23 @@ strong {
 }
 
 #dropdown-room-guest {
-    display: none;
-    position: absolute;
-    top: calc(100% + 4px);
-    left: 0;
-    width: 320px;
-    background: white;
-    z-index: 100;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    box-sizing: border-box;
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 320px;
+  background: white;
+  z-index: 100;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 #rooms-dropdown-container:hover #dropdown-room-guest,
 #rooms-dropdown-container:focus-within #dropdown-room-guest {
-    display: block;
+  display: block;
 }
 
 .room-panel {
@@ -1142,9 +1158,9 @@ strong {
   list-style: none;
 }
 
-#home  h1 {
-    font-size: 2.2rem;
-    margin: 0;
+#home h1 {
+  font-size: 2.2rem;
+  margin: 0;
 }
 
 .welcome-message {
@@ -1172,10 +1188,10 @@ strong {
 }
 
 .hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .hero-content h1 {
@@ -1211,7 +1227,8 @@ strong {
 
 .cta-button:hover {
   color: var(--white);
-  background: #005a6b;}
+  background: #005a6b;
+}
 
 /* Booking Form */
 
@@ -1227,7 +1244,7 @@ strong {
 }
 
 .booking-form form {
- display: flex;
+  display: flex;
   gap: 1rem;
   flex-wrap: wrap;
   align-items: flex-end;
@@ -1240,7 +1257,7 @@ strong {
 .form-group {
   display: flex;
   flex-direction: column;
-   min-width: 100px;
+  min-width: 100px;
   flex: 1;
 }
 
@@ -1292,9 +1309,9 @@ strong {
   height: auto;
 }
 
-.room-card-home:hover{
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
+.room-card-home:hover {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 .room-card:hover {
@@ -1327,12 +1344,12 @@ strong {
 }
 
 .features-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    height: auto;
-    gap: 2rem;
-    margin: 3px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: auto;
+  gap: 2rem;
+  margin: 3px;
 }
 
 .feature-item {
@@ -1341,12 +1358,12 @@ strong {
   background: var(--white);
   border-radius: 10px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  width:300px ;
+  width: 300px;
 }
 
 .feature-item:hover {
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
 }
 
 .feature-icon {
@@ -1383,11 +1400,11 @@ strong {
 }
 
 .map-img {
-    width: 40%;
-    height: auto;
-    border-radius: 10px;
-    background-color: var(--gray-300);
-    padding: 30px;
+  width: 40%;
+  height: auto;
+  border-radius: 10px;
+  background-color: var(--gray-300);
+  padding: 30px;
 }
 
 /*** RESPONSIVE ADJUSTEMENTS ***/
@@ -1395,92 +1412,93 @@ strong {
 /* 992px */
 @media (max-width: 992px) {
 
-    /* Booking Search */
-    .search-fields-container {
-        gap: 10px;
-    }
+  /* Booking Search */
+  .search-fields-container {
+    gap: 10px;
+  }
 
-    .search-field {
-        min-width: 180px;
-    }
+  .search-field {
+    min-width: 180px;
+  }
 }
 
 /* 768px */
 @media (max-width: 768px) {
   /* Our Rooms */
 
-    .room-card {
-        flex-direction: row;
-    }
+  .room-card {
+    flex-direction: row;
+  }
 
-    .image-container {
-        width: 33.333%;
-        height: auto;
-        min-height: 300px;
-    }
+  .image-container {
+    width: 33.333%;
+    height: auto;
+    min-height: 300px;
+  }
 
-    /* Footer */
-    .footer-top {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+  /* Footer */
+  .footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    .footer-logo {
-        margin-bottom: 20px;
-    }
+  .footer-logo {
+    margin-bottom: 20px;
+  }
 
-    .menu-list {
-        flex-wrap: wrap;
-    }
+  .menu-list {
+    flex-wrap: wrap;
+  }
 
-    .menu-list li {
-        margin: 0 15px 10px 0;
-    }
+  .menu-list li {
+    margin: 0 15px 10px 0;
+  }
 
-    .footer-middle {
-        flex-direction: column;
-    }
+  .footer-middle {
+    flex-direction: column;
+  }
 
-    .footer-column {
-        width: 100%;
-        padding-right: 0;
-    }
+  .footer-column {
+    width: 100%;
+    padding-right: 0;
+  }
 
-    .footer-bottom-row {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+  .footer-bottom-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    .footer-legal,
-    .footer-links {
-        margin-bottom: 15px;
-    }
+  .footer-legal,
+  .footer-links {
+    margin-bottom: 15px;
+  }
 
-    .social-media {
-        margin-top: 15px;
-    }
+  .social-media {
+    margin-top: 15px;
+  }
 
-    /* Booking Search */
-    .search-field {
-        flex: 1 0 calc(50% - 10px);
-    }
+  /* Booking Search */
+  .search-field {
+    flex: 1 0 calc(50% - 10px);
+  }
 
-    .destination-field {
-        flex: 1 0 100%;
-    }
+  .destination-field {
+    flex: 1 0 100%;
+  }
 
-    .rooms-guests-field {
-        flex: 1 0 100%;
-    }
+  .rooms-guests-field {
+    flex: 1 0 100%;
+  }
 
-    .button-field {
-        flex: 1 0 100%;
-        max-width: none;
-    }
+  .button-field {
+    flex: 1 0 100%;
+    max-width: none;
+  }
 }
 
 /* 576px */
 @media (max-width: 576px) {
+
   /* Booking Search */
   .search-field {
     flex: 1 0 100%;
@@ -1496,12 +1514,12 @@ strong {
 }
 
 @media (max-width: 640px) {
-    .room-footer {
-        flex-direction: column;
-        align-items: stretch;
-    }
+  .room-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-    .book-btn {
-        width: 100%;
-    }
+  .book-btn {
+    width: 100%;
+  }
 }

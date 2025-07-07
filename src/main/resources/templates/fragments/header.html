@@ -7,6 +7,7 @@
                 <img th:src="@{/images/icone-logo/suite-dreams-logo-trans.png}" alt="Logo">
                 <span class="logo-text">Suite Dream</span>
             </a>
+            <div id="logoutMessage" class="alert alert-info" th:if="${logoutMessage}" th:text="${logoutMessage}"></div>
             <div class="right-items">
                 <!-- Language selector -->
                 <div class="dropdown">
@@ -38,7 +39,7 @@
                 </button>
 
                 <!-- Authentication - Logged Out State -->
-                <div class="auth-buttons logged-out" th:if="${!isAuthenticated}">
+                <div class="auth-buttons logged-out" th:if="${isAuthenticated == false}">
                     <button id="loginButton" class="btn btn-outline-white">Login/Register</button>
                 </div>
 
@@ -56,8 +57,13 @@
                                 <span>Mon profil</span>
                             </div>
                             <div class="dropdown-item">
-                                <i class="fas fa-sign-out-alt" style="margin-right: 8px; font-size: 0.875rem;"></i>
-                                <span>Se déconnecter</span>
+                                <form th:action="@{/logout}" method="post">
+                                    <button type="submit" class="btn btn-link logout-button">
+                                        <i class="fas fa-sign-out-alt"
+                                            style="margin-right: 8px; font-size: 0.875rem;"></i>
+                                        <span>Se déconnecter</span>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -74,68 +80,25 @@
                     👋 Hello, <span th:text="${user.firstName + ' ' + user.lastName}">User</span><br>
                     📅 DOB: <span th:text="${#dates.format(user.dob, 'dd/MM/yyyy')}">dob</span><br>
                     🏠 Address: <span th:text="${user.userAddress}">address</span><br>
+                    🏠 Email: <span th:text="${user.email}">email</span><br>
                     📞 Phone: <span th:text="${user.phoneNumber}">phone</span><br>
                     <span th:text="'(Role: ' + ${user.role.roleName} + ')'"></span>
                 </p>
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const logoutMessage = document.getElementById("logoutMessage");
+            if (logoutMessage) {
+                logoutMessage.classList.add("fade-out");
+                setTimeout(() => {
+                    logoutMessage.classList.add("hidden");
+                    setTimeout(() => {
+                        logoutMessage.style.display = "none";
+                    }, 1000);
+                }, 3000);
+            }
+        });
+    </script>
 </header>
-const loginButton = document.getElementById('loginButton');
-const loginModal = document.getElementById('loginModal');
-const closeModal = document.getElementById('closeModal');
-const tabs = document.querySelectorAll('.tab');
-const tabContents = document.querySelectorAll('.tab-content');
-
-// Open modal when login button is clicked
-loginButton.addEventListener('click', function() {
-loginModal.style.display = 'flex';
-});
-
-// Close modal when close button is clicked
-closeModal.addEventListener('click', function() {
-loginModal.style.display = 'none';
-});
-
-// Close modal when clicking outside the modal content
-window.addEventListener('click', function(event) {
-if (event.target === loginModal) {
-loginModal.style.display = 'none';
-}
-});
-
-// Tab functionality
-tabs.forEach(tab => {
-tab.addEventListener('click', function() {
-// Remove active class from all tabs
-tabs.forEach(t => t.classList.remove('active'));
-
-// Add active class to clicked tab
-this.classList.add('active');
-
-// Hide all tab contents
-tabContents.forEach(content => content.classList.remove('active'));
-
-// Show the corresponding tab content
-const tabId = this.getAttribute('data-tab');
-if (tabId === 'customer') {
-document.getElementById('customerTab').classList.add('active');
-} else if (tabId === 'employee') {
-document.getElementById('employeeTab').classList.add('active');
-}
-});
-});
-
-// Toggle login state (for demo purposes)
-function toggleLoginState() {
-const loggedOutElements = document.querySelectorAll('.logged-out');
-const loggedInElements = document.querySelectorAll('.logged-in');
-
-loggedOutElements.forEach(el => {
-el.style.display = el.style.display === 'none' ? 'flex' : 'none';
-});
-
-loggedInElements.forEach(el => {
-el.style.display = el.style.display === 'flex' ? 'none' : 'flex';
-});
-}
