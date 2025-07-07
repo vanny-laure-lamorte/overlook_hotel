@@ -1,0 +1,175 @@
+<div th:fragment="fgt-profil">
+    <div th:if="${isAuthenticated}">
+        <div class="profile-container">
+            <div class="profile-card">
+                <!-- Profile Header -->
+                <div class="profile-header">
+                    <div class="profile-avatar-section">
+                        <div class="profile-avatar">
+                             <span th:text="|${user.firstName != null && user.firstName.length() > 0 ? user.firstName.substring(0,1).toUpperCase() : 'U'}${user.lastName != null && user.lastName.length() > 0 ? user.lastName.substring(0,1).toUpperCase() : ''}|">U</span>
+                            <div class="edit-avatar-btn" title="Change Avatar">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p id="avatarInitials" class="profile-title" th:text="${user.firstName + ' ' + user.lastName}"></p>
+                    <p class="profile-subtitle">Manage your personal information</p>
+                </div>
+
+                <!-- Profile Body -->
+                <div class="profile-body">
+                    <!-- Alert Message -->
+                    <div id="alertMessage" class="alert-custom">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="alertText">Profile updated successfully!</span>
+                    </div>
+
+                    <!-- Section Header -->
+                    <div class="profile-section-header">
+                        <div class="profile-title">
+                            <p class="profile-page-title">
+                                <i class="fas fa-user-edit"></i>
+                                Personal Information
+                            </p>
+                        </div>
+                        <div>
+
+                            <button type="button" id="editToggleBtn" class="edit-profile-toggle-btn">
+                                <i class="fas fa-edit"></i> Edit Profile
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Profile Form -->
+                    <form id="profileForm" th:action="@{/profile/update}" th:object="${user}" method="post">
+                        <div class="profile-form-grid">
+                            <!-- First Name -->
+                            <div class="profile-form-group">
+                                <label for="firstName" class="form-label">
+                                    First Name
+                                </label>
+                                <div class="input-group">
+                                    <i class="fas fa-user profile-input-icon"></i>
+                                    <input type="text"
+                                        class="form-control-info with-icon"
+                                        id="firstName"
+                                        th:field="*{firstName}"
+                                        th:value="${user.firstName}"
+                                        placeholder="Enter your first name"
+                                        disabled
+                                        required>
+                                    <div class="validation-message">Please enter your first name</div>
+                                </div>
+                            </div>
+
+                            <!-- Last Name -->
+                            <div class="profile-form-group">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <div class="input-group">
+                                    <i class="fas fa-user profile-input-icon"></i>
+                                    <input type="text"
+                                        class="form-control-info with-icon"
+                                        id="lastName"
+                                        th:field="*{lastName}"
+                                        th:value="${user.lastName}"
+                                        placeholder="Enter your last name"
+                                        disabled
+                                        required>
+                                    <div class="validation-message">Please enter your last name</div>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="profile-form-group">
+                                <label for="email" class="form-label">Email Address</label>
+                                <div class="input-group">
+                                    <i class="fas fa-envelope profile-input-icon"></i>
+                                    <input type="email"
+                                        class="form-control-info with-icon"
+                                        id="email"
+                                        th:field="*{email}"
+                                        th:value="${user.email}"
+                                        placeholder="Enter your email address"
+                                        disabled
+                                        required>
+                                    <div class="validation-message">Please enter a valid email address</div>
+                                </div>
+                            </div>
+
+                            <!-- Date of Birth -->
+                            <div class="profile-form-group">
+                                <label for="dob" class="form-label">Date of Birth</label>
+                                <div class="input-group">
+                                    <i class="fas fa-calendar-alt profile-input-icon"></i>
+                                   <input type="date"
+                                        class="form-control-info with-icon"
+                                        id="dob"
+                                        th:value="${#dates.format(user.dob, 'yyyy-MM-dd')}"
+                                        disabled
+                                        required>
+                                    <div class="validation-message">Please enter your date of birth</div>
+                                </div>
+                            </div>
+
+                            <!-- Address -->
+                            <div class="profile-form-group">
+                                <label for="address" class="form-label">Address</label>
+                                <div class="input-group">
+                                    <i class="fas fa-home profile-input-icon"></i>
+                                    <input type="text"
+                                        class="form-control-info with-icon"
+                                        id="address"
+                                        th:field="*{userAddress}"
+                                        th:value="${user.userAddress}"
+                                        placeholder="Enter your address"
+                                        disabled
+                                        required>
+                                    <div class="validation-message">Please enter your address</div>
+                                </div>
+                            </div>
+
+                            <!-- Phone Number -->
+                            <div class="profile-form-group">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <div class="input-group">
+                                    <i class="fas fa-phone profile-input-icon"></i>
+                                    <input type="tel"
+                                        class="form-control-info with-icon"
+                                        id="phone"
+                                        th:field="*{phoneNumber}"
+                                        th:value="${user.phoneNumber}"
+                                        placeholder="Enter your phone number"
+                                        disabled
+                                        required>
+                                    <div class="validation-message">Please enter your phone number</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="action-buttons" id="actionButtons" style="display: none;">
+                            <button type="submit" class="btn-primary-custom" id="saveBtn">
+                                <div class="loading-spinner" id="loadingSpinner"></div>
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                            <button type="button" class="btn-secondary-custom" id="cancelBtn">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        document.getElementById('calendarIcon').addEventListener('click', function() {
+            const dateInput = document.getElementById('dob');
+            if (dateInput.showPicker) {
+                dateInput.showPicker();
+            } else {
+                dateInput.focus();
+            }
+        });
+    </script>
+
+</div>

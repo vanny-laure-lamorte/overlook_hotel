@@ -14,7 +14,7 @@ import projetb2.overlook_hotel.security.CustomUserDetails;
 public class UserViewController {
     /**
      * Displays the home page with optional modal and tab selection.
-     * 
+     *
      * @param model Model to add attributes for the view
      * @return The name of the view to render
      */
