@@ -404,6 +404,23 @@ strong {
   color: red;
 }
 
+/* Admin Dashboard */
+.employee-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.employee-table th, .employee-table td {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.employee-table thead {
+    background-color: #f4f4f4;
+}
+
 /*** FOOTER ***/
 
 .footer-container {
