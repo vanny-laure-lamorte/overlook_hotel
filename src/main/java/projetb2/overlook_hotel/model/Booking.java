@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="booking")
+@Table(name = "booking")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,8 +19,8 @@ public class Booking {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private HotelUser user;
+    @JoinColumn(name = "customer_id")
+    private HotelUser hotelUser;
 
     @ManyToOne
     @JoinColumn(name = "room_id", referencedColumnName = "id")
@@ -42,5 +42,4 @@ public class Booking {
     private int children;
 
     private int bill;
-
 }

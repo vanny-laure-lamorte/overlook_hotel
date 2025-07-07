@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import projetb2.overlook_hotel.model.HotelUser;
 
 @Repository
+<<<<<<< HEAD
 public interface HotelUserRepository extends JpaRepository<HotelUser, Long> {
     /**
      * Finds a HotelUser by their email.
@@ -25,4 +26,10 @@ public interface HotelUserRepository extends JpaRepository<HotelUser, Long> {
      */
     List<HotelUser> findByRole_RoleName(String roleName);
 
+=======
+public interface HotelUserRepository extends JpaRepository<HotelUser, Integer> {
+
+    Optional<HotelUser> findByEmail(String email);
+
+>>>>>>> 7235656 (✨ <feat> add files for feedback form.)
 }
