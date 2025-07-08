@@ -26,7 +26,8 @@ public class SecurityConfig {
                                 "/fonts/**",
                                 "/profile",
                                 "/api/auth/register",
-                                "/home")
+                                "/home",
+                                "header/***")
                         .permitAll()
                         .requestMatchers(
                             "/admin/employees",

@@ -18,12 +18,13 @@
 </head>
 <body>
   <!-- Header -->
-  <header th:replace="~{fragments/header :: header}"></header>
+ <header th:replace="~{fragments/header :: header}"></header>
   <main>
-    <!-- Connexion Modal -->
+    <!-- Header Tom -->
     <div th:replace="~{fragments/connexion-modal :: connexion-modal}"></div>
-    <!-- Search Widget -->
-    <div th:replace="~{fragments/booking-search-widget :: booking-search-widget}"></div>
+    <!-- Header bottom -->
+    <div th:replace="~{fragments/header-bottom :: fgt-header-bottom}"></div>
+
     <!-- Main fragment -->
     <div class="main-content" th:replace="~{${fragmentPath} :: ${fragmentName}}"></div>
   </main>
