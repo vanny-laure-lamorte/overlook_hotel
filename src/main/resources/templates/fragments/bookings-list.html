@@ -15,10 +15,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="booking : ${bookings}" th:classappend="
-    ${booking.bookingStatus == 'DECLINED'} ? 'cancelled-booking' :
-    (${booking.bookingStatus == 'ACCEPTED'} ? 'accepted-booking' : '')">
-                    <!-- Booking details -->
+                <tr th:each="booking : ${bookings}"
+                    th:classappend="${booking.bookingStatus == 'DECLINED'} ? 'cancelled-booking' :
+                                   (booking.bookingStatus == 'ACCEPTED' ? 'accepted-booking' : '')">
                     <td th:text="${booking.bookingId}">1</td>
                     <td th:text="${booking.username}">John Doe</td>
                     <td>
@@ -49,7 +48,8 @@
                     <!-- Accept -->
                     <td class="action-cell borderless">
                         <span th:if="${booking.bookingStatus != 'PENDING'}">
-                            <i class="fas fa-check text-muted" th:title="${booking.bookingStatus == 'DECLINED'} ?
+                            <i class="fas fa-check text-muted"
+                               th:title="${booking.bookingStatus == 'DECLINED'} ?
                                           'Cannot accept a cancelled reservation' :
                                           'Reservation already accepted'"></i>
                         </span>
