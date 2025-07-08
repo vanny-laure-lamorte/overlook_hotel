@@ -1,0 +1,128 @@
+<div th:fragment="fgt-header-employee" id="header-employee" class="header-bottom">
+        <div class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <!-- brand -->
+                <a class="navbar-brand" href="/">
+                    <span class="header-bottom-bagde">Staff</span>
+                </a>
+                <div class="collapse navbar-collapse" id="navbarEmployee">
+                    <ul class="navbar-nav me-auto">
+                        <!-- pending Requests -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle position-relative" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-clock"></i> Pending Requests
+                                <span class="pending-badge" th:text="${pendingRequests ?: '0'}">8</span>
+                                <span class="urgent-requests" th:if="${urgentRequests > 0}" th:text="${urgentRequests + ' urgent'}">2 urgent</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/employee/requests/checkin">
+                                    <i class="fas fa-sign-in-alt"></i> Check-in
+                                    <span class="badge bg-warning ms-2" th:text="${checkinRequests ?: '0'}">3</span>
+                                </a></li>
+                                <li><a class="dropdown-item" href="/employee/requests/checkout">
+                                    <i class="fas fa-sign-out-alt"></i> Check-out
+                                    <span class="badge bg-info ms-2" th:text="${checkoutRequests ?: '0'}">2</span>
+                                </a></li>
+                                <li><a class="dropdown-item" href="/">
+                                    <i class="fas fa-broom"></i> Housekeeping
+                                    <span class="badge bg-success ms-2" th:text="${housekeepingRequests ?: '0'}">5</span>
+                                </a></li>
+                                <li><a class="dropdown-item" href="/">
+                                    <i class="fas fa-tools"></i> Maintenance
+                                    <span class="badge bg-danger ms-2" th:text="${maintenanceRequests ?: '0'}">1</span>
+                                </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/">
+                                    <i class="fas fa-list"></i> All Requests
+                                </a></li>
+                            </ul>
+                        </li>
+
+                        <!-- room Management -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-bed"></i> Room Management
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/employee/rooms/status">
+                                    <i class="fas fa-info-circle"></i> Room Status
+                                </a></li>
+                                <li><a class="dropdown-item" href="/employee/rooms/bookings">
+                                    <i class="fas fa-calendar-check"></i> Guest Bookings
+                                </a></li>
+                                <li><a class="dropdown-item" href="/employee/rooms/cleaning">
+                                    <i class="fas fa-spray-can"></i> Cleaning Schedule
+                                </a></li>
+                                <li><a class="dropdown-item" href="/employee/rooms/maintenance">
+                                    <i class="fas fa-wrench"></i> Maintenance
+                                </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/employee/rooms/assign">
+                                    <i class="fas fa-key"></i> Room Assignment
+                                </a></li>
+                            </ul>
+                        </li>
+
+                        <!-- dashboard -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/employee/dashboard">
+                                    <i class="fas fa-chart-line"></i> Overview
+                                </a></li>
+                                <li><a class="dropdown-item" href="/employee/calendar">
+                                    <i class="fas fa-calendar"></i> Calendar
+                                </a></li>
+                                <li><a class="dropdown-item" href="/employee/schedule">
+                                    <i class="fas fa-clock"></i> My Schedule
+                                </a></li>
+                                <li><a class="dropdown-item" href="/employee/tasks">
+                                    <i class="fas fa-tasks"></i> My Tasks
+                                </a></li>
+                            </ul>
+                        </li>
+
+                        <!-- services -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-concierge-bell"></i> Services
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/employee/services/concierge">
+                                    <i class="fas fa-bell"></i> Concierge
+                                </a></li>
+                                <li><a class="dropdown-item" href="/employee/services/restaurant">
+                                    <i class="fas fa-utensils"></i> Restaurant
+                                </a></li>
+                                <li><a class="dropdown-item" href="/employee/services/events">
+                                    <i class="fas fa-note-sticky"></i> Events
+                                </a></li>
+                                <li><a class="dropdown-item" href="/employee/services/transport">
+                                    <i class="fas fa-car"></i> Transport
+                                </a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <!--right Side -->
+                    <div class="d-flex align-items-center">
+                        <!-- messages -->
+                        <div class="position-relative me-3">
+                            <a href="/employee/messages" class="nav-link">
+                                <i class="fas fa-envelope fa-lg"></i>
+                                <span class="pending-badge" th:text="${unreadMessages ?: '0'}">2</span>
+                            </a>
+                        </div>
+                        <!-- greeting -->
+                        <div class="greeting-section me-3">
+                            <span>Hello, </span>
+                            <span th:text="${user.firstName}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
