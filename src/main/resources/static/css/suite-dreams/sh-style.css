@@ -404,21 +404,43 @@ strong {
   color: red;
 }
 
-/* Admin Dashboard */
-.employee-table {
+/* Admin Dashboard - Table Styling */
+.sd-custom-table-wrapper {
+    padding: 2rem; /* ✅ Padding autour du tableau */
+}
+
+.sd-custom-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.employee-table th, .employee-table td {
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    text-align: left;
+.sd-custom-table thead {
+    background-color: var(--purple-900);
+    color: white;
 }
 
-.employee-table thead {
-    background-color: #f4f4f4;
+.sd-custom-table th, .sd-custom-table td {
+    padding: 0.5rem;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 0.95rem;
+}
+
+.sd-custom-table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.sd-custom-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.sd-custom-table tbody tr:hover {
+    background-color: #eaeaea;
+    transition: background-color 0.2s;
 }
 
 /*** FOOTER ***/

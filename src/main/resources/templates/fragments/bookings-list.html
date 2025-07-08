@@ -1,0 +1,30 @@
+<div th:fragment="fgt-booking-list">
+    <h2>Booking List</h2>
+    <div class="sd-custom-table-wrapper">
+        <table class="sd-custom-table">
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Customer Name</th>
+                    <th>Room</th>
+                    <th>Arriving Date</th>
+                    <th>Departure Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="booking : ${bookings}">
+                    <td th:text="${booking.bookingId}">1</td>
+                    <td th:text="${booking.username}">John Doe</td>
+                    <td>
+                        <span th:text="${booking.roomTitle}">Deluxe Suite</span>
+                        (<span th:text="${booking.roomId}">5</span>)
+                    </td>
+                    <td th:text="${booking.formattedArrivingDate}">10/07/2025</td>
+                    <td th:text="${booking.formattedDepartureDate}">12/07/2025</td>
+                    <td th:text="${booking.bookingStatus}">Confirmed</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

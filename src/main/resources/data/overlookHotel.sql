@@ -40,23 +40,34 @@ CREATE TABLE IF NOT EXISTS hotel_user (
     CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES "role"(id)
 );
 
+-- Admins
 INSERT INTO hotel_user (first_name, last_name, dob, user_address, phone_number, email, user_password, role_id) VALUES
-('CustomerFirstName', 'CustomerLastName', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'c', 'c', 1),
-('EmployeeFirstName', 'EmployeeLastName', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'e', 'e', 2),
 ('AdminFirstName', 'AdminLastName', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'a', 'a', 3),
 ('TestFirstName', 'TestLastName', '1995-12-22', '1 Rue des Champs, Paris', '0123456789', 't', 't', 3),
+('Lucas', 'Martinie', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'alice.durand@example.com', 'password123', 3),
+('Vanny', 'Lamorte', '1993-12-25', '2 Boulevard de la Republique, Paris', '0987654321', 'bob.martin@example.com', 'password123', 3);
+-- Employees
+INSERT INTO hotel_user (first_name, last_name, dob, user_address, phone_number, email, user_password, role_id) VALUES
+('EmployeeFirstName', 'EmployeeLastName', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'e', 'e', 2),
+('Frank', 'Meyer', '1992-04-12', '6 Rue de l eglise, Lille', '0612345679', 'frank.meyer@example.com', 'password123', 2),
+('Gina', 'Petit', '1988-07-08', '7 Place du Marche, Nice', '0623456789', 'gina.petit@example.com', 'password123', 2),
+('Hugo', 'Bernard', '1993-01-22', '8 Rue de la Gare, Bordeaux', '0687654321', 'hugo.bernard@example.com', 'password123', 2);
+-- Customers
+INSERT INTO hotel_user (first_name, last_name, dob, user_address, phone_number, email, user_password, role_id) VALUES
+('CustomerFirstName', 'CustomerLastName', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'c', 'c', 1),
 ('Charlie', 'Dupont', '1982-03-30', '3 Avenue des Tuileries, Lyon', '0601020304', 'charlie.dupont@example.com', 'password123', 1),
 ('Diana', 'Lemoine', '1995-09-10', '4 Rue de la Paix, Marseille', '0712345678', 'diana.lemoine@example.com', 'password123', 1),
-('Eve', 'Blanchard', '1987-11-05', '5 Place de la Liberté, Toulouse', '0812345678', 'eve.blanchard@example.com', 'password123', 1);
-
-INSERT INTO hotel_user (first_name, last_name, dob, user_address, phone_number, email, user_password, role_id) VALUES
-('Frank', 'Meyer', '1992-04-12', '6 Rue de l Église, Lille', '0612345679', 'frank.meyer@example.com', 'password123', 2),
-('Gina', 'Petit', '1988-07-08', '7 Place du Marché, Nice', '0623456789', 'gina.petit@example.com', 'password123', 2),
-('Hugo', 'Bernard', '1993-01-22', '8 Rue de la Gare, Bordeaux', '0687654321', 'hugo.bernard@example.com', 'password123', 2);
-
-INSERT INTO hotel_user (first_name, last_name, dob, user_address, phone_number, email, user_password, role_id) VALUES
-('Lucas', 'Martinie', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'alice.durand@example.com', 'password123', 3),
-('Vanny', 'Lamorte', '1993-12-25', '2 Boulevard de la République, Paris', '0987654321', 'bob.martin@example.com', 'password123', 3);
+('Eve', 'Blanchard', '1987-11-05', '5 Place de la Liberte, Toulouse', '0812345678', 'eve.blanchard@example.com', 'password123', 1),
+('Alice', 'Martin', '1990-04-12', '10 Rue de la Republique, Paris', '0611223344', 'alice.martin@example.com', 'password123', 1),
+('Benoît', 'Girard', '1985-08-19', '21 Boulevard Victor Hugo, Nice', '0622334455', 'benoit.girard@example.com', 'password123', 1),
+('Claire', 'Perrot', '1992-02-28', '33 Avenue Jean Jaures, Lille', '0633445566', 'claire.perrot@example.com', 'password123', 1),
+('Damien', 'Roux', '1988-06-17', '5 Rue Nationale, Nantes', '0644556677', 'damien.roux@example.com', 'password123', 1),
+('Elodie', 'Marchand', '1993-10-09', '8 Place Bellecour, Lyon', '0655667788', 'elodie.marchand@example.com', 'password123', 1),
+('François', 'Leclerc', '1980-12-03', '14 Rue des Remparts, Bordeaux', '0666778899', 'francois.leclerc@example.com', 'password123', 1),
+('Gabrielle', 'Picard', '1996-07-25', '2 Allee des Lilas, Rennes', '0677889900', 'gabrielle.picard@example.com', 'password123', 1),
+('Hugo', 'Meyer', '1983-11-14', '18 Avenue de Strasbourg, Strasbourg', '0688990011', 'hugo.meyer@example.com', 'password123', 1),
+('Isabelle', 'Renard', '1991-05-05', '7 Rue Saint-Michel, Montpellier', '0699001122', 'isabelle.renard@example.com', 'password123', 1),
+('Julien', 'Barbier', '1986-09-21', '12 Boulevard Haussmann, Paris', '0600112233', 'julien.barbier@example.com', 'password123', 1);
 
 -- room_type ENUM type for rooms
 CREATE TYPE ROOM_TYPE AS ENUM ('Room', 'Meeting', 'Spa');
@@ -111,12 +122,12 @@ CREATE TABLE IF NOT EXISTS booking (
 );
 
 INSERT INTO booking (user_id, room_id, arriving_date, departure_date, booking_status, confirmation_number, adults, children, bill) VALUES
-(1, 1, '2025-06-10', '2025-06-12', 'PENDING', 1001, 2, 1, 200),
-(2, 2, '2025-06-15', '2025-06-16', 'ACCEPTED', 1002, 10, 2, 2500),
-(3, 3, '2025-06-20', '2025-06-22', 'PENDING', 1003, 4, 0, 600),
-(4, 4, '2025-06-05', '2025-06-07', 'DECLINED', 1004, 2, 0, 240),
-(5, 5, '2025-06-25', '2025-06-28', 'PENDING', 1005, 2, 0, 360),
-(6, 6, '2025-06-30', '2025-07-02', 'ACCEPTED', 1006, 2, 3, 400);
+(11, 1, '2025-06-10', '2025-06-12', 'PENDING', 1001, 2, 1, 200),
+(12, 2, '2025-06-15', '2025-06-16', 'ACCEPTED', 1002, 10, 2, 2500),
+(15, 3, '2025-06-20', '2025-06-22', 'PENDING', 1003, 4, 0, 600),
+(10, 4, '2025-06-05', '2025-06-07', 'DECLINED', 1004, 2, 0, 240),
+(13, 5, '2025-06-25', '2025-06-28', 'PENDING', 1005, 2, 0, 360),
+(16, 6, '2025-06-30', '2025-07-02', 'ACCEPTED', 1006, 2, 3, 400);
 
 -- Feedback
 CREATE TABLE IF NOT EXISTS feedback (
@@ -132,11 +143,11 @@ CREATE TABLE IF NOT EXISTS feedback (
 );
 
 INSERT INTO feedback (user_id, booking_id, rating, user_comment, response, created_at) VALUES
-(1, 1, 4, 'Great room, very clean and comfortable.', 'Thank you for your feedback!', '2025-06-12 10:00:00'),
-(2, 2, 5, 'Perfect for our team meeting, very spacious.', 'We are glad to hear it was helpful!', '2025-06-16 15:00:00'),
-(3, 3, 3, 'Room was decent, but a bit too small for 4 people.', 'We will work on improving space.', '2025-06-22 12:00:00'),
-(4, 4, 2, 'Room was not available when we arrived, very disappointing.', 'We apologize for the inconvenience.', '2025-06-07 09:00:00'),
-(5, 5, 4, 'Nice room, a bit more attention to detail would make it perfect.', 'We appreciate the feedback!', '2025-06-28 14:00:00');
+(10, 1, 4, 'Great room, very clean and comfortable.', 'Thank you for your feedback!', '2025-06-12 10:00:00'),
+(9, 2, 5, 'Perfect for our team meeting, very spacious.', 'We are glad to hear it was helpful!', '2025-06-16 15:00:00'),
+(15, 3, 3, 'Room was decent, but a bit too small for 4 people.', 'We will work on improving space.', '2025-06-22 12:00:00'),
+(12, 4, 2, 'Room was not available when we arrived, very disappointing.', 'We apologize for the inconvenience.', '2025-06-07 09:00:00'),
+(7, 5, 4, 'Nice room, a bit more attention to detail would make it perfect.', 'We appreciate the feedback!', '2025-06-28 14:00:00');
 
 -- Notification
 CREATE TABLE IF NOT EXISTS user_notification (
