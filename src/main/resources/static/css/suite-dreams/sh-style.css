@@ -406,7 +406,7 @@ strong {
 
 /* Admin Dashboard - Table Styling */
 .sd-custom-table-wrapper {
-    padding: 2rem; /* ✅ Padding autour du tableau */
+    padding: 2rem;
 }
 
 .sd-custom-table {
@@ -442,7 +442,60 @@ strong {
     background-color: #eaeaea;
     transition: background-color 0.2s;
 }
+.action-cell {
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5rem;
+    border: none !important;
+}
 
+.action-cell i {
+    transition: color 0.2s;
+}
+
+.action-cell i:hover {
+    color: var(--purple-900);
+}
+
+/* ========= DECLINED ========= */
+.cancelled-booking {
+    background-color: #f8d7da;
+    font-style: italic;
+    opacity: 0.85;
+}
+
+.cancelled-booking td {
+    color: #8b0000;
+}
+
+.cancelled-booking .action-cell i {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.cancelled-booking .icon-edit {
+    pointer-events: auto !important;
+    opacity: 1;
+    color: inherit !important;
+}
+
+.cancelled-booking .icon-edit:hover {
+    color: var(--purple-900);
+}
+
+.accepted-booking .fa-check,
+.accepted-booking .fa-times {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.text-muted {
+    color: #bbb;
+}
+
+.cancelled-booking .action-cell i.icon-edit {
+    opacity: 1 !important;
+}
 /*** FOOTER ***/
 
 .footer-container {

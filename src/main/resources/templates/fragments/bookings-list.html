@@ -1,5 +1,6 @@
 <div th:fragment="fgt-booking-list">
     <h2>Booking List</h2>
+
     <div class="sd-custom-table-wrapper">
         <table class="sd-custom-table">
             <thead>
@@ -10,10 +11,14 @@
                     <th>Arriving Date</th>
                     <th>Departure Date</th>
                     <th>Status</th>
+                    <th colspan="3">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="booking : ${bookings}">
+                <tr th:each="booking : ${bookings}" th:classappend="
+    ${booking.bookingStatus == 'DECLINED'} ? 'cancelled-booking' :
+    (${booking.bookingStatus == 'ACCEPTED'} ? 'accepted-booking' : '')">
+                    <!-- Booking details -->
                     <td th:text="${booking.bookingId}">1</td>
                     <td th:text="${booking.username}">John Doe</td>
                     <td>
@@ -22,7 +27,36 @@
                     </td>
                     <td th:text="${booking.formattedArrivingDate}">10/07/2025</td>
                     <td th:text="${booking.formattedDepartureDate}">12/07/2025</td>
-                    <td th:text="${booking.bookingStatus}">Confirmed</td>
+                    <td th:text="${booking.bookingStatus}">PENDING</td>
+
+                    <!-- Edit -->
+                    <td class="action-cell borderless">
+                        <a href="#" title="Edit">
+                            <i class="fas fa-edit icon-edit"></i>
+                        </a>
+                    </td>
+
+                    <!-- Cancel -->
+                    <td class="action-cell borderless">
+                        <span th:if="${booking.bookingStatus == 'DECLINED'}">
+                            <i class="fas fa-times text-muted" title="Reservation already cancelled"></i>
+                        </span>
+                        <a th:if="${booking.bookingStatus != 'DECLINED'}" href="#" title="Cancel">
+                            <i class="fas fa-times text-danger"></i>
+                        </a>
+                    </td>
+
+                    <!-- Accept -->
+                    <td class="action-cell borderless">
+                        <span th:if="${booking.bookingStatus != 'PENDING'}">
+                            <i class="fas fa-check text-muted" th:title="${booking.bookingStatus == 'DECLINED'} ?
+                                          'Cannot accept a cancelled reservation' :
+                                          'Reservation already accepted'"></i>
+                        </span>
+                        <a th:if="${booking.bookingStatus == 'PENDING'}" href="#" title="Accept">
+                            <i class="fas fa-check text-success"></i>
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>
