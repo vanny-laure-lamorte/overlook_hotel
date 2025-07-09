@@ -1,0 +1,83 @@
+<div th:fragment="fgt-header-admin" id="header-admin" class="header-bottom">
+    <div class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <!-- user role -->
+            <a class="navbar-brand" href="/dashboard">
+                <span class="header-bottom-bagde">Admin</span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarEmployee">
+                <ul class="navbar-nav me-auto">
+                    <!-- room & booking Management -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-bed"></i> Room & Booking Management
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/">
+                                <i class="fas fa-info-circle"></i>Room Status
+                            </a></li>
+                            <li><a class="dropdown-item" href="/">
+                                <i class="fas fa-calendar-check"></i> Guest Bookings
+                            </a></li>
+                            <li><a class="dropdown-item" href="/">
+                                <i class="fas fa-broom"></i> Cleaning & Maintenance
+                            </a></li>
+                        </ul>
+                    </li>
+                    <!-- user & Staff Management-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-cogs"></i> User & Staff Management
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/">
+                                <i class="fas fa-th-large"></i>Room Types
+                            </a></li>
+                                <li><a class="dropdown-item" href="/">
+                                <i class="fas fa-calendar-alt"></i>Staff Directory
+                            </a></li>
+                            <li><a class="dropdown-item" href="/">
+                                <i class="fas fa-calendar-alt"></i>Work Schedules
+                            </a></li>
+                            <li><a class="dropdown-item" href="/">
+                                <i class="fas fa-user-friends"></i>Guest Profiles
+                            </a></li>
+                                <li><a class="dropdown-item" href="/">
+                                <i class="fas fa-money-check-alt"></i>Payroll
+                            </a></li>
+                        </ul>
+                    </li>
+                    <!-- fa-calendar-alt -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-calendar-alt"></i> Reports & Analytics
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/">
+                                <i class="fas fa-chart-bar"></i>Booking Stats
+                            </a></li>
+                            <li><a class="dropdown-item" href="/">
+                                <i class="fas fa-coins"></i>Revenue Reports
+                            </a></li>
+                             <li><a class="dropdown-item" href="/">
+                                <i class="fas fa-user-clock"></i>Staff Activity Logs
+                            </a></li>
+                        </ul>
+                    <!-- dashboard -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <!-- greeting -->
+                    <div class="greeting-section me-3">
+                        <span>Hello, </span>
+                        <span th:text="${user.firstName}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

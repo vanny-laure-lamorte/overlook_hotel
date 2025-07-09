@@ -1,0 +1,13 @@
+<div th:fragment="fgt-header-bottom" id="header-bottom">
+    <!-- header according to user role -->
+    <div class="header-bottom">
+        <div th:if="${isAuthenticated}" th:switch="${user.role.roleName}">
+            <div th:case="'customer'" th:insert="~{fragments/header-user :: fgt-header-user}"></div>
+            <div th:case="'employee'" th:insert="~{fragments/header-employee :: fgt-header-employee}"></div>
+            <div th:case="'admin'" th:insert="~{fragments/header-admin :: fgt-header-admin}"></div>
+            <div th:case="*"></div>
+        </div>
+    </div>
+    <!-- search section -->
+    <div th:replace="~{fragments/booking-search-widget :: booking-search-widget}"></div>
+</div>

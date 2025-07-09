@@ -137,6 +137,7 @@ strong {
 .dropdown {
   position: relative;
   display: inline-block;
+  z-index: 4;
 }
 
 .dropdown-button {
@@ -268,7 +269,7 @@ strong {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+  z-index: 3;
   justify-content: center;
   align-items: center;
 }
@@ -539,6 +540,115 @@ strong {
 .accepted-booking .fa-check,
 .accepted-booking .fa-times {
   pointer-events: none;
+}
+
+/*** HEADER BOTTOM ***/
+
+#header-bottom{
+  background-color: var(--purple-900);
+}
+
+.header-bottom {
+  background: var(--purple-900);
+  box-shadow: 0 4px 20px rgba(60, 16, 83, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  border-bottom: 1px solid var(--white);
+}
+
+.navbar-brand {
+  font-size: 1rem;
+  font-weight: 700;
+  color: white !important;
+  text-decoration: none;
+}
+
+.header-bottom-bagde {
+  background: var(--purple-500);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+.navbar-nav .nav-link {
+  color:var(--white) !important;
+  font-weight: 500;
+  padding: 0.75rem 1rem !important;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.navbar-nav .nav-link:hover {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.header-bottom .dropdown-menu {
+  background: white;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(60, 16, 83, 0.2);
+  padding: 0.5rem 0;
+}
+
+.header-bottom .dropdown-item {
+  color: var(--primary-color);
+  padding: 0.75rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.header-bottom .dropdown-item:hover {
+  background: var(--light-purple);
+  color: var(--primary-dark);
+}
+
+.greeting-section {
+  color: white;
+  font-weight: 500;
+}
+
+.header-bottom .user-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: var(--employee-accent);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-left: 0.5rem;
+  border: 2px solid white;
+}
+
+.dropdown-menu .fas {
+  color: var(--purple-900);
+}
+
+.fa-envelope{
+  color:white;
+}
+
+.header-bottom .pending-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #f39c12;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s infinite;
 }
 
 /*** FOOTER ***/
@@ -937,7 +1047,7 @@ strong {
   left: 0;
   width: 320px;
   background: white;
-  z-index: 100;
+  z-index: 2;
   border: 1px solid #ddd;
   border-radius: 3px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);

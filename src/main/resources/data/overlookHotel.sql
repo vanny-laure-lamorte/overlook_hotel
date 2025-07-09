@@ -42,19 +42,19 @@ CREATE TABLE IF NOT EXISTS hotel_user (
 
 -- Admins
 INSERT INTO hotel_user (first_name, last_name, dob, user_address, phone_number, email, user_password, role_id) VALUES
-('AdminFirstName', 'AdminLastName', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'a', 'a', 3),
-('TestFirstName', 'TestLastName', '1995-12-22', '1 Rue des Champs, Paris', '0123456789', 't', 't', 3),
+('Admin', 'AdminLN', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'a', 'a', 3),
+('Test', 'TestLN', '1995-12-22', '1 Rue des Champs, Paris', '0123456789', 't', 't', 3),
 ('Lucas', 'Martinie', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'alice.durand@example.com', 'password123', 3),
 ('Vanny', 'Lamorte', '1993-12-25', '2 Boulevard de la Republique, Paris', '0987654321', 'bob.martin@example.com', 'password123', 3);
 -- Employees
 INSERT INTO hotel_user (first_name, last_name, dob, user_address, phone_number, email, user_password, role_id) VALUES
-('EmployeeFirstName', 'EmployeeLastName', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'e', 'e', 2),
+('Employee', 'EmployeeLN', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'e', 'e', 2),
 ('Frank', 'Meyer', '1992-04-12', '6 Rue de l eglise, Lille', '0612345679', 'frank.meyer@example.com', 'password123', 2),
 ('Gina', 'Petit', '1988-07-08', '7 Place du Marche, Nice', '0623456789', 'gina.petit@example.com', 'password123', 2),
 ('Hugo', 'Bernard', '1993-01-22', '8 Rue de la Gare, Bordeaux', '0687654321', 'hugo.bernard@example.com', 'password123', 2);
 -- Customers
 INSERT INTO hotel_user (first_name, last_name, dob, user_address, phone_number, email, user_password, role_id) VALUES
-('CustomerFirstName', 'CustomerLastName', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'c', 'c', 1),
+('Customer', 'CustomerLastName', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'c', 'c', 1),
 ('Charlie', 'Dupont', '1982-03-30', '3 Avenue des Tuileries, Lyon', '0601020304', 'charlie.dupont@example.com', 'password123', 1),
 ('Diana', 'Lemoine', '1995-09-10', '4 Rue de la Paix, Marseille', '0712345678', 'diana.lemoine@example.com', 'password123', 1),
 ('Eve', 'Blanchard', '1987-11-05', '5 Place de la Liberte, Toulouse', '0812345678', 'eve.blanchard@example.com', 'password123', 1),
