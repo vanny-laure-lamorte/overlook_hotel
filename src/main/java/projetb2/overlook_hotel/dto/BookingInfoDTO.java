@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import projetb2.overlook_hotel.model.BookingStatus;
 
 @Data
 @AllArgsConstructor
@@ -15,7 +16,7 @@ public class BookingInfoDTO {
     private String roomTitle;
     private LocalDate arrivingDate;
     private LocalDate departureDate;
-    private String bookingStatus;
+    private BookingStatus bookingStatus;
 
     public String getFormattedArrivingDate() {
         return arrivingDate != null ? arrivingDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) : "";

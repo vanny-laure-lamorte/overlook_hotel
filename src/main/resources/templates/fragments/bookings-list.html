@@ -15,9 +15,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="booking : ${bookings}"
-                    th:classappend="${booking.bookingStatus == 'DECLINED'} ? 'cancelled-booking' :
-                                   (booking.bookingStatus == 'ACCEPTED' ? 'accepted-booking' : '')">
+                <tr th:each="booking : ${bookings}" th:classappend="${booking.bookingStatus == DECLINED} ? 'cancelled-booking' :
+                                    (booking.bookingStatus == ACCEPTED ? 'accepted-booking' : '')">
                     <td th:text="${booking.bookingId}">1</td>
                     <td th:text="${booking.username}">John Doe</td>
                     <td>
@@ -35,27 +34,38 @@
                         </a>
                     </td>
 
-                    <!-- Cancel -->
+                    <!-- Decline -->
                     <td class="action-cell borderless">
-                        <span th:if="${booking.bookingStatus == 'DECLINED'}">
-                            <i class="fas fa-times text-muted" title="Reservation already cancelled"></i>
+                        <span th:if="${booking.bookingStatus != PENDING}">
+                            <i class="fas fa-times text-muted" th:title="${booking.bookingStatus == DECLINED} ?
+                      'Reservation already declined' :
+                      'Cannot decline an accepted reservation'"></i>
                         </span>
-                        <a th:if="${booking.bookingStatus != 'DECLINED'}" href="#" title="Cancel">
-                            <i class="fas fa-times text-danger"></i>
-                        </a>
+
+                        <form th:if="${booking.bookingStatus == PENDING}" th:action="@{/api/booking/decline}"
+                            method="post" style="display: inline;">
+                            <input type="hidden" name="bookingId" th:value="${booking.bookingId}" />
+                            <button type="submit" class="btn btn-link p-0" title="Decline">
+                                <i class="fas fa-times text-danger"></i>
+                            </button>
+                        </form>
                     </td>
 
                     <!-- Accept -->
                     <td class="action-cell borderless">
-                        <span th:if="${booking.bookingStatus != 'PENDING'}">
-                            <i class="fas fa-check text-muted"
-                               th:title="${booking.bookingStatus == 'DECLINED'} ?
-                                          'Cannot accept a cancelled reservation' :
-                                          'Reservation already accepted'"></i>
+                        <span th:if="${booking.bookingStatus != PENDING}">
+                            <i class="fas fa-check text-muted" th:title="${booking.bookingStatus == DECLINED} ?
+                                         'Cannot accept a cancelled reservation' :
+                                         'Reservation already accepted'"></i>
                         </span>
-                        <a th:if="${booking.bookingStatus == 'PENDING'}" href="#" title="Accept">
-                            <i class="fas fa-check text-success"></i>
-                        </a>
+
+                        <form th:if="${booking.bookingStatus == PENDING}" th:action="@{/api/booking/accept}"
+                            method="post" style="display: inline;">
+                            <input type="hidden" name="bookingId" th:value="${booking.bookingId}" />
+                            <button type="submit" class="btn btn-link p-0" title="Accept">
+                                <i class="fas fa-check text-success"></i>
+                            </button>
+                        </form>
                     </td>
                 </tr>
             </tbody>

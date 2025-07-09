@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="booking")
+@Table(name = "booking")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,8 +32,9 @@ public class Booking {
     @Column(name = "departure_date")
     private LocalDate departureDate;
 
-    @Column(name = "booking_status")
-    private String bookingStatus;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "booking_status", nullable = false)
+    private BookingStatus bookingStatus;
 
     @Column(name = "confirmation_number")
     private int confirmationNumber;
