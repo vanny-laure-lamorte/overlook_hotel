@@ -30,10 +30,15 @@
 
                     <!-- Edit -->
                     <td class="action-cell borderless">
-                        <a href="#" title="Edit">
+                        <button type="button" class="btn btn-link p-0" title="Edit" th:attr="data-id=${booking.bookingId},
+                 data-room=${booking.roomTitle},
+                 data-arrival=${booking.formattedArrivingDate},
+                 data-departure=${booking.formattedDepartureDate},
+                 data-status=${booking.bookingStatus}" onclick="openEditModal(this)">
                             <i class="fas fa-edit icon-edit"></i>
-                        </a>
+                        </button>
                     </td>
+
 
                     <!-- Decline -->
                     <td class="action-cell borderless">
@@ -69,6 +74,32 @@
                 </tr>
             </tbody>
         </table>
+        <div id="editBookingModal"
+            style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); z-index:1000; background:white; border:1px solid #ccc; padding:20px; box-shadow:0 0 15px rgba(0,0,0,0.3); border-radius:10px; max-width:500px; width:90%;">
+            <h3>Edit Booking</h3>
+            <form id="editBookingForm" th:action="@{/api/booking/edit}" method="post">
+                <input type="hidden" name="bookingId" id="editBookingId" />
+
+                <label for="editArrivingDate">Arriving Date:</label>
+                <input type="date" name="arrivingDate" id="editArrivingDate" required><br><br>
+
+                <label for="editDepartureDate">Departure Date:</label>
+                <input type="date" name="departureDate" id="editDepartureDate" required><br><br>
+
+                <label for="editRoomId">Room:</label>
+                <select name="roomId" id="editRoomId" required>
+                    <option th:each="room : ${rooms}" th:value="${room.id}"
+                        th:text="${room.roomTitle} + ' (' + ${room.capacity} + 'p)'" />
+                </select><br><br>
+                <label for="editBookingStatus">Status:</label>
+                <select name="bookingStatus" id="editBookingStatus" required>
+                    <option th:each="status : ${status}" th:value="${status}" th:text="${status}"></option>
+                </select><br><br>
+
+                <button type="submit">Save Changes</button>
+                <button type="button" onclick="closeEditModal()">Cancel</button>
+            </form>
+        </div>
     </div>
     <script>
         let currentSortColumn = -1;
@@ -106,6 +137,37 @@
 
             tbody.innerHTML = "";
             rows.forEach(row => tbody.appendChild(row));
+        }
+        function openEditModal(button) {
+            const bookingId = button.getAttribute("data-id");
+            const roomTitle = button.getAttribute("data-room");
+            const arrivingDate = formatDateForInput(button.getAttribute("data-arrival"));
+            const departureDate = formatDateForInput(button.getAttribute("data-departure"));
+            const bookingStatus = button.getAttribute("data-status");
+
+            document.getElementById("editBookingId").value = bookingId;
+            document.getElementById("editArrivingDate").value = arrivingDate;
+            document.getElementById("editDepartureDate").value = departureDate;
+            document.getElementById("editBookingStatus").value = bookingStatus;
+
+            const roomSelect = document.getElementById("editRoomId");
+            for (let option of roomSelect.options) {
+                if (option.text.includes(roomTitle)) {
+                    option.selected = true;
+                    break;
+                }
+            }
+
+            document.getElementById("editBookingModal").style.display = "block";
+        }
+
+        function formatDateForInput(dateStr) {
+            const parts = dateStr.split("/");
+            return `${parts[2]}-${parts[1]}-${parts[0]}`;
+        }
+
+        function closeEditModal() {
+            document.getElementById("editBookingModal").style.display = "none";
         }
     </script>
 </div>

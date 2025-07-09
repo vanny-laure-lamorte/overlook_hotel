@@ -43,6 +43,9 @@ public class AdminViewController {
         model.addAttribute("ACCEPTED", BookingStatus.ACCEPTED);
         model.addAttribute("DECLINED", BookingStatus.DECLINED);
 
+        model.addAttribute("rooms", adminService.getAllRooms());
+        model.addAttribute("status", BookingStatus.values());
+
         model.addAttribute("fragmentPath", "fragments/bookings-list");
         model.addAttribute("fragmentName", "fgt-booking-list");
 

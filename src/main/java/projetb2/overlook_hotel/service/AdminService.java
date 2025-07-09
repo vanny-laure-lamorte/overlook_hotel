@@ -16,9 +16,11 @@ public class AdminService {
     @Autowired
     private HotelUserRepository userRepo;
     private final BookingService bookingService;
+    private final RoomService roomService;
 
-    public AdminService(BookingService bookingService) {
+    public AdminService(BookingService bookingService, RoomService roomService) {
         this.bookingService = bookingService;
+        this.roomService = roomService;
     }
 
     /**
@@ -50,5 +52,9 @@ public class AdminService {
                 booking.getBookingStatus()
             ))
             .collect(Collectors.toList());
+    }
+
+    public List<projetb2.overlook_hotel.model.Room> getAllRooms() {
+        return roomService.getAllRooms();
     }
 }
