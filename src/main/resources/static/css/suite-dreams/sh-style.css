@@ -517,8 +517,21 @@ strong {
   opacity: 0.85;
 }
 
+.accepted-booking {
+  background-color: #d4edda;
+}
+
+th {
+  cursor: pointer;
+  user-select: none;
+}
+
 .cancelled-booking td {
-  color: #8b0000;
+  background-color: #f8d7da;
+}
+
+.accepted-booking td {
+  background-color: #d4edda;
 }
 
 .cancelled-booking .action-cell i {
@@ -544,7 +557,7 @@ strong {
 
 /*** HEADER BOTTOM ***/
 
-#header-bottom{
+#header-bottom {
   background-color: var(--purple-900);
 }
 
@@ -575,7 +588,7 @@ strong {
 }
 
 .navbar-nav .nav-link {
-  color:var(--white) !important;
+  color: var(--white) !important;
   font-weight: 500;
   padding: 0.75rem 1rem !important;
   border-radius: 8px;
@@ -631,8 +644,8 @@ strong {
   color: var(--purple-900);
 }
 
-.fa-envelope{
-  color:white;
+.fa-envelope {
+  color: white;
 }
 
 .header-bottom .pending-badge {
