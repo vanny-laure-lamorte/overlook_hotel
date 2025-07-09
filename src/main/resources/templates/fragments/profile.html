@@ -1,4 +1,4 @@
-<div th:fragment="fgt-profile">
+<div th:fragment="fgt-profile" id="profile-user">
     <div th:if="${isAuthenticated}">
         <div class="profile-container">
             <div class="profile-card">
@@ -32,12 +32,12 @@
                                 Personal Information
                             </p>
                         </div>
-                        <div>
+                        <!-- <div>
 
                             <button type="button" id="editToggleBtn" class="edit-profile-toggle-btn">
                                 <i class="fas fa-edit"></i> Edit Profile
                             </button>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- Profile Form -->
                     <form id="profileForm" th:action="@{/profile/update}" th:object="${user}" method="post">
@@ -55,7 +55,7 @@
                                         th:field="*{firstName}"
                                         th:value="${user.firstName}"
                                         placeholder="Enter your first name"
-                                        disabled
+                                         th:attr="disabled=${!editMode}"
                                         required>
                                     <div class="validation-message">Please enter your first name</div>
                                 </div>
@@ -72,7 +72,7 @@
                                         th:field="*{lastName}"
                                         th:value="${user.lastName}"
                                         placeholder="Enter your last name"
-                                        disabled
+                                         th:attr="disabled=${!editMode}"
                                         required>
                                     <div class="validation-message">Please enter your last name</div>
                                 </div>
@@ -89,7 +89,7 @@
                                         th:field="*{email}"
                                         th:value="${user.email}"
                                         placeholder="Enter your email address"
-                                        disabled
+                                         th:attr="disabled=${!editMode}"
                                         required>
                                     <div class="validation-message">Please enter a valid email address</div>
                                 </div>
@@ -104,7 +104,7 @@
                                         class="form-control-info with-icon"
                                         id="dob"
                                         th:value="${#dates.format(user.dob, 'yyyy-MM-dd')}"
-                                        disabled
+                                         th:attr="disabled=${!editMode}"
                                         required>
                                     <div class="validation-message">Please enter your date of birth</div>
                                 </div>
@@ -121,7 +121,7 @@
                                         th:field="*{userAddress}"
                                         th:value="${user.userAddress}"
                                         placeholder="Enter your address"
-                                        disabled
+                                         th:attr="disabled=${!editMode}"
                                         required>
                                     <div class="validation-message">Please enter your address</div>
                                 </div>
@@ -138,7 +138,7 @@
                                         th:field="*{phoneNumber}"
                                         th:value="${user.phoneNumber}"
                                         placeholder="Enter your phone number"
-                                        disabled
+                                         th:attr="disabled=${!editMode}"
                                         required>
                                     <div class="validation-message">Please enter your phone number</div>
                                 </div>
@@ -146,14 +146,18 @@
                         </div>
 
                         <!-- Action Buttons -->
-                        <div class="action-buttons" id="actionButtons" style="display: none;">
-                            <button type="submit" class="btn-primary-custom" id="saveBtn">
-                                <div class="loading-spinner" id="loadingSpinner"></div>
+                        <div class="action-buttons" th:if="${editMode}">
+                            <button type="submit" class="edit-profile-toggle-btn" id="save-btn">
                                 <i class="fas fa-save"></i> Save Changes
                             </button>
-                            <button type="button" class="btn-secondary-custom" id="cancelBtn">
+                            <a th:href="@{/profile}" class="edit-profile-toggle-btn" id="cancel-btn">
                                 <i class="fas fa-times"></i> Cancel
-                            </button>
+                            </a>
+                        </div>
+                        <div class="action-buttons" th:if="${!editMode}">
+                            <a th:href="@{/profile/edit}" class="edit-profile-toggle-btn" id="edit-btn">
+                                <i class="fas fa-edit"></i> Edit Profile
+                            </a>
                         </div>
                     </form>
                 </div>
