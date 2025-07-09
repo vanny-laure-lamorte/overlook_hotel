@@ -29,10 +29,8 @@ public class SecurityConfig {
                                 "/home",
                                 "header/***")
                         .permitAll()
-                        .requestMatchers(
-                            "/admin/employees",
-                            "/admin/bookings")
-                        .hasRole("ADMIN")
+                        .requestMatchers("/admin/employees").hasRole("ADMIN")
+                        .requestMatchers("/admin/bookings").hasAnyRole("ADMIN", "EMPLOYEE")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/auth")

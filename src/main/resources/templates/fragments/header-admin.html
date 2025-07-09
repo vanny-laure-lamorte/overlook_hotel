@@ -14,14 +14,19 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/">
-                                <i class="fas fa-info-circle"></i>Room Status
-                            </a></li>
+                                    <i class="fas fa-info-circle"></i>Room Status
+                                </a></li>
+                            <li>
+                                <form th:action="@{/admin/bookings}" method="get" style="margin: 0; padding: 0;">
+                                    <button type="submit" class="dropdown-item"
+                                        style="background: none; border: none; width: 100%; text-align: left;">
+                                        <i class="fas fa-calendar-check"></i> Guest Bookings
+                                    </button>
+                                </form>
+                            </li>
                             <li><a class="dropdown-item" href="/">
-                                <i class="fas fa-calendar-check"></i> Guest Bookings
-                            </a></li>
-                            <li><a class="dropdown-item" href="/">
-                                <i class="fas fa-broom"></i> Cleaning & Maintenance
-                            </a></li>
+                                    <i class="fas fa-broom"></i> Cleaning & Maintenance
+                                </a></li>
                         </ul>
                     </li>
                     <!-- user & Staff Management-->
@@ -31,20 +36,24 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/">
-                                <i class="fas fa-th-large"></i>Room Types
-                            </a></li>
-                                <li><a class="dropdown-item" href="/">
-                                <i class="fas fa-calendar-alt"></i>Staff Directory
-                            </a></li>
+                                    <i class="fas fa-th-large"></i>Room Types
+                                </a></li>
+                            <li>
+                                <form th:action="@{/admin/employees}" method="get" style="margin: 0; padding: 0;">
+                                    <button type="submit" class="dropdown-item"
+                                        style="background: none; border: none; width: 100%; text-align: left;">
+                                        <i class="fas fa-calendar-friends"></i> Staff Directory
+                                    </button>
+                                </form>
                             <li><a class="dropdown-item" href="/">
-                                <i class="fas fa-calendar-alt"></i>Work Schedules
-                            </a></li>
+                                    <i class="fas fa-calendar-alt"></i>Work Schedules
+                                </a></li>
                             <li><a class="dropdown-item" href="/">
-                                <i class="fas fa-user-friends"></i>Guest Profiles
-                            </a></li>
-                                <li><a class="dropdown-item" href="/">
-                                <i class="fas fa-money-check-alt"></i>Payroll
-                            </a></li>
+                                    <i class="fas fa-user-friends"></i>Guest Profiles
+                                </a></li>
+                            <li><a class="dropdown-item" href="/">
+                                    <i class="fas fa-money-check-alt"></i>Payroll
+                                </a></li>
                         </ul>
                     </li>
                     <!-- fa-calendar-alt -->
@@ -54,16 +63,16 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/">
-                                <i class="fas fa-chart-bar"></i>Booking Stats
-                            </a></li>
+                                    <i class="fas fa-chart-bar"></i>Booking Stats
+                                </a></li>
                             <li><a class="dropdown-item" href="/">
-                                <i class="fas fa-coins"></i>Revenue Reports
-                            </a></li>
-                             <li><a class="dropdown-item" href="/">
-                                <i class="fas fa-user-clock"></i>Staff Activity Logs
-                            </a></li>
+                                    <i class="fas fa-coins"></i>Revenue Reports
+                                </a></li>
+                            <li><a class="dropdown-item" href="/">
+                                    <i class="fas fa-user-clock"></i>Staff Activity Logs
+                                </a></li>
                         </ul>
-                    <!-- dashboard -->
+                        <!-- dashboard -->
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
                             <i class="fas fa-tachometer-alt"></i> Dashboard
