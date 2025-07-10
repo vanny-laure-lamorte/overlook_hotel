@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import projetb2.overlook_hotel.model.HotelUser;
-import projetb2.overlook_hotel.service.UserHotelService;
+import projetb2.overlook_hotel.service.HotelUserService;
 
 @RestController
 public class ProfileApiController {
 
     @Autowired
-    private UserHotelService userHotelService;
+    private HotelUserService hotelUserService;
 
     @PostMapping("/profile/update")
     public RedirectView updateProfile(
@@ -22,7 +22,7 @@ public class ProfileApiController {
         @AuthenticationPrincipal UserDetails currentUser) {
 
         Integer userId = updatedUser.getId();
-        HotelUser existingUser = userHotelService.findById(userId);
+        HotelUser existingUser = hotelUserService.findById(userId);
         if (existingUser != null) {
             existingUser.setFirstName(updatedUser.getFirstName());
             existingUser.setLastName(updatedUser.getLastName());
@@ -30,7 +30,7 @@ public class ProfileApiController {
             existingUser.setDob(updatedUser.getDob());
             existingUser.setUserAddress(updatedUser.getUserAddress());
             existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
-            userHotelService.saveUser(existingUser);
+            hotelUserService.saveUser(existingUser);
         }
         return new RedirectView("/profile");
     }

@@ -8,7 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import java.util.Optional;
 
 import projetb2.overlook_hotel.model.HotelUser;
-import projetb2.overlook_hotel.service.UserHotelService;
+import projetb2.overlook_hotel.service.HotelUserService;
 
 import org.springframework.ui.Model;
 
@@ -16,11 +16,11 @@ import org.springframework.ui.Model;
 public class ProfileViewController {
 
     @Autowired
-    private UserHotelService userHotelService;
+    private HotelUserService hotelUserService;
 
     @GetMapping("/profile")
     public String showUserHotelProfile(@AuthenticationPrincipal UserDetails currentUser, Model model) {
-        Optional<HotelUser> userOpt = userHotelService.findByEmail(currentUser.getUsername());
+        Optional<HotelUser> userOpt = hotelUserService.findByEmail(currentUser.getUsername());
 
         if (userOpt.isPresent()) {
             model.addAttribute("user", userOpt.get());
@@ -34,7 +34,7 @@ public class ProfileViewController {
 
     @GetMapping("/profile/edit")
     public String showEditProfile(@AuthenticationPrincipal UserDetails currentUser, Model model) {
-        Optional<HotelUser> userOpt = userHotelService.findByEmail(currentUser.getUsername());
+        Optional<HotelUser> userOpt = hotelUserService.findByEmail(currentUser.getUsername());
 
         if (userOpt.isPresent()) {
             model.addAttribute("user", userOpt.get());

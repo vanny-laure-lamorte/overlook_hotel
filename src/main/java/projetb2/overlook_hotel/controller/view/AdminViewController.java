@@ -17,11 +17,14 @@ import projetb2.overlook_hotel.service.AdminService;
 public class AdminViewController {
 
     private final AdminService adminService;
-
     public AdminViewController(AdminService adminService) {
         this.adminService = adminService;
     }
 
+    /*
+     * Displays the list of employees in the admin panel.
+     * The list is fetched from the admin service and added to the model.
+     */
     @GetMapping("/employees")
     public String showEmployeeList(Model model) {
         List<HotelUser> employees = adminService.getAllEmployees();
@@ -33,18 +36,20 @@ public class AdminViewController {
         return "layout/connectedLayout";
     }
 
+    /*
+     * Displays the list of bookings in the admin panel.
+     * The list is fetched from the admin service and added to the model.
+     */
     @GetMapping("/bookings")
     public String showBookings(Model model) {
         List<BookingInfoDTO> bookings = adminService.getAllBookingInfos();
         model.addAttribute("bookings", bookings);
+        model.addAttribute("rooms", adminService.getAllRooms());
+        model.addAttribute("status", BookingStatus.values());
 
-        // Injecter les valeurs d'enum directement pour Thymeleaf
         model.addAttribute("PENDING", BookingStatus.PENDING);
         model.addAttribute("ACCEPTED", BookingStatus.ACCEPTED);
         model.addAttribute("DECLINED", BookingStatus.DECLINED);
-
-        model.addAttribute("rooms", adminService.getAllRooms());
-        model.addAttribute("status", BookingStatus.values());
 
         model.addAttribute("fragmentPath", "fragments/bookings-list");
         model.addAttribute("fragmentName", "fgt-booking-list");

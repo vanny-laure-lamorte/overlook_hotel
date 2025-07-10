@@ -16,7 +16,6 @@ import projetb2.overlook_hotel.model.BookingStatus;
 public class BookingApiController {
 
     private final BookingService bookingService;
-
     public BookingApiController(BookingService bookingService) {
         this.bookingService = bookingService;
     }
@@ -44,7 +43,8 @@ public class BookingApiController {
      * with an error message.
      */
     @PostMapping("/decline")
-    public RedirectView declineBooking(@RequestParam("bookingId") Long bookingId,
+    public RedirectView declineBooking(
+            @RequestParam("bookingId") Long bookingId,
             RedirectAttributes redirectAttributes) {
         boolean result = bookingService.declineBooking(bookingId);
         redirectAttributes.addFlashAttribute("message", result ? "Booking declined" : "Could not decline booking");
@@ -58,12 +58,14 @@ public class BookingApiController {
      * page with a success or error message.
      */
     @PostMapping("/edit")
-    public RedirectView editBooking(@RequestParam Long bookingId,
+    public RedirectView editBooking(
+            @RequestParam Long bookingId,
+            @RequestParam(required = false) Long roomId,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate arrivingDate,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate departureDate,
             @RequestParam(required = false) BookingStatus bookingStatus,
             RedirectAttributes redirectAttributes) {
-        boolean result = bookingService.updateBooking(bookingId, arrivingDate, departureDate, bookingStatus);
+        boolean result = bookingService.updateBooking(bookingId, roomId, arrivingDate, departureDate, bookingStatus);
         redirectAttributes.addFlashAttribute("message", result ? "Booking updated" : "Could not update booking");
         return new RedirectView("/admin/bookings");
     }
