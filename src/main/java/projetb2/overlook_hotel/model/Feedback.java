@@ -54,7 +54,7 @@ public class Feedback {
                 '}';
     }
 
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "user_id")
     private HotelUser hotelUser;
 
     @ManyToOne
