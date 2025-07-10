@@ -6,15 +6,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import projetb2.overlook_hotel.model.Booking;
 import projetb2.overlook_hotel.model.BookingStatus;
+import projetb2.overlook_hotel.model.Room;
 import projetb2.overlook_hotel.repository.BookingRepository;
 
 @Service
 public class BookingService {
 
     private final BookingRepository bookingRepo;
+    private final RoomService roomService;
 
-    public BookingService(BookingRepository bookingRepo) {
+    public BookingService(BookingRepository bookingRepo, RoomService roomService) {
         this.bookingRepo = bookingRepo;
+        this.roomService = roomService;
     }
 
     public List<Booking> getAllBookings() {
@@ -56,8 +59,14 @@ public class BookingService {
      * If the booking is successfully updated, it returns true.
      */
     @Transactional
-    public boolean updateBooking(Long bookingId, LocalDate arrival, LocalDate departure, BookingStatus status) {
+    public boolean updateBooking(Long bookingId, Long roomId, LocalDate arrival, LocalDate departure,
+            BookingStatus status) {
         return bookingRepo.findById(bookingId).map(booking -> {
+            Room room = roomService.getRoomById(roomId);
+            if (room == null)
+                return false;
+
+            booking.setRoom(room);
             booking.setArrivingDate(arrival);
             booking.setDepartureDate(departure);
             booking.setBookingStatus(status);

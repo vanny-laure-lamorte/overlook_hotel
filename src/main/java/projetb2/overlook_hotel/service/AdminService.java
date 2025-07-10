@@ -36,10 +36,20 @@ public class AdminService {
         return employees;
     }
 
+    /**
+     * Retrieves a list of all customers.
+     *
+     * @return List of HotelUser objects representing all customers
+     */
     public List<HotelUser> getAllCustomers() {
         return userRepo.findByRole_RoleName("customer");
     }
 
+    /**
+     * Retrieves a list of all booking information.
+     *
+     * @return List of BookingInfoDTO objects containing booking details
+     */
     public List<BookingInfoDTO> getAllBookingInfos() {
         return bookingService.getAllBookings().stream()
             .map(booking -> new BookingInfoDTO(
@@ -54,6 +64,11 @@ public class AdminService {
             .collect(Collectors.toList());
     }
 
+    /**
+     * Retrieves a list of all rooms.
+     *
+     * @return List of Room objects representing all rooms
+     */
     public List<projetb2.overlook_hotel.model.Room> getAllRooms() {
         return roomService.getAllRooms();
     }
