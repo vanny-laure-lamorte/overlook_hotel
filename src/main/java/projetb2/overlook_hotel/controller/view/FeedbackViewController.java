@@ -1,12 +1,17 @@
 package projetb2.overlook_hotel.controller.view;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import projetb2.overlook_hotel.model.Booking;
 import projetb2.overlook_hotel.model.Feedback;
@@ -14,6 +19,7 @@ import projetb2.overlook_hotel.model.HotelUser;
 import projetb2.overlook_hotel.repository.BookingRepository;
 import projetb2.overlook_hotel.repository.HotelUserRepository;
 import projetb2.overlook_hotel.service.FeedbackService;
+import projetb2.overlook_hotel.service.HotelUserService;
 
 @Controller
 public class FeedbackViewController {
@@ -21,6 +27,9 @@ public class FeedbackViewController {
     private final FeedbackService feedbackService;
     private final BookingRepository bookingRepository;
     private final HotelUserRepository userRepository;
+
+    @Autowired
+    private HotelUserService hotelUserService;
 
     public FeedbackViewController(
             FeedbackService feedbackService,
@@ -35,14 +44,20 @@ public class FeedbackViewController {
      * Handles the feedback page view.
      */
     @GetMapping("/feedback")
-    public String showFeedback(Model model) {
-            System.out.println("test");
-        Feedback feedback = new Feedback();
-        model.addAttribute("hotelUserId", 1);
-        model.addAttribute("bookingId", 1);
-        model.addAttribute("rating", 5);
+    public String showFeedback(
+        @AuthenticationPrincipal UserDetails currentUser,
+        Model model) {
 
+        Feedback feedback = new Feedback();
+
+        Optional<HotelUser> hotelUserOpt = hotelUserService.findByEmail(currentUser.getUsername());
+        if (hotelUserOpt.isEmpty()) {
+            return "redirect:/login";
+        }
+        HotelUser hotelUser =  hotelUserOpt.get();
         model.addAttribute("feedback", feedback);
+        model.addAttribute("hotelUser", hotelUser);
+
         model.addAttribute("fragmentPath", "fragments/feedbacks.html");
         model.addAttribute("fragmentName", "fgt-feedback");
         return "layout/connectedLayout";
@@ -50,22 +65,29 @@ public class FeedbackViewController {
 
     @PostMapping("/feedback/submit")
     public String submitFeedback(
-            @RequestParam("feedback") Feedback feedback,
-            @RequestParam(value ="booking") Integer bookingId,
-            @RequestParam(value ="hotelUser") Integer userId,
-            Model model) {
+        @ModelAttribute Feedback feedback,
+        @RequestParam(value ="booking") Integer bookingId,
+        @RequestParam(value ="hotelUser") Integer hotelUserId,
+        Model model) {
 
-            Booking booking = bookingRepository.findById(bookingId).orElse(null);
-            HotelUser hotelUser = userRepository.findById(userId).orElse(null);
+        Booking booking = bookingRepository.findById(bookingId).orElse(null);
+        HotelUser hotelUser = userRepository.findById(hotelUserId).orElse(null);
 
-            feedback.setBooking(booking);
-            feedback.setHotelUser(hotelUser);
-            feedback.setCreatedAt(LocalDateTime.now());
+        if (booking == null || hotelUser == null) {
+            model.addAttribute("error", "Erreur : réservation ou utilisateur introuvable.");
+            return "layout/connectedLayout";
+        }
 
-            System.out.println("Submitting feedback: " + feedback);
+        feedback.setBooking(booking);
+        feedback.setHotelUser(hotelUser);
+        feedback.setCreatedAt(LocalDateTime.now());
+        feedbackService.saveFeedback(feedback);
 
-            feedbackService.saveFeedback(feedback);
+        model.addAttribute("success", "Feedback soumis avec succès !");
+        model.addAttribute("feedback", new Feedback());
+        model.addAttribute("hotelUser", hotelUser);
+        model.addAttribute("fragmentPath", "fragments/feedbacks.html");
+        model.addAttribute("fragmentName", "fgt-feedback");
 
-        return "layout/connectedLayout";
-    }
+    return "layout/connectedLayout";    }
 }

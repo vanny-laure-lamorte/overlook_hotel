@@ -35,8 +35,7 @@
                     <form id="profileForm" th:action="@{/profile/update}" th:object="${user}" method="post">
                         <div class="profile-form-grid">
                             <!-- Id -->
-                            <input type="hidden" th:field="*{id}" />
-
+                            <input type="hidden" th:field="*{id}"/>
                             <!-- First Name -->
                             <div class="profile-form-group">
                                 <label for="firstName" class="form-label">
@@ -71,7 +70,6 @@
                                     <div class="validation-message">Please enter your last name</div>
                                 </div>
                             </div>
-
                             <!-- Email -->
                             <div class="profile-form-group">
                                 <label for="email" class="form-label">Email Address</label>
@@ -88,8 +86,7 @@
                                     <div class="validation-message">Please enter a valid email address</div>
                                 </div>
                             </div>
-
-                            <!-- Date of Birth -->
+                            <!-- DOB -->
                             <div class="profile-form-group">
                                 <label for="dob" class="form-label">Date of Birth</label>
                                 <div class="input-group">
@@ -103,7 +100,6 @@
                                     <div class="validation-message">Please enter your date of birth</div>
                                 </div>
                             </div>
-
                             <!-- Address -->
                             <div class="profile-form-group">
                                 <label for="address" class="form-label">Address</label>
@@ -120,7 +116,6 @@
                                     <div class="validation-message">Please enter your address</div>
                                 </div>
                             </div>
-
                             <!-- Phone Number -->
                             <div class="profile-form-group">
                                 <label for="phone" class="form-label">Phone Number</label>
@@ -138,7 +133,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <!-- Action Buttons -->
                         <div class="action-buttons" th:if="${editMode}">
                             <button type="submit" class="edit-profile-toggle-btn" id="save-btn">
@@ -156,7 +150,6 @@
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
     <script>
@@ -169,5 +162,4 @@
             }
         });
     </script>
-
 </div>
