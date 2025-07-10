@@ -24,6 +24,8 @@ public class SecurityConfig {
                                 "/images/**",
                                 "/fonts/**",
                                 "/profile",
+                                "/feedback",
+                                "/feedback/**",
                                 "/api/auth/register",
                                 "/home",
                                 "/feedback",
