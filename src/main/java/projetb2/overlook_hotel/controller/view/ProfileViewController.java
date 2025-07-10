@@ -21,11 +21,9 @@ public class ProfileViewController {
     @GetMapping("/profile")
     public String showUserHotelProfile(@AuthenticationPrincipal UserDetails currentUser, Model model) {
         Optional<HotelUser> userOpt = hotelUserService.findByEmail(currentUser.getUsername());
-
         if (userOpt.isPresent()) {
             model.addAttribute("user", userOpt.get());
         }
-
         model.addAttribute("fragmentPath", "fragments/profile.html");
         model.addAttribute("fragmentName", "fgt-profile");
         model.addAttribute("editMode", false);
@@ -35,11 +33,9 @@ public class ProfileViewController {
     @GetMapping("/profile/edit")
     public String showEditProfile(@AuthenticationPrincipal UserDetails currentUser, Model model) {
         Optional<HotelUser> userOpt = hotelUserService.findByEmail(currentUser.getUsername());
-
         if (userOpt.isPresent()) {
             model.addAttribute("user", userOpt.get());
         }
-
         model.addAttribute("fragmentPath", "fragments/profile.html");
         model.addAttribute("fragmentName", "fgt-profile");
         model.addAttribute("editMode", true);
