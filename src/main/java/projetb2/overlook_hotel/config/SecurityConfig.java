@@ -24,9 +24,11 @@ public class SecurityConfig {
                                 "/images/**",
                                 "/fonts/**",
                                 "/profile",
+                                "/feedback",
+                                "/feedback/**",
                                 "/api/auth/register",
                                 "/home",
-                                "header/***")
+                                "/header/***")
                         .permitAll()
                         .requestMatchers("/admin/employees").hasRole("ADMIN")
                         .requestMatchers("/admin/bookings").hasAnyRole("ADMIN", "EMPLOYEE")

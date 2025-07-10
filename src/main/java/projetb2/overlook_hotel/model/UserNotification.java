@@ -21,7 +21,7 @@ public class UserNotification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private int customer_id;
+    private int user_id;
     private Date created_at;
     private String user_message;
 }
