@@ -15,7 +15,6 @@
                     <p id="avatarInitials" class="profile-title" th:text="${user.firstName + ' ' + user.lastName}"></p>
                     <p class="profile-subtitle">Manage your personal information</p>
                 </div>
-
                 <!-- Profile Body -->
                 <div class="profile-body">
                     <!-- Alert Message -->
@@ -23,7 +22,6 @@
                         <i class="fas fa-check-circle"></i>
                         <span id="alertText">Profile updated successfully!</span>
                     </div>
-
                     <!-- Section Header -->
                     <div class="profile-section-header">
                         <div class="profile-title">
@@ -32,16 +30,13 @@
                                 Personal Information
                             </p>
                         </div>
-                        <!-- <div>
-
-                            <button type="button" id="editToggleBtn" class="edit-profile-toggle-btn">
-                                <i class="fas fa-edit"></i> Edit Profile
-                            </button>
-                        </div> -->
                     </div>
                     <!-- Profile Form -->
                     <form id="profileForm" th:action="@{/profile/update}" th:object="${user}" method="post">
                         <div class="profile-form-grid">
+                            <!-- Id -->
+                            <input type="hidden" th:field="*{id}" />
+
                             <!-- First Name -->
                             <div class="profile-form-group">
                                 <label for="firstName" class="form-label">
@@ -55,12 +50,11 @@
                                         th:field="*{firstName}"
                                         th:value="${user.firstName}"
                                         placeholder="Enter your first name"
-                                         th:attr="disabled=${!editMode}"
+                                        th:attr="disabled=${!editMode}"
                                         required>
                                     <div class="validation-message">Please enter your first name</div>
                                 </div>
                             </div>
-
                             <!-- Last Name -->
                             <div class="profile-form-group">
                                 <label for="lastName" class="form-label">Last Name</label>
@@ -89,7 +83,7 @@
                                         th:field="*{email}"
                                         th:value="${user.email}"
                                         placeholder="Enter your email address"
-                                         th:attr="disabled=${!editMode}"
+                                        th:attr="disabled=${!editMode}"
                                         required>
                                     <div class="validation-message">Please enter a valid email address</div>
                                 </div>
@@ -104,7 +98,7 @@
                                         class="form-control-info with-icon"
                                         id="dob"
                                         th:value="${#dates.format(user.dob, 'yyyy-MM-dd')}"
-                                         th:attr="disabled=${!editMode}"
+                                        th:attr="disabled=${!editMode}"
                                         required>
                                     <div class="validation-message">Please enter your date of birth</div>
                                 </div>
@@ -121,7 +115,7 @@
                                         th:field="*{userAddress}"
                                         th:value="${user.userAddress}"
                                         placeholder="Enter your address"
-                                         th:attr="disabled=${!editMode}"
+                                        th:attr="disabled=${!editMode}"
                                         required>
                                     <div class="validation-message">Please enter your address</div>
                                 </div>
@@ -138,7 +132,7 @@
                                         th:field="*{phoneNumber}"
                                         th:value="${user.phoneNumber}"
                                         placeholder="Enter your phone number"
-                                         th:attr="disabled=${!editMode}"
+                                        th:attr="disabled=${!editMode}"
                                         required>
                                     <div class="validation-message">Please enter your phone number</div>
                                 </div>

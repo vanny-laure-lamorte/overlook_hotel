@@ -34,10 +34,20 @@ public class AdminService {
         return employees;
     }
 
+    /**
+     * Retrieves a list of all customers.
+     *
+     * @return List of HotelUser objects representing all customers
+     */
     public List<HotelUser> getAllCustomers() {
         return userRepo.findByRole_RoleName("customer");
     }
 
+    /**
+     * Retrieves a list of all booking information.
+     *
+     * @return List of BookingInfoDTO objects containing booking details
+     */
     public List<BookingInfoDTO> getAllBookingInfos() {
         return bookingService.getAllBookings().stream()
             .map(booking -> new BookingInfoDTO(

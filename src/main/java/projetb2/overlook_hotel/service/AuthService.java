@@ -18,6 +18,14 @@ public class AuthService {
     @Autowired
     private PasswordEncoder encoder;
 
+    /**
+     * Authenticates a user by checking their email and password.
+     *
+     * @param email    The email of the user.
+     * @param password The password of the user.
+     * @return The authenticated HotelUser object.
+     * @throws ResponseStatusException if the email is not found or the password is incorrect.
+     */
     public HotelUser authenticate(String email, String password) {
         HotelUser user = userRepo.findByEmail(email)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED,
@@ -26,10 +34,15 @@ public class AuthService {
         if (!encoder.matches(password, user.getUserPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Incorrect email or password.");
         }
-
         return user;
     }
 
+    /**
+     * Encodes a raw password using the configured PasswordEncoder.
+     *
+     * @param rawPassword The raw password to encode.
+     * @return The encoded password.
+     */
     public String encodePassword(String rawPassword) {
         return encoder.encode(rawPassword);
     }
