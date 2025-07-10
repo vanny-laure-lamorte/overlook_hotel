@@ -25,6 +25,11 @@ public class AdminService {
         return userService.getAllEmployeesAndAdmins();
     }
 
+    /**
+     * Retrieves a list of all customers.
+     *
+     * @return List of HotelUser objects representing all customers
+     */
     public List<HotelUser> getAllCustomers() {
         return userService.getAllCustomers();
     }

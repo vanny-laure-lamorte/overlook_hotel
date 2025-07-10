@@ -26,12 +26,6 @@ public class BookingService {
         this.roomService = roomService;
     }
 
-    /**
-     * Saves a booking to the repository.
-     *
-     * @param booking the Booking object to be saved
-     * @return the saved Booking object
-     */
     public List<Booking> getAllBookings() {
         return bookingRepo.findAll();
     }
@@ -71,12 +65,7 @@ public class BookingService {
      * If the booking is successfully updated, it returns true.
      */
     @Transactional
-    public boolean updateBooking(
-            Long bookingId,
-            Long roomId,
-            LocalDate arrival,
-            LocalDate departure,
-            BookingStatus status) {
+    public boolean updateBooking(Long bookingId, Long roomId, LocalDate arrival, LocalDate departure, BookingStatus status) {
         return bookingRepo.findById(bookingId).map(booking -> {
             Room room = roomService.getRoomById(roomId);
             if (room == null)
