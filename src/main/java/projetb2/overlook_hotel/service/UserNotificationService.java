@@ -10,17 +10,14 @@ public class UserNotificationService {
     @Autowired
     private UserNotificationRepository notificationRepository;
 
-    // Example method to send a notification
     public void sendNotification(String message) {
         System.out.println("Notification sent: " + message);
     }
 
-    // Example method to delete a notification
     public void deleteNotification(int notificationId) {
         System.out.println("Notification with ID " + notificationId + " deleted.");
     }
 
-    // Example method to view notifications
     public void viewNotifications() {
         System.out.println("Viewing notifications...");
     }

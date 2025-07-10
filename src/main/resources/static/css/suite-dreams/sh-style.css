@@ -1670,6 +1670,10 @@ th {
 }
 
 /*** PROFILE USER ***/
+#profile-user a:hover{
+  color: white;
+}
+
 
 .profile-container {
   padding: 40px;

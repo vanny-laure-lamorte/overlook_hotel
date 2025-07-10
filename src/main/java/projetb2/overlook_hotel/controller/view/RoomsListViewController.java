@@ -2,12 +2,12 @@ package projetb2.overlook_hotel.controller.view;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
+
+import java.util.List;
 
 import projetb2.overlook_hotel.service.RoomService;
 import projetb2.overlook_hotel.model.Room;
-
-import org.springframework.ui.Model;
-import java.util.List;
 
 @Controller
 public class RoomsListViewController {
@@ -31,5 +31,4 @@ public class RoomsListViewController {
 
         return "layout/connectedLayout";
     }
-
 }

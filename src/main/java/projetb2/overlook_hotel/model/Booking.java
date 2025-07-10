@@ -43,5 +43,4 @@ public class Booking {
     private int children;
 
     private int bill;
-
 }

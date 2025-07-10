@@ -13,10 +13,21 @@ public class BookingService {
 
     private final BookingRepository bookingRepo;
 
+    /**
+     * Constructor for BookingService.
+     *
+     * @param bookingRepo the BookingRepository to be used by this service
+     */
     public BookingService(BookingRepository bookingRepo) {
         this.bookingRepo = bookingRepo;
     }
 
+    /**
+     * Saves a booking to the repository.
+     *
+     * @param booking the Booking object to be saved
+     * @return the saved Booking object
+     */
     public List<Booking> getAllBookings() {
         return bookingRepo.findAll();
     }

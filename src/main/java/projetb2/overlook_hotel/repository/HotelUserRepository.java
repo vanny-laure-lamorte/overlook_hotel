@@ -2,6 +2,7 @@ package projetb2.overlook_hotel.repository;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -23,5 +24,4 @@ public interface HotelUserRepository extends JpaRepository<HotelUser, Integer> {
      * @return a list of HotelUsers
      */
     List<HotelUser> findByRole_RoleName(String roleName);
-
 }
