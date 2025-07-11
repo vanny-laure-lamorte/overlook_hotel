@@ -37,6 +37,21 @@ public class AdminViewController {
     }
 
     /*
+     * Displays the list of employees in the admin panel.
+     * The list is fetched from the admin service and added to the model.
+     */
+    @GetMapping("/customers")
+    public String showCustomerList(Model model) {
+        List<HotelUser> customers = adminService.getAllCustomers();
+        model.addAttribute("customersList", customers);
+
+        model.addAttribute("fragmentPath", "fragments/customer-list");
+        model.addAttribute("fragmentName", "fgt-customer-list");
+
+        return "layout/connectedLayout";
+    }
+
+    /*
      * Displays the list of bookings in the admin panel.
      * The list is fetched from the admin service and added to the model.
      */
@@ -49,6 +64,7 @@ public class AdminViewController {
 
         model.addAttribute("PENDING", BookingStatus.PENDING);
         model.addAttribute("ACCEPTED", BookingStatus.ACCEPTED);
+        model.addAttribute("ACCEPTED", BookingStatus.CANCELLED);
         model.addAttribute("DECLINED", BookingStatus.DECLINED);
 
         model.addAttribute("fragmentPath", "fragments/bookings-list");

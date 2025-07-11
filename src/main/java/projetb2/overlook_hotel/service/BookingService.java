@@ -66,11 +66,11 @@ public class BookingService {
      */
     @Transactional
     public boolean updateBooking(
-        Integer bookingId,
-        Integer roomId,
-        LocalDate arrival,
-        LocalDate departure,
-        BookingStatus status) {
+            Integer bookingId,
+            Integer roomId,
+            LocalDate arrival,
+            LocalDate departure,
+            BookingStatus status) {
         return bookingRepo.findById(bookingId).map(booking -> {
             Room room = roomService.getRoomById(roomId);
             if (room == null)
@@ -85,4 +85,19 @@ public class BookingService {
         }).orElse(false);
     }
 
+    /**
+     * Cancel all bookings associated with a user by their user ID.
+     *
+     * @param userId the ID of the user whose bookings are to be deleted
+     */
+    @Transactional
+    public void cancelBookingsByUserId(Integer userId) {
+        List<Booking> bookings = bookingRepo.findByUser_Id(userId);
+        for (Booking booking : bookings) {
+            System.out.println("\n\n\nCancelling booking with ID: " + booking.getId() + "\n\n\n");
+            booking.setBookingStatus(BookingStatus.CANCELLED);
+            booking.setUser(null);
+            bookingRepo.save(booking);
+        }
+    }
 }

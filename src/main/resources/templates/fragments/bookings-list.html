@@ -15,9 +15,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="booking : ${bookings}" th:classappend="
-                    ${booking.bookingStatus.name() == 'DECLINED'} ? 'cancelled-booking' :
-                    (${booking.bookingStatus.name() == 'ACCEPTED'} ? 'accepted-booking' : '')">
+                <tr th:each="booking : ${bookings}"
+                    th:classappend="
+                        ${booking.bookingStatus.name() == 'CANCELLED'} ? 'cancelled-booking' :
+                        (${booking.bookingStatus.name() == 'DECLINED'} ? 'declined-booking' :
+                        (${booking.bookingStatus.name() == 'ACCEPTED'} ? 'accepted-booking' : ''))">
+
                     <td th:text="${booking.bookingId}">1</td>
                     <td th:text="${booking.username}">John Doe</td>
                     <td>
@@ -30,50 +33,55 @@
 
                     <!-- Edit -->
                     <td class="action-cell borderless">
-                        <button type="button" class="btn btn-link p-0" title="Edit" th:attr="data-id=${booking.bookingId},
-                 data-room=${booking.roomTitle},
-                 data-arrival=${booking.formattedArrivingDate},
-                 data-departure=${booking.formattedDepartureDate},
-                 data-status=${booking.bookingStatus}" onclick="openEditModal(this)">
-                            <i class="fas fa-edit icon-edit"></i>
-                        </button>
+                        <th:block th:switch="${booking.bookingStatus.name()}">
+                            <i th:case="'CANCELLED'" class="fas fa-edit text-muted"
+                               title="Cancelled booking cannot be edited"></i>
+                            <button th:case="*" type="button" class="btn btn-link p-0" title="Edit"
+                                th:attr="data-id=${booking.bookingId},
+                                         data-room=${booking.roomTitle},
+                                         data-arrival=${booking.formattedArrivingDate},
+                                         data-departure=${booking.formattedDepartureDate},
+                                         data-status=${booking.bookingStatus}"
+                                onclick="openEditModal(this)">
+                                <i class="fas fa-edit icon-edit"></i>
+                            </button>
+                        </th:block>
                     </td>
-
 
                     <!-- Decline -->
                     <td class="action-cell borderless">
-                        <span th:if="${booking.bookingStatus.name() != 'PENDING'}">
-                            <i class="fas fa-times text-muted" th:title="${booking.bookingStatus.name() == 'DECLINED'} ?
-                                'Reservation already declined' :
-                                'Cannot decline an accepted reservation'"></i>
-                        </span>
-                        <form th:if="${booking.bookingStatus.name() == 'PENDING'}" th:action="@{/api/booking/decline}"
-                            method="post" style="display: inline;">
-                            <input type="hidden" name="bookingId" th:value="${booking.bookingId}" />
-                            <button type="submit" class="btn btn-link p-0" title="Decline">
-                                <i class="fas fa-times text-danger"></i>
-                            </button>
-                        </form>
+                        <th:block th:switch="${booking.bookingStatus.name()}">
+                            <i th:case="'DECLINED'" class="fas fa-times text-muted" title="Reservation already declined"></i>
+                            <i th:case="'CANCELLED'" class="fas fa-times text-muted" title="Cancelled booking"></i>
+                            <form th:case="'PENDING'" th:action="@{/api/booking/decline}" method="post" style="display: inline;">
+                                <input type="hidden" name="bookingId" th:value="${booking.bookingId}" />
+                                <button type="submit" class="btn btn-link p-0" title="Decline">
+                                    <i class="fas fa-times text-danger"></i>
+                                </button>
+                            </form>
+                            <i th:case="*" class="fas fa-times text-muted" title="Cannot decline this reservation"></i>
+                        </th:block>
                     </td>
 
                     <!-- Accept -->
                     <td class="action-cell borderless">
-                        <span th:if="${booking.bookingStatus.name() != 'PENDING'}">
-                            <i class="fas fa-check text-muted" th:title="${booking.bookingStatus.name() == 'DECLINED'} ?
-                                'Cannot accept a cancelled reservation' :
-                                'Reservation already accepted'"></i>
-                        </span>
-                        <form th:if="${booking.bookingStatus.name() == 'PENDING'}" th:action="@{/api/booking/accept}"
-                            method="post" style="display: inline;">
-                            <input type="hidden" name="bookingId" th:value="${booking.bookingId}" />
-                            <button type="submit" class="btn btn-link p-0" title="Accept">
-                                <i class="fas fa-check text-success"></i>
-                            </button>
-                        </form>
+                        <th:block th:switch="${booking.bookingStatus.name()}">
+                            <i th:case="'ACCEPTED'" class="fas fa-check text-muted" title="Already accepted"></i>
+                            <i th:case="'CANCELLED'" class="fas fa-check text-muted" title="Cancelled booking"></i>
+                            <form th:case="'PENDING'" th:action="@{/api/booking/accept}" method="post" style="display: inline;">
+                                <input type="hidden" name="bookingId" th:value="${booking.bookingId}" />
+                                <button type="submit" class="btn btn-link p-0" title="Accept">
+                                    <i class="fas fa-check text-success"></i>
+                                </button>
+                            </form>
+                            <i th:case="*" class="fas fa-check text-muted" title="Cannot accept this reservation"></i>
+                        </th:block>
                     </td>
                 </tr>
             </tbody>
         </table>
+
+        <!-- Modal -->
         <div id="editBookingModal"
             style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); z-index:1000; background:white; border:1px solid #ccc; padding:20px; box-shadow:0 0 15px rgba(0,0,0,0.3); border-radius:10px; max-width:500px; width:90%;">
             <h3>Edit Booking</h3>
@@ -89,8 +97,9 @@
                 <label for="editRoomId">Room:</label>
                 <select name="roomId" id="editRoomId" required>
                     <option th:each="room : ${rooms}" th:value="${room.id}"
-                        th:text="${room.roomTitle} + ' (' + ${room.capacity} + 'p)'" />
+                        th:text="${room.roomTitle} + ' (' + ${room.capacity} + 'p)'"></option>
                 </select><br><br>
+
                 <label for="editBookingStatus">Status:</label>
                 <select name="bookingStatus" id="editBookingStatus" required>
                     <option th:each="status : ${status}" th:value="${status}" th:text="${status}"></option>
@@ -101,6 +110,7 @@
             </form>
         </div>
     </div>
+
     <script>
         let currentSortColumn = -1;
         let currentSortDir = "asc";
@@ -111,9 +121,7 @@
             const rows = Array.from(tbody.querySelectorAll("tr"));
 
             let dir = "asc";
-            if (n === currentSortColumn && currentSortDir === "asc") {
-                dir = "desc";
-            }
+            if (n === currentSortColumn && currentSortDir === "asc") dir = "desc";
             currentSortColumn = n;
             currentSortDir = dir;
 
@@ -130,14 +138,13 @@
                     cellB = parseFloat(cellB);
                 }
 
-                if (cellA < cellB) return dir === "asc" ? -1 : 1;
-                if (cellA > cellB) return dir === "asc" ? 1 : -1;
-                return 0;
+                return (cellA < cellB ? (dir === "asc" ? -1 : 1) : (cellA > cellB ? (dir === "asc" ? 1 : -1) : 0));
             });
 
             tbody.innerHTML = "";
             rows.forEach(row => tbody.appendChild(row));
         }
+
         function openEditModal(button) {
             const bookingId = button.getAttribute("data-id");
             const roomTitle = button.getAttribute("data-room");

@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS booking (
     adults INT,
     children INT,
     bill INT,
-    FOREIGN KEY (user_id) REFERENCES hotel_user(id),
+    FOREIGN KEY (user_id) REFERENCES hotel_user(id) ON DELETE SET NULL,
     FOREIGN KEY (room_id) REFERENCES room(id)
 );
 

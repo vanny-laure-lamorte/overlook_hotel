@@ -509,11 +509,11 @@ strong {
   opacity: 0.5 !important;
 }
 
-/* === DECLINED === */
-.cancelled-booking {
+.cancelled-booking, .declined-booking{
   background-color: #f8d7da;
   font-style: italic;
   opacity: 0.85;
+  pointer-events: none;
 }
 
 .accepted-booking {
@@ -525,34 +525,41 @@ th {
   user-select: none;
 }
 
-.cancelled-booking td {
+.declined-booking td {
   background-color: #f8d7da;
 }
 
 .accepted-booking td {
   background-color: #d4edda;
 }
+.cancelled-booking td{
+    background-color: #dbdbdb;
 
-.cancelled-booking .action-cell i {
+}
+
+.declined-booking .action-cell i {
   pointer-events: none;
   opacity: 0.5;
 }
 
-.cancelled-booking .icon-edit {
-  pointer-events: auto !important;
+.declined-booking .icon-edit {
   opacity: 1 !important;
   color: inherit !important;
 }
 
-.cancelled-booking .icon-edit:hover {
+.declined-booking .icon-edit:hover {
   color: var(--purple-900);
 }
 
-/* === ACCEPTED === */
+.action-cell  {
+    pointer-events: auto !important;
+}
+
+/* === ACCEPTED ===
 .accepted-booking .fa-check,
 .accepted-booking .fa-times {
   pointer-events: none;
-}
+} */
 
 /*** HEADER BOTTOM ***/
 

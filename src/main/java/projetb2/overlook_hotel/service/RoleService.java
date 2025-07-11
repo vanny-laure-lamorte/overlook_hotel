@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import projetb2.overlook_hotel.repository.RoleRepository;
+import projetb2.overlook_hotel.model.Role;
 
 @Service
 public class RoleService {
@@ -20,22 +21,8 @@ public class RoleService {
         System.out.println("Role " + role + " assigned to user " + username);
     }
 
-    /**
-     * Removes a role from a user.
-     *
-     * @param username the username of the user from whom the role is to be removed
-     * @param role     the role to be removed
-     */
-    public void removeRoleFromUser(String username, String role) {
-        System.out.println("Role " + role + " removed from user " + username);
-    }
-
-    /**
-     * Retrieves the roles for a given user.
-     *
-     * @param username the username of the user whose roles are to be retrieved
-     */
-    public void getUserRoles(String username) {
-        System.out.println("Roles for user " + username + ": [Admin, User]");
+    public Role setUserRole(String roleName) {
+        return roleRepository.findByRoleName(roleName)
+                .orElseThrow(() -> new IllegalArgumentException("Role not found: " + roleName));
     }
 }

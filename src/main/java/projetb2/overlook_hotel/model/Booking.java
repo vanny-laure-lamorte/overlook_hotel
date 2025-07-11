@@ -19,7 +19,7 @@ public class Booking {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = true)
     private HotelUser user;
 
     @ManyToOne

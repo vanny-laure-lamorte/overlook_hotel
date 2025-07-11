@@ -43,7 +43,9 @@ public class AdminService {
         return bookingService.getAllBookings().stream()
                 .map(booking -> new BookingInfoDTO(
                         booking.getId(),
-                        booking.getUser().getFirstName() + " " + booking.getUser().getLastName(),
+                        booking.getUser() != null
+                                ? booking.getUser().getFirstName() + " " + booking.getUser().getLastName()
+                                : "User deleted",
                         booking.getRoom().getId(),
                         booking.getRoom().getRoomTitle(),
                         booking.getArrivingDate(),

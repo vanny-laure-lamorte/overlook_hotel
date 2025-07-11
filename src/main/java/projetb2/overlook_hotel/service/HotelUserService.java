@@ -2,9 +2,12 @@ package projetb2.overlook_hotel.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import projetb2.overlook_hotel.model.HotelUser;
 import projetb2.overlook_hotel.repository.HotelUserRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +16,8 @@ public class HotelUserService {
 
     @Autowired
     private HotelUserRepository hotelUserRepository;
+    @Autowired
+    private RoleService roleService;
 
     public List<HotelUser> getAllUsers() {
         return hotelUserRepository.findAll();
@@ -22,8 +27,16 @@ public class HotelUserService {
         return hotelUserRepository.save(user);
     }
 
-    public HotelUser updateUser(HotelUser user) {
-        return hotelUserRepository.save(user);
+    @Transactional
+    public void updateUser(Integer id, String firstName, String lastName, Date dob, String address, String roleName) {
+        HotelUser user = hotelUserRepository.findById(id).orElseThrow();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setDob(dob);
+        user.setUserAddress(address);
+        user.setRole(roleService.setUserRole(roleName));
+
+        hotelUserRepository.save(user);
     }
 
     public Optional<HotelUser> findByEmail(String email) {
@@ -52,4 +65,6 @@ public class HotelUserService {
     public List<HotelUser> getAllCustomers() {
         return hotelUserRepository.findByRole_RoleName("customer");
     }
+
+    
 }

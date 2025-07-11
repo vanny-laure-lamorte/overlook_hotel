@@ -48,9 +48,13 @@
                             <li><a class="dropdown-item" href="/">
                                     <i class="fas fa-calendar-alt"></i>Work Schedules
                                 </a></li>
-                            <li><a class="dropdown-item" href="/">
-                                    <i class="fas fa-user-friends"></i>Guest Profiles
-                                </a></li>
+                            <li>
+                                <form th:action="@{/admin/customers}" method="get" style="margin: 0; padding: 0;">
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="fas fa-user-friends"></i>Guest Profiles
+                                    </button>
+                                </form>
+                            </li>
                             <li><a class="dropdown-item" href="/">
                                     <i class="fas fa-money-check-alt"></i>Payroll
                                 </a></li>

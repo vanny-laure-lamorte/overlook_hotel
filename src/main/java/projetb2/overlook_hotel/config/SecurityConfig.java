@@ -30,13 +30,16 @@ public class SecurityConfig {
                                 "/home",
                                 "/feedback",
                                 "/feedback/**",
+                                "/api/customers/delete",
                                 "/api/feedback/**",
                                 "/payment",
                                 "/spa",
                                 "/meeting-room**",
                                 "/header/***")
                         .permitAll()
-                        .requestMatchers("/admin/employees").hasRole("ADMIN")
+                        .requestMatchers(
+                                "/admin/**")
+                        .hasRole("ADMIN")
                         .requestMatchers("/admin/bookings").hasAnyRole("ADMIN", "EMPLOYEE")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
