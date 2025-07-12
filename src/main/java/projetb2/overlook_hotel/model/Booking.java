@@ -6,6 +6,7 @@ import lombok.Data;
 
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 @Table(name = "booking")
@@ -43,4 +44,8 @@ public class Booking {
     private int children;
 
     private int bill;
+
+    public long getDuration() {
+        return ChronoUnit.DAYS.between(arrivingDate, departureDate);
+    }
 }

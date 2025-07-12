@@ -251,19 +251,12 @@
                                 <span th:text="${booking.room.roomTitle}"></span>
                             </div>
                         </div>
-                        <!-- Departure Date -->
-                        <!-- <div class="detail-item">
-                            <i class="fas fa-calendar-check detail-icon"></i>
-                            <div class="detail-text">
-                                <strong>Date de départ:</strong><br>
-                                <span th:text="${booking.formattedDepartureDate}">01/07/2024</span>
-                            </div>
-                        </div> -->
                         <div class="detail-item">
                             <i class="fas fa-clock detail-icon"></i>
                             <div class="detail-text">
                                 <strong>Duration</strong><br>
-                                <span th:text="${booking.duration + ' days'}"></span>
+                                <span th:text="${booking.duration}"></span>
+                                <span>day(s)</span>
                             </div>
                         </div>
                         <div class="detail-item">
