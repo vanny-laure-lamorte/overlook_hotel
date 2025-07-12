@@ -6,11 +6,12 @@ import java.time.temporal.ChronoUnit;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
 import projetb2.overlook_hotel.model.BookingStatus;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class BookingDTO {
     private Integer bookingId;
     private String username;
