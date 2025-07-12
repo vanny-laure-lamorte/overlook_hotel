@@ -85,4 +85,8 @@ public class BookingService {
         }).orElse(false);
     }
 
+    public List<Booking> getPastBookingsForCurrentUser(Integer currentUserId) {
+    LocalDate today = LocalDate.now();
+    return bookingRepo.findPastBookingsByUserId(currentUserId, today);
+    }
 }

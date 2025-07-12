@@ -1,9 +1,9 @@
 <div th:fragment="fgt-feedback" id="feedbacks-widget" class="container-feeback" th:if="${isAuthenticated}">
     <div class="form-card">
-        <div class="form-header">
+        <!-- <div class="form-header">
             <h1>Share Your Experience</h1>
             <p>Help other travelers by sharing your honest review</p>
-        </div>
+        </div> -->
 
         <form
             th:action="@{/feedback/submit}"
@@ -167,7 +167,7 @@
             <div class="submit-section">
                 <button
                     type="submit"
-                    class="btn-submit"
+                    class="btn-gradient"
                     value="Submit">
                     Submit Review
                 </button>

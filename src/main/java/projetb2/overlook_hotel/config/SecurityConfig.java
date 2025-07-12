@@ -34,6 +34,7 @@ public class SecurityConfig {
                                 "/payment",
                                 "/spa",
                                 "/meeting-room**",
+                                "/past-booking",
                                 "/header/***")
                         .permitAll()
                         .requestMatchers("/admin/employees").hasRole("ADMIN")

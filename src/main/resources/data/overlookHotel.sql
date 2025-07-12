@@ -119,14 +119,18 @@ CREATE TABLE IF NOT EXISTS booking (
     FOREIGN KEY (room_id) REFERENCES room(id)
 );
 
-
 INSERT INTO booking (user_id, room_id, arriving_date, departure_date, booking_status, confirmation_number, adults, children, bill) VALUES
 (11, 1, '2025-06-10', '2025-06-12', 'PENDING', 1001, 2, 1, 200),
 (12, 2, '2025-06-15', '2025-06-16', 'ACCEPTED', 1002, 10, 2, 2500),
 (15, 3, '2025-06-20', '2025-06-22', 'PENDING', 1003, 4, 0, 600),
 (10, 4, '2025-06-05', '2025-06-07', 'DECLINED', 1004, 2, 0, 240),
 (13, 5, '2025-06-25', '2025-06-28', 'PENDING', 1005, 2, 0, 360),
-(16, 6, '2025-06-30', '2025-07-02', 'ACCEPTED', 1006, 2, 3, 400);
+(16, 6, '2025-06-30', '2025-07-02', 'ACCEPTED', 1006, 2, 3, 400),
+(9, 1, '2025-06-01', '2025-06-03', 'COMPLETED', 2001, 2, 0, 500),
+(9, 2, '2025-05-15', '2025-05-17', 'COMPLETED', 2002, 1, 1, 450),
+(9, 3, '2025-04-10', '2025-04-12', 'COMPLETED', 2003, 2, 2, 600),
+(9, 4, '2025-03-20', '2025-03-22', 'COMPLETED', 2004, 1, 0, 300),
+(9, 5, '2025-01-05', '2025-01-07', 'COMPLETED', 2005, 2, 1, 550);;
 
 CREATE TABLE IF NOT EXISTS feedback (
     id SERIAL PRIMARY KEY,
