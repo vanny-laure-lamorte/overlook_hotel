@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import projetb2.overlook_hotel.dto.BookingInfoDTO;
+import projetb2.overlook_hotel.dto.BookingDTO;
 import projetb2.overlook_hotel.model.BookingStatus;
 import projetb2.overlook_hotel.model.HotelUser;
 import projetb2.overlook_hotel.service.AdminService;
@@ -17,6 +17,7 @@ import projetb2.overlook_hotel.service.AdminService;
 public class AdminViewController {
 
     private final AdminService adminService;
+
     public AdminViewController(AdminService adminService) {
         this.adminService = adminService;
     }
@@ -57,7 +58,7 @@ public class AdminViewController {
      */
     @GetMapping("/bookings")
     public String showBookings(Model model) {
-        List<BookingInfoDTO> bookings = adminService.getAllBookingInfos();
+        List<BookingDTO> bookings = adminService.getAllBookingInfos();
         model.addAttribute("bookings", bookings);
         model.addAttribute("rooms", adminService.getAllRooms());
         model.addAttribute("status", BookingStatus.values());

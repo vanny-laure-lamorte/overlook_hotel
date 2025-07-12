@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import projetb2.overlook_hotel.dto.BookingInfoDTO;
+import projetb2.overlook_hotel.dto.BookingDTO;
 import projetb2.overlook_hotel.model.HotelUser;
 
 @Service
@@ -37,11 +37,11 @@ public class AdminService {
     /**
      * Retrieves a list of all booking information.
      *
-     * @return List of BookingInfoDTO objects containing booking details
+     * @return List of BookingDTO objects containing booking details
      */
-    public List<BookingInfoDTO> getAllBookingInfos() {
+    public List<BookingDTO> getAllBookingInfos() {
         return bookingService.getAllBookings().stream()
-                .map(booking -> new BookingInfoDTO(
+                .map(booking -> new BookingDTO(
                         booking.getId(),
                         booking.getUser() != null
                                 ? booking.getUser().getFirstName() + " " + booking.getUser().getLastName()

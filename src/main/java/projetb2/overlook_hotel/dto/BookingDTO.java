@@ -2,6 +2,7 @@ package projetb2.overlook_hotel.dto;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +11,7 @@ import projetb2.overlook_hotel.model.BookingStatus;
 
 @Data
 @AllArgsConstructor
-public class BookingInfoDTO {
+public class BookingDTO {
     private Integer bookingId;
     private String username;
     private Integer roomId;
@@ -33,5 +34,12 @@ public class BookingInfoDTO {
      */
     public String getFormattedDepartureDate() {
         return departureDate != null ? departureDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) : "";
+    }
+
+    public int getDuration() {
+        if (arrivingDate != null && departureDate != null) {
+            return (int) ChronoUnit.DAYS.between(arrivingDate, departureDate);
+        }
+        return 0;
     }
 }
