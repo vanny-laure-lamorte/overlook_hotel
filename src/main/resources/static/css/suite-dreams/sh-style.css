@@ -2045,7 +2045,6 @@ input[type="date"]::-moz-calendar-picker-indicator {
   }
 
   .feedback-title {
-    color: var(--purple-900);
     font-weight: 600;
     font-size: 1.2rem;
     margin: 0;
