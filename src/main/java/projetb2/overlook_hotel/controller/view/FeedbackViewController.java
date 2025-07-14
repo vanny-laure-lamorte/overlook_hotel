@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.view.RedirectView;
 
 import projetb2.overlook_hotel.model.Booking;
 import projetb2.overlook_hotel.model.Feedback;
@@ -27,55 +29,72 @@ public class FeedbackViewController {
     private final FeedbackService feedbackService;
     private final BookingRepository bookingRepository;
     private final HotelUserRepository userRepository;
+    private final HotelUserService hotelUserService;
 
     @Autowired
-    private HotelUserService hotelUserService;
-
     public FeedbackViewController(
             FeedbackService feedbackService,
             BookingRepository bookingRepository,
-            HotelUserRepository userRepository) {
-        this.bookingRepository = bookingRepository;
+            HotelUserRepository userRepository,
+            HotelUserService hotelUserService) {
         this.feedbackService = feedbackService;
+        this.bookingRepository = bookingRepository;
         this.userRepository = userRepository;
+        this.hotelUserService = hotelUserService;
     }
 
-    /*
-     * Handles the feedback page view.
+    /**
+     * Affiche le formulaire de feedback pour une réservation spécifique.
      */
-    @GetMapping("/feedback")
-    public String showFeedback(
-        @AuthenticationPrincipal UserDetails currentUser,
-        Model model) {
-
-        Feedback feedback = new Feedback();
-
+    @GetMapping("/feedback/form")
+    public String showFeedbackForm(@RequestParam("bookingId") Integer bookingId,
+                                   @AuthenticationPrincipal UserDetails currentUser,
+                                   Model model) {
         Optional<HotelUser> hotelUserOpt = hotelUserService.findByEmail(currentUser.getUsername());
         if (hotelUserOpt.isEmpty()) {
             return "redirect:/login";
         }
-        HotelUser hotelUser =  hotelUserOpt.get();
+
+        HotelUser hotelUser = hotelUserOpt.get();
+        Booking booking = bookingRepository.findById(bookingId).orElse(null);
+
+        if (booking == null || !booking.getUser().getId().equals(hotelUser.getId())) {
+            model.addAttribute("error", "Réservation invalide ou non autorisée.");
+            return "layout/connectedLayout";
+        }
+
+        Feedback feedback = new Feedback();
+        feedback.setBooking(booking);
+        feedback.setHotelUser(hotelUser);
+
         model.addAttribute("feedback", feedback);
         model.addAttribute("hotelUser", hotelUser);
-
+        model.addAttribute("booking", booking);
         model.addAttribute("fragmentPath", "fragments/feedbacks.html");
         model.addAttribute("fragmentName", "fgt-feedback");
         return "layout/connectedLayout";
     }
 
+    /**
+     * Soumet le feedback rempli par l'utilisateur.
+     */
     @PostMapping("/feedback/submit")
-    public String submitFeedback(
+    public RedirectView submitFeedback(
         @ModelAttribute Feedback feedback,
-        @RequestParam(value ="booking") Integer bookingId,
-        @RequestParam(value ="hotelUser") Integer hotelUserId,
+        BindingResult result,
         Model model) {
 
-        Booking booking = bookingRepository.findById(bookingId).orElse(null);
-        HotelUser hotelUser = userRepository.findById(hotelUserId).orElse(null);
+        if (feedback.getBooking() == null || feedback.getHotelUser() == null) {
+            model.addAttribute("error", "Feedback invalide : réservation ou utilisateur manquant.");
+            return new RedirectView("/view/booking/past-booking");
+        }
+
+        Booking booking = bookingRepository.findById(feedback.getBooking().getId()).orElse(null);
+        HotelUser hotelUser = userRepository.findById(feedback.getHotelUser().getId()).orElse(null);
 
         if (booking == null || hotelUser == null) {
-            model.addAttribute("error", "Erreur : réservation ou utilisateur introuvable.");
-            return "layout/connectedLayout";
+            model.addAttribute("error", "Réservation ou utilisateur non trouvé.");
+            return new RedirectView("/view/booking/past-booking");
         }
 
         feedback.setBooking(booking);
@@ -88,6 +107,6 @@ public class FeedbackViewController {
         model.addAttribute("hotelUser", hotelUser);
         model.addAttribute("fragmentPath", "fragments/feedbacks.html");
         model.addAttribute("fragmentName", "fgt-feedback");
-
-    return "layout/connectedLayout";    }
+        return new RedirectView("/view/booking/past-booking");
+    }
 }

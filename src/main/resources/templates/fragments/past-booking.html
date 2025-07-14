@@ -6,21 +6,21 @@
             <p class="page-subtitle">Review your previous stays and share your experience.</p>
         </div>
     </div>
-
     <!-- Main Content -->
     <div class="container-past-booking">
         <!-- Bookings List -->
-        <!-- <div th:if="${not #lists.isEmpty(pastBookings)}"> -->
+        <div th:if="${not #lists.isEmpty(pastBookings)}">
             <div th:each="booking : ${pastBookings}"  class="booking-card">
                 <!-- Booking Header -->
                 <div class="booking-header">
                     <div class="booking-title" th:text="${booking.room.roomTitle}"></div>
                     <div class="booking-date">
-                        <i class="fas fa-calendar-alt me-2"></i>
-                        <span th:text="${#temporals.format(booking.arrivingDate, 'dd/MM/yyyy') + ' → ' + #temporals.format(booking.departureDate, 'dd/MM/yyyy')}"></span>
+                        <i class="fas fa-calendar-alt me-2"></i><span>Stay</span>
+                        <span th:text="${#temporals.format(booking.arrivingDate, 'dd/MM/yyyy') + ' → ' + #temporals.format(booking.departureDate, 'dd/MM/yyyy')}"></span><br>
+                        <i class="fas fa-file me-2"></i><span>Booking reference</span>
+                        <span th:text="${booking.id}"></span>
                     </div>
                 </div>
-
                 <!-- Booking Body -->
                 <div class="booking-body">
                     <!-- Booking Details -->
@@ -62,98 +62,25 @@
                     <!-- Feedback Section -->
                     <div class="feedback-section">
                         <div class="feedback-header">
-                            <i class="fas fa-star me-2" style="color: var(--purple-700);"></i>
-                            <h3 class="feedback-title">Leave a Review</h3>
-                        </div>        
-                        <!-- Feedback Form -->
-                        <div  class="feedback-form">
-                            <!-- <div th:insert="~{fragments/feedbacks :: fgt-fee}"></div> -->
-
+                            <a th:href="@{/feedback/form(bookingId=${booking.id})}" class="btn btn-primary feedback-title">
+                                <i class="fas fa-star me-2" style="color: var(--purple-700);"></i>Leave a Review
+                            </a>
                         </div>
+                        <!-- Feedback Form -->
+                        <!-- <div  class="feedback-form">
+                        </div> -->
                     </div>
                 </div>
-            <!-- </div> -->
+            </div>
         </div>
-
         <!-- Empty State -->
-        <!-- <div th:if="${#lists.isEmpty(pastBookings)}" class="no-past-booking">
+        <div th:if="${#lists.isEmpty(pastBookings)}" class="no-past-booking">
             <i class="fas fa-calendar-times"></i>
-            <h3>Aucune réservation passée</h3>
-            <p>Vous n'avez pas encore de réservations terminées.</p>
+            <h3>No past bookings</h3>
+            <p>You have not completed any bookings yet.</p>
             <a href="#" th:href="@{/bookings}" class="btn btn-primary mt-3">
-                <i class="fas fa-plus me-2"></i>
-                Faire une réservation
+                <i class="fas fa-plus me-2"></i>Make a reservation
             </a>
-        </div> -->
+        </div>
     </div>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Rating system
-        document.addEventListener('DOMContentLoaded', function() {
-            const ratingStars = document.querySelectorAll('.rating-star');
-            const ratingInput = document.getElementById('rating');
-            
-            ratingStars.forEach(star => {
-                star.addEventListener('click', function() {
-                    const rating = this.getAttribute('data-rating');
-                    ratingInput.value = rating;
-                    
-                    // Update visual feedback
-                    ratingStars.forEach((s, index) => {
-                        if (index < rating) {
-                            s.classList.add('active');
-                        } else {
-                            s.classList.remove('active');
-                        }
-                    });
-                });
-                
-                star.addEventListener('mouseover', function() {
-                    const rating = this.getAttribute('data-rating');
-                    
-                    ratingStars.forEach((s, index) => {
-                        if (index < rating) {
-                            s.style.color = '#ffc107';
-                        } else {
-                            s.style.color = '#ddd';
-                        }
-                    });
-                });
-            });
-            
-            // Reset on mouse leave
-            document.querySelector('.rating-input').addEventListener('mouseleave', function() {
-                const currentRating = ratingInput.value;
-                ratingStars.forEach((s, index) => {
-                    if (index < currentRating) {
-                        s.style.color = '#ffc107';
-                    } else {
-                        s.style.color = '#ddd';
-                    }
-                });
-            });
-        });
-
-        // Form validation
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', function(e) {
-                const rating = this.querySelector('input[name="rating"]').value;
-                const comment = this.querySelector('textarea[name="comment"]').value.trim();
-                
-                if (!rating) {
-                    e.preventDefault();
-                    alert('Veuillez sélectionner une note.');
-                    return;
-                }
-                
-                if (!comment) {
-                    e.preventDefault();
-                    alert('Veuillez saisir un commentaire.');
-                    return;
-                }
-            });
-        });
-    </script>
 </div>
