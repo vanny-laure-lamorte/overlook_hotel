@@ -63,15 +63,14 @@ public class RoomsViewController {
 
     @GetMapping("/{roomTitleId}")
     public String getRoomByTitle(@PathVariable("roomTitleId") int roomTitleId, Model model) {
-        Optional<Room> roomOpt = roomService.getRoomByTitle(roomTitleId);
+        List<Room> rooms = roomService.getRoomsByTitle(roomTitleId);
 
-        if (roomOpt.isEmpty()) {
-            model.addAttribute("error", "Room not found.");
-        return "layout/connectedLayout";
+        if (rooms.isEmpty()) {
+            model.addAttribute("error", "No rooms found for the given title.");
+            return "layout/connectedLayout";
         }
 
-        Room room = roomOpt.get();
-        model.addAttribute("rooms", room);
+        model.addAttribute("rooms", rooms);
         model.addAttribute("fragmentPath", "fragments/all-rooms.html");
         model.addAttribute("fragmentName", "fgt-all-rooms");
         return "layout/connectedLayout";

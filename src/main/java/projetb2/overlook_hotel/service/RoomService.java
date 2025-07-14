@@ -81,15 +81,11 @@ public class RoomService {
     public void deleteRoom() {
     }
 
-    /**
-     * Fetches a Room by its room title.
-     *
-     * @param roomTitle the title of the room
-     * @return an Optional containing the Room if found, or empty if not found
-     */
-    public Optional<Room> getRoomByTitle(int roomTitle) {
-        Optional<Room> roomOpt = roomRepository.findByRoomTitle(roomTitle);
-        roomOpt.ifPresent(room -> room.setRoomTitleLabel(mapRoomTitle(room.getRoomTitle())));
-        return roomOpt;
+
+    public List<Room> getRoomsByTitle(int roomTitle) {
+        List<Room> rooms = roomRepository.findByRoomTitle(roomTitle);
+        rooms.forEach(room -> room.setRoomTitleLabel(mapRoomTitle(room.getRoomTitle())));
+        return rooms;
     }
+
 }
