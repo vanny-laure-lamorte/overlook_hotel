@@ -46,7 +46,7 @@ public class FeedbackViewController {
     /**
      * Affiche le formulaire de feedback pour une réservation spécifique.
      */
-    @GetMapping("/feedback/form")
+    @GetMapping("/view/feedback")
     public String showFeedbackForm(@RequestParam("bookingId") Integer bookingId,
                                    @AuthenticationPrincipal UserDetails currentUser,
                                    Model model) {

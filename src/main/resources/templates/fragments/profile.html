@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <!-- Profile Form -->
-                    <form id="profileForm" th:action="@{/profile/update}" th:object="${user}" method="post">
+                    <form id="profileForm" th:action="@{/api/profile/update}" th:object="${user}" method="post">
                         <div class="profile-form-grid">
                             <!-- Id -->
                             <input type="hidden" th:field="*{id}"/>
@@ -138,12 +138,12 @@
                             <button type="submit" class="edit-profile-toggle-btn" id="save-btn">
                                 <i class="fas fa-save"></i> Save Changes
                             </button>
-                            <a th:href="@{/profile}" class="edit-profile-toggle-btn" id="cancel-btn">
+                            <a th:href="@{/view/profile}" class="edit-profile-toggle-btn" id="cancel-btn">
                                 <i class="fas fa-times"></i> Cancel
                             </a>
                         </div>
                         <div class="action-buttons" th:if="${!editMode}">
-                            <a th:href="@{/profile/edit}" class="edit-profile-toggle-btn" id="edit-btn">
+                            <a th:href="@{/edit}" class="edit-profile-toggle-btn" id="edit-btn">
                                 <i class="fas fa-edit"></i> Edit Profile
                             </a>
                         </div>

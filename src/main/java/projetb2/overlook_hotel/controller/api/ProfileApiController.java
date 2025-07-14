@@ -16,7 +16,7 @@ public class ProfileApiController {
     @Autowired
     private HotelUserService hotelUserService;
 
-    @PostMapping("/profile/update")
+    @PostMapping("/api/profile/update")
     public RedirectView updateProfile(
         @ModelAttribute("user") HotelUser updatedUser,
         @AuthenticationPrincipal UserDetails currentUser) {
@@ -32,7 +32,7 @@ public class ProfileApiController {
             existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
             hotelUserService.saveUser(existingUser);
         }
-        return new RedirectView("/profile");
+        return new RedirectView("/view/profile");
     }
 }
 

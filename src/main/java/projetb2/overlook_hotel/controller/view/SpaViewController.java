@@ -9,7 +9,7 @@ public class SpaViewController {
     /*
      * Handles the spa page view.
      */
-    @GetMapping("/spa")
+    @GetMapping("/all-spa")
     public String showSpaPage(Model model) {
         model.addAttribute("fragmentPath", "fragments/spa.html");
         model.addAttribute("fragmentName", "fgt-spa");
