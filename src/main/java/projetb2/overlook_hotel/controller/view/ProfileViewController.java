@@ -5,6 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.Optional;
 
 import projetb2.overlook_hotel.model.HotelUser;
@@ -12,13 +14,14 @@ import projetb2.overlook_hotel.service.HotelUserService;
 
 import org.springframework.ui.Model;
 
+@RequestMapping("/view/profile")
 @Controller
 public class ProfileViewController {
 
     @Autowired
     private HotelUserService hotelUserService;
 
-    @GetMapping("/view/profile")
+    @GetMapping("")
     public String showUserHotelProfile(@AuthenticationPrincipal UserDetails currentUser, Model model) {
         Optional<HotelUser> userOpt = hotelUserService.findByEmail(currentUser.getUsername());
         if (userOpt.isPresent()) {

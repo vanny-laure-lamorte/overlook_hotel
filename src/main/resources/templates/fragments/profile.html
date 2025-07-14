@@ -135,15 +135,15 @@
                         </div>
                         <!-- Action Buttons -->
                         <div class="action-buttons" th:if="${editMode}">
-                            <button type="submit" class="edit-profile-toggle-btn" id="save-btn">
-                                <i class="fas fa-save"></i> Save Changes
-                            </button>
                             <a th:href="@{/view/profile}" class="edit-profile-toggle-btn" id="cancel-btn">
                                 <i class="fas fa-times"></i> Cancel
                             </a>
+                            <button type="submit" class="edit-profile-toggle-btn" id="save-btn">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
                         </div>
                         <div class="action-buttons" th:if="${!editMode}">
-                            <a th:href="@{/edit}" class="edit-profile-toggle-btn" id="edit-btn">
+                            <a th:href="@{/view/profile/edit}" class="edit-profile-toggle-btn" id="edit-btn">
                                 <i class="fas fa-edit"></i> Edit Profile
                             </a>
                         </div>

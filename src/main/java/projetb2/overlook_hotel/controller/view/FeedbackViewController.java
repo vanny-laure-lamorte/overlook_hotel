@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,7 @@ import projetb2.overlook_hotel.repository.HotelUserRepository;
 import projetb2.overlook_hotel.service.FeedbackService;
 import projetb2.overlook_hotel.service.HotelUserService;
 
+@RequestMapping("/view/feedback")
 @Controller
 public class FeedbackViewController {
 
@@ -44,9 +46,9 @@ public class FeedbackViewController {
     }
 
     /**
-     * Affiche le formulaire de feedback pour une réservation spécifique.
+     * Display the feedback form for a specific booking.
      */
-    @GetMapping("/view/feedback")
+    @GetMapping("")
     public String showFeedbackForm(@RequestParam("bookingId") Integer bookingId,
                                    @AuthenticationPrincipal UserDetails currentUser,
                                    Model model) {
@@ -76,9 +78,9 @@ public class FeedbackViewController {
     }
 
     /**
-     * Soumet le feedback rempli par l'utilisateur.
+     * Submits the feedback for a booking.
      */
-    @PostMapping("/feedback/submit")
+    @PostMapping("/submit")
     public RedirectView submitFeedback(
         @ModelAttribute Feedback feedback,
         BindingResult result,
