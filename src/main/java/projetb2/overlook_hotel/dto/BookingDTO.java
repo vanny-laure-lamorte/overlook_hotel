@@ -16,7 +16,7 @@ public class BookingDTO {
     private Integer bookingId;
     private String username;
     private Integer roomId;
-    private String roomTitle;
+    private Integer roomTitle;
     private LocalDate arrivingDate;
     private LocalDate departureDate;
     private BookingStatus bookingStatus;
