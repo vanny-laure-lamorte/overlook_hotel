@@ -18,7 +18,30 @@ public class RoomService {
      * @return a List<Room> containing all rooms.
      */
     public List<Room> getAllRooms() {
-        return roomRepository.findAll();
+        List<Room> rooms = roomRepository.findAll();
+        for (Room room : rooms) {
+            room.setRoomTitleLabel(mapRoomTitle(room.getRoomTitle()));
+        }
+        return rooms;
+    }
+
+    /*
+     * Maps room title integers to their corresponding string labels.
+     */
+    private String mapRoomTitle(int roomTitle) {
+        return switch (roomTitle) {
+            case 1 -> "Standard Queen Room";
+            case 2 -> "Superior Sea View";
+            case 3 -> "Basic Single Room";
+            case 4 -> "Family Room";
+            case 5 -> "Deluxe King Room";
+            case 6 -> "Cozy City Room";
+            case 7 -> "Conference Room";
+            case 8 -> "Large Meeting Room";
+            case 9 -> "Spa with Jacuzzi";
+            case 10 -> "Spa Sauna & Massage";
+            default -> "Unknown Room Type";
+        };
     }
 
     /**

@@ -35,7 +35,7 @@ public class Room {
     private String roomDescription;
 
     @Column(name = "room_title")
-    private String roomTitle;
+    private int roomTitle;
 
     @Column(name = "room_image")
     private String roomImage;
@@ -45,6 +45,9 @@ public class Room {
 
     @Transient
     private List<String> amenitiesWords;
+
+    @Transient
+    private String roomTitleLabel;
 
     /**
      * Splits the amenitiesList (a comma-separated string) into a clean list of individual amenities.
@@ -56,5 +59,19 @@ public class Room {
                     .map(String::trim)
                     .filter(s -> !s.isEmpty())
                     .toList();
+    }
+
+    /*
+     * Returns a label for the room title based on the roomTitle integer.
+     */
+    public String getRoomTitleLabel() {
+        return roomTitleLabel;
+    }
+
+    /*
+     * Sets the room title label based on the roomTitle integer.
+     */
+    public void setRoomTitleLabel(String roomTitleLabel) {
+        this.roomTitleLabel = roomTitleLabel;
     }
 }
