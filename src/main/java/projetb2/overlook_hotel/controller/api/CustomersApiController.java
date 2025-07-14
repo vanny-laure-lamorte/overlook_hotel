@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
-import projetb2.overlook_hotel.model.Booking;
 import projetb2.overlook_hotel.model.HotelUser;
 import projetb2.overlook_hotel.service.HotelUserService;
 import projetb2.overlook_hotel.service.BookingService;

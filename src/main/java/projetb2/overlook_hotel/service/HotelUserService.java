@@ -1,6 +1,7 @@
 package projetb2.overlook_hotel.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,9 @@ public class HotelUserService {
     private HotelUserRepository hotelUserRepository;
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<HotelUser> getAllUsers() {
         return hotelUserRepository.findAll();
@@ -66,5 +70,24 @@ public class HotelUserService {
         return hotelUserRepository.findByRole_RoleName("customer");
     }
 
-    
+    @Transactional
+    public HotelUser addUser(String firstName,
+            String lastName,
+            String email,
+            String rawPassword) {
+
+        if (hotelUserRepository.existsByEmail(email)) {
+            throw new IllegalArgumentException("Email already used");
+        }
+
+        HotelUser user = new HotelUser();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setUserPassword(passwordEncoder.encode(rawPassword));
+        user.setRole(roleService.setUserRole("customer"));
+
+        return hotelUserRepository.save(user);
+    }
+
 }

@@ -9,6 +9,8 @@
             </a>
             <div id="logoutMessage" class="alert alert-info" th:if="${logoutMessage}" th:text="${logoutMessage}"></div>
             <div id="errorMessage" class="alert alert-info error-message" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+            <div id="registerSuccess" class="alert alert-info" th:if="${registerSuccess}" th:text="${registerSuccess}"></div>
+            <div id="registerError" class="alert alert-info error-message" th:if="${registerError}" th:text="${registerError}"></div>
             <div class="right-items">
                 <!-- Language selector -->
                 <div class="dropdown">
@@ -79,6 +81,8 @@
         document.addEventListener("DOMContentLoaded", function () {
             const logoutMessage = document.getElementById("logoutMessage");
             const errorMessage = document.getElementById("errorMessage");
+            const registerSuccess = document.getElementById("registerSuccess");
+            const registerError = document.getElementById("registerError");
             if (logoutMessage) {
                 logoutMessage.classList.add("fade-out");
                 setTimeout(() => {
@@ -89,12 +93,29 @@
                 }, 3000);
             }
             if (errorMessage) {
-                // errorMessage.style.color = "#dc3545";
                 errorMessage.classList.add("fade-out");
                 setTimeout(() => {
                     errorMessage.classList.add("hidden");
                     setTimeout(() => {
                         errorMessage.style.display = "none";
+                    }, 1000);
+                }, 3000);
+            }
+            if (registerSuccess) {
+                registerMessage.classList.add("fade-out");
+                setTimeout(() => {
+                    registerMessage.classList.add("hidden");
+                    setTimeout(() => {
+                        registerMessage.style.display = "none";
+                    }, 1000);
+                }, 3000);
+            }
+            if (registerError) {
+                registerError.classList.add("fade-out");
+                setTimeout(() => {
+                    registerError.classList.add("hidden");
+                    setTimeout(() => {
+                        registerError.style.display = "none";
                     }, 1000);
                 }, 3000);
             }

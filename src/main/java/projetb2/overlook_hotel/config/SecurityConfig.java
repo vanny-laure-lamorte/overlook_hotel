@@ -38,14 +38,15 @@ public class SecurityConfig {
                                                                 "/meeting-room**",
                                                                 "/past-booking",
                                                                 "/past-booking",
-                                                                "/header/***")
+                                                                "/header/***",
+                                                                "/auth")
                                                 .permitAll()
                                                 .requestMatchers(
                                                                 "/admin/**")
                                                 .hasRole("ADMIN")
                                                 .requestMatchers(
-                                                        "/view/dashboard/bookings"
-                                                        ).hasAnyRole("ADMIN", "EMPLOYEE")
+                                                                "/view/dashboard/bookings")
+                                                .hasAnyRole("ADMIN", "EMPLOYEE")
                                                 .anyRequest().authenticated())
                                 .formLogin(form -> form
                                                 .loginPage("/auth")

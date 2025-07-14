@@ -24,4 +24,7 @@ public interface HotelUserRepository extends JpaRepository<HotelUser, Integer> {
      * @return a list of HotelUsers
      */
     List<HotelUser> findByRole_RoleName(String roleName);
+
+    boolean existsByEmail(String email);
+
 }

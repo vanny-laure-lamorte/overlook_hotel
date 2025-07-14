@@ -17,23 +17,25 @@
                     <td th:text="${customer.id}">1</td>
                     <td th:text="${customer.lastName}">LastName</td>
                     <td th:text="${customer.firstName}">FirstName</td>
-                    <td th:text="${#dates.format(customer.dob, 'dd/MM/yyyy')}">01/01/2000</td>
-                    <td th:text="${customer.role.roleName}">Role</td>
+                    <td th:text="${customer.dob != null ? #dates.format(customer.dob, 'dd/MM/yyyy') : ''}">01/01/2000</td>
+                    <td th:text="${customer.role != null ? customer.role.roleName : ''}">Role</td>
                     <td class="action-cell borderless">
-                        <button type="button" class="btn btn-link p-0" title="Edit" th:attr="data-id=${customer.id},
-                         data-firstname=${customer.firstName},
-                         data-lastname=${customer.lastName},
-                         data-dob=${#dates.format(customer.dob, 'dd/MM/yyyy')},
-                         data-role=${customer.role.roleName},
-                         data-address=${customer.userAddress}" onclick="openEditCustomerModal(this)">
+                        <button type="button" class="btn btn-link p-0" title="Edit"
+                            onclick="openEditCustomerModal(this)"
+                            th:attr="data-id=${customer.id},
+                                     data-firstname=${customer.firstName != null ? customer.firstName : ''},
+                                     data-lastname=${customer.lastName != null ? customer.lastName : ''},
+                                     data-dob=${customer.dob != null ? #dates.format(customer.dob, 'dd/MM/yyyy') : ''},
+                                     data-role=${customer.role != null ? customer.role.roleName : ''},
+                                     data-address=${customer.userAddress != null ? customer.userAddress : ''}">
                             <i class="fas fa-edit icon-edit"></i>
                         </button>
                     </td>
                 </tr>
             </tbody>
-
         </table>
     </div>
+
     <div id="editCustomerModal"
         style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); z-index:1000; background:white; border:1px solid #ccc; padding:20px; box-shadow:0 0 15px rgba(0,0,0,0.3); border-radius:10px; max-width:500px; width:90%;">
         <h3>Edit Customer <span id="editCustomerIdDisplay"></span></h3>
@@ -63,13 +65,15 @@
             <button type="submit">Save Changes</button>
             <button type="button" onclick="closeEditCustomerModal()">Cancel</button>
         </form>
+
         <form id="deleteCustomerForm" th:action="@{/api/customers/delete}" method="post">
-            <!-- <input type="hidden" name="deleteId" id="customerId" /> -->
-            <input  name="customerId" id="deleteCustomerId" />
-            <button type="submit" class="btn btn-danger" onclick="closeEditCustomerModal()">Delete Customer</button>
-            <i class="fas fa-trash-alt mx-5 icon-delete"></i>
+            <input type="hidden" name="customerId" id="deleteCustomerId" />
+            <button type="submit" class="btn btn-danger" onclick="closeEditCustomerModal()">
+                Delete Customer <i class="fas fa-trash-alt icon-delete"></i>
+            </button>
         </form>
     </div>
+
     <script>
         function openEditCustomerModal(button) {
             const customerId = button.getAttribute("data-id");
@@ -80,13 +84,12 @@
             const role = button.getAttribute("data-role");
 
             document.getElementById("editCustomerId").value = customerId;
-            document.getElementById("editFirstName").value = firstName;
-            document.getElementById("editLastName").value = lastName;
+            document.getElementById("editFirstName").value = firstName || '';
+            document.getElementById("editLastName").value = lastName || '';
             document.getElementById("editDob").value = formatDateForInput(dob);
-            document.getElementById("editAddress").value = address;
-            document.getElementById("editRole").value = role;
+            document.getElementById("editAddress").value = address || '';
+            document.getElementById("editRole").value = role || 'customer';
             document.getElementById("deleteCustomerId").value = customerId;
-
             document.getElementById("editCustomerIdDisplay").textContent = `#${customerId}`;
 
             document.getElementById("editCustomerModal").style.display = "block";
@@ -97,7 +100,9 @@
         }
 
         function formatDateForInput(dateStr) {
+            if (!dateStr || !dateStr.includes("/")) return "";
             const parts = dateStr.split("/");
+            if (parts.length !== 3) return "";
             return `${parts[2]}-${parts[1]}-${parts[0]}`;
         }
     </script>
