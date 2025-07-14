@@ -42,7 +42,7 @@ public class RoomsViewController {
         return "layout/connectedLayout";
     }
 
-    @GetMapping("/rooms-search")
+    @GetMapping("/filter")
     public String searchRooms(
             @RequestParam(name = "adultCount", defaultValue = "2") int adults,
             @RequestParam(name = "childCount", defaultValue = "0") int children,
