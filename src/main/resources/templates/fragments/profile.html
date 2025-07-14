@@ -90,13 +90,15 @@
                             <div class="profile-form-group">
                                 <label for="dob" class="form-label">Date of Birth</label>
                                 <div class="input-group">
-                                    <i class="fas fa-calendar-alt profile-input-icon"></i>
-                                   <input type="date"
-                                        class="form-control-info with-icon"
-                                        id="dob"
-                                        th:value="${#dates.format(user.dob, 'yyyy-MM-dd')}"
-                                        th:attr="disabled=${!editMode}"
-                                        required>
+                                    <i class="fas fa-calendar-alt profile-input-icon" id="calendarIcon"></i>
+                                        <input type="date"
+                                            class="form-control-info with-icon"
+                                            id="dob"
+                                            name="dob"
+                                            th:value="${user.dob != null ? #dates.format(user.dob, 'yyyy-MM-dd') : ''}"
+                                            th:attr="disabled=${!editMode}"
+                                            required>
+
                                     <div class="validation-message">Please enter your date of birth</div>
                                 </div>
                             </div>
@@ -153,7 +155,7 @@
         </div>
     </div>
     <script>
-        document.getElementById('calendarIcon').addEventListener('click', function() {
+        document.getElementById('calendarIcon').addEventListener('click', () =>  {
             const dateInput = document.getElementById('dob');
             if (dateInput.showPicker) {
                 dateInput.showPicker();
