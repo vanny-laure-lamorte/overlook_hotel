@@ -86,7 +86,24 @@ public class BookingService {
     }
 
     public List<Booking> getPastBookingsForCurrentUser(Integer currentUserId) {
-    LocalDate today = LocalDate.now();
-    return bookingRepo.findPastBookingsByUserId(currentUserId, today);
+        LocalDate today = LocalDate.now();
+        return bookingRepo.findPastBookingsByUserId(currentUserId, today);
+    }
+
+     /**
+     * Cancel all bookings associated with a user by their user ID.
+     *
+     * @param userId the ID of the user whose bookings are to be deleted
+     */
+    @Transactional
+    public void cancelBookingsByUserId(Integer userId) {
+        List<Booking> bookings = bookingRepo.findByUser_Id(userId);
+        for (Booking booking : bookings) {
+            System.out.println("\n\n\nCancelling booking with ID: " + booking.getId() + "\n\n\n");
+            booking.setBookingStatus(BookingStatus.CANCELLED);
+            booking.setUser(null);
+            bookingRepo.save(booking);
+        }
     }
 }
+

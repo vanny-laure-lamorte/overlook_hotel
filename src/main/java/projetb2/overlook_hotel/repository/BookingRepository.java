@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,8 +21,10 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
      * @return a list of bookings made by the user
      */
     @Query("SELECT b FROM Booking b " +
-       "WHERE b.user.id = :userId " +
-       "AND b.departureDate < :today " +
-       "ORDER BY b.departureDate DESC")
+            "WHERE b.user.id = :userId " +
+            "AND b.departureDate < :today " +
+            "ORDER BY b.departureDate DESC")
     List<Booking> findPastBookingsByUserId(Integer userId, LocalDate today);
+
+    List<Booking> findByUser_Id(Integer userId);
 }
