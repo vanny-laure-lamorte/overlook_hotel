@@ -3,23 +3,30 @@ package projetb2.overlook_hotel.controller.view;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 import projetb2.overlook_hotel.service.RoomService;
 import projetb2.overlook_hotel.model.Room;
 
+@RequestMapping("/view/rooms")
 @Controller
-public class RoomsListViewController {
+public class RoomsViewController {
 
     private final RoomService roomService;
-
-    public RoomsListViewController(RoomService roomService) {
+    public RoomsViewController(RoomService roomService) {
         this.roomService = roomService;
     }
 
-    @GetMapping("/view/all-rooms")
+    public String getMethodName(@RequestParam String param) {
+        return new String();
+    }
+
+    @GetMapping("/all")
     public String showRoomForm(Model model) {
         List<Room> allRooms = roomService.getAllRooms();
         List<Room> onlyRooms = allRooms.stream()
@@ -51,6 +58,22 @@ public class RoomsListViewController {
         model.addAttribute("fragmentPath", "fragments/all-rooms.html");
         model.addAttribute("fragmentName", "fgt-all-rooms");
 
+        return "layout/connectedLayout";
+    }
+
+    @GetMapping("/{roomTitleId}")
+    public String getRoomByTitle(@PathVariable("roomTitleId") int roomTitleId, Model model) {
+        Optional<Room> roomOpt = roomService.getRoomByTitle(roomTitleId);
+
+        if (roomOpt.isEmpty()) {
+            model.addAttribute("error", "Room not found.");
+        return "layout/connectedLayout";
+        }
+
+        Room room = roomOpt.get();
+        model.addAttribute("rooms", room);
+        model.addAttribute("fragmentPath", "fragments/all-rooms.html");
+        model.addAttribute("fragmentName", "fgt-all-rooms");
         return "layout/connectedLayout";
     }
 }
