@@ -44,7 +44,7 @@ public class SecurityConfig {
                                                                 "/admin/**")
                                                 .hasRole("ADMIN")
                                                 .requestMatchers(
-                                                        "/admin/bookings"
+                                                        "/view/dashboard/bookings"
                                                         ).hasAnyRole("ADMIN", "EMPLOYEE")
                                                 .anyRequest().authenticated())
                                 .formLogin(form -> form

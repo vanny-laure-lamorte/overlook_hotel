@@ -35,7 +35,7 @@ public class CustomersApiController {
             @RequestParam("address") String address,
             @RequestParam("role") String role) {
         hotelUserService.updateUser(id, firstName, lastName, dob, address, role);
-        return new RedirectView("/admin/customers");
+        return new RedirectView("/view/dashboard/customers");
     }
 
     @PostMapping("/delete")
@@ -48,7 +48,7 @@ public class CustomersApiController {
             System.out.println("\n\n\nCustomer with ID " + existingUser.getFirstName() + " has been deleted.\n\n\n");
             hotelUserService.deleteUser(existingUser);
         }
-        return new RedirectView("/admin/customers");
+        return new RedirectView("/view/dashboard/customers");
     }
 
 }

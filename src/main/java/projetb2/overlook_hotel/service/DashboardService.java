@@ -9,13 +9,13 @@ import projetb2.overlook_hotel.dto.BookingDTO;
 import projetb2.overlook_hotel.model.HotelUser;
 
 @Service
-public class AdminService {
+public class DashboardService {
 
     private final BookingService bookingService;
     private final RoomService roomService;
     private final HotelUserService userService;
 
-    public AdminService(BookingService bookingService, RoomService roomService, HotelUserService userService) {
+    public DashboardService(BookingService bookingService, RoomService roomService, HotelUserService userService) {
         this.bookingService = bookingService;
         this.roomService = roomService;
         this.userService = userService;

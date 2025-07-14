@@ -259,6 +259,10 @@ strong {
   background-color: transparent;
   border-color: transparent;
 }
+.error-message {
+  color: #dc3545;
+  font-weight: 700;
+}
 
 /* Modal styles */
 .modal {

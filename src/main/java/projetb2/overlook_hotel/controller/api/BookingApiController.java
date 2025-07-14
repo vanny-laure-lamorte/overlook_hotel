@@ -32,7 +32,7 @@ public class BookingApiController {
             RedirectAttributes redirectAttributes) {
         boolean result = bookingService.acceptBooking(bookingId);
         redirectAttributes.addFlashAttribute("message", result ? "Booking accepted" : "Could not accept booking");
-        return new RedirectView("/admin/bookings");
+        return new RedirectView("/view/dashboard/bookings");
     }
 
     /*
@@ -48,7 +48,7 @@ public class BookingApiController {
         boolean result = bookingService.declineBooking(bookingId);
         redirectAttributes.addFlashAttribute("message", result ? "Booking declined" : "Could not decline booking");
         System.out.println("\n\n\nDeclining booking with ID: " + bookingId + "\n\n\n");
-        return new RedirectView("/admin/bookings");
+        return new RedirectView("/view/dashboard/bookings");
     }
 
     /*
@@ -66,6 +66,6 @@ public class BookingApiController {
             RedirectAttributes redirectAttributes) {
         boolean result = bookingService.updateBooking(bookingId, roomId, arrivingDate, departureDate, bookingStatus);
         redirectAttributes.addFlashAttribute("message", result ? "Booking updated" : "Could not update booking");
-        return new RedirectView("/admin/bookings");
+        return new RedirectView("/view/dashboard/bookings");
     }
 }

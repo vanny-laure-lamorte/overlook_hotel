@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import projetb2.overlook_hotel.dto.BookingDTO;
 import projetb2.overlook_hotel.model.BookingStatus;
 import projetb2.overlook_hotel.model.HotelUser;
-import projetb2.overlook_hotel.service.AdminService;
+import projetb2.overlook_hotel.service.DashboardService;
 
 @Controller
-@RequestMapping("/admin")
-public class AdminViewController {
+@RequestMapping("/view/dashboard")
+public class DashboardViewController {
 
-    private final AdminService adminService;
+    private final DashboardService dashboardService;
 
-    public AdminViewController(AdminService adminService) {
-        this.adminService = adminService;
+    public DashboardViewController(DashboardService dashboardService) {
+        this.dashboardService = dashboardService;
     }
 
     /*
@@ -28,7 +28,7 @@ public class AdminViewController {
      */
     @GetMapping("/employees")
     public String showEmployeeList(Model model) {
-        List<HotelUser> employees = adminService.getAllEmployees();
+        List<HotelUser> employees = dashboardService.getAllEmployees();
         model.addAttribute("employeeList", employees);
 
         model.addAttribute("fragmentPath", "fragments/employee-list");
@@ -43,7 +43,7 @@ public class AdminViewController {
      */
     @GetMapping("/customers")
     public String showCustomerList(Model model) {
-        List<HotelUser> customers = adminService.getAllCustomers();
+        List<HotelUser> customers = dashboardService.getAllCustomers();
         model.addAttribute("customersList", customers);
 
         model.addAttribute("fragmentPath", "fragments/customer-list");
@@ -58,9 +58,9 @@ public class AdminViewController {
      */
     @GetMapping("/bookings")
     public String showBookings(Model model) {
-        List<BookingDTO> bookings = adminService.getAllBookingInfos();
+        List<BookingDTO> bookings = dashboardService.getAllBookingInfos();
         model.addAttribute("bookings", bookings);
-        model.addAttribute("rooms", adminService.getAllRooms());
+        model.addAttribute("rooms", dashboardService.getAllRooms());
         model.addAttribute("status", BookingStatus.values());
 
         model.addAttribute("PENDING", BookingStatus.PENDING);
