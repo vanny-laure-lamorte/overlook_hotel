@@ -74,24 +74,4 @@ public class BookingViewController {
             }
         return "layout/connectedLayout";
     }
-
-    @GetMapping("/loyalty-points")
-    public String showLoyaltyPoints(
-        Model model,
-        @AuthenticationPrincipal UserDetails currentUser) {
-
-        Optional<HotelUser> userOpt = hotelUserService.findByEmail(currentUser.getUsername());
-
-        model.addAttribute("fragmentPath", "fragments/past-booking");
-        model.addAttribute("fragmentName", "fgt-past-booking");
-
-        if (userOpt.isPresent()) {
-            HotelUser user = userOpt.get();
-            model.addAttribute("user", user);
-
-            int loyaltyPoints = bookingService.calculateLoyaltyPoints(user.getId());
-            model.addAttribute("loyaltyPoints", loyaltyPoints);
-        }
-        return "layout/connectedLayout";
-    }
 }
