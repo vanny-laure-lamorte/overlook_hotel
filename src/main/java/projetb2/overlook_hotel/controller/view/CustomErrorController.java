@@ -29,7 +29,6 @@ public class CustomErrorController implements ErrorController {
             }
         }
 
-        // [!] Injecter manuellement user et isAuthenticated
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         boolean isAuthenticated = auth != null && auth.isAuthenticated() &&
                 !(auth instanceof AnonymousAuthenticationToken);
