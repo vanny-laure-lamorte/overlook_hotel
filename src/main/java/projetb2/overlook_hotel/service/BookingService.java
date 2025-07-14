@@ -113,5 +113,16 @@ public class BookingService {
             bookingRepo.save(booking);
         }
     }
+
+    public int calculateLoyaltyPoints(Integer userId) {
+        List<Booking> pastBookings = getPastBookingsForCurrentUser(userId);
+        int bookingCount = pastBookings.size();
+
+        if (bookingCount < 3) {
+            return 0;
+        }
+
+        return (bookingCount / 3) * 10;
+    }
 }
 
