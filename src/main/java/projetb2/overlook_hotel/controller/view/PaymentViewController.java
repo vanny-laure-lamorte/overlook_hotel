@@ -10,7 +10,7 @@ public class PaymentViewController {
     /*
      * Handles the payment page view.
      */
-    @GetMapping("/payment")
+    @GetMapping("/view/payment")
     public String showHome(Model model) {
         model.addAttribute("fragmentPath", "fragments/payment.html");
         model.addAttribute("fragmentName", "fgt-payment");

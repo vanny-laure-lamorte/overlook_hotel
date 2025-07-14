@@ -19,36 +19,38 @@ public class RoomsListViewController {
         this.roomService = roomService;
     }
 
-    @GetMapping("/rooms-list")
+    @GetMapping("/view/all-rooms")
     public String showRoomForm(Model model) {
         List<Room> allRooms = roomService.getAllRooms();
         List<Room> onlyRooms = allRooms.stream()
         .filter(room -> "Room".equalsIgnoreCase(room.getAccommodationType()))
         .toList();
 
+        System.out.println();
+
         model.addAttribute("rooms", onlyRooms);
-        model.addAttribute("fragmentPath", "fragments/rooms_list.html");
-        model.addAttribute("fragmentName", "fgt-rooms-list");
+        model.addAttribute("fragmentPath", "fragments/all-rooms.html");
+        model.addAttribute("fragmentName", "fgt-all-rooms");
 
         return "layout/connectedLayout";
     }
 
     @GetMapping("/rooms-search")
-public String searchRooms(
-        @RequestParam(name = "adultCount", defaultValue = "2") int adults,
-        @RequestParam(name = "childCount", defaultValue = "0") int children,
-        Model model) {
+    public String searchRooms(
+            @RequestParam(name = "adultCount", defaultValue = "2") int adults,
+            @RequestParam(name = "childCount", defaultValue = "0") int children,
+            Model model) {
 
-    int totalGuests = adults + children;
-    List<Room> matchingRooms = roomService.findRoomsByMinimumCapacity(totalGuests);
-    List<Room> onlyRooms = matchingRooms.stream()
-        .filter(room -> "Room".equalsIgnoreCase(room.getAccommodationType()))
-        .toList();
+        int totalGuests = adults + children;
+        List<Room> matchingRooms = roomService.findRoomsByMinimumCapacity(totalGuests);
+        List<Room> onlyRooms = matchingRooms.stream()
+            .filter(room -> "Room".equalsIgnoreCase(room.getAccommodationType()))
+            .toList();
 
-    model.addAttribute("rooms", onlyRooms);
-    model.addAttribute("fragmentPath", "fragments/rooms_list.html");
-    model.addAttribute("fragmentName", "fgt-rooms-list");
+        model.addAttribute("rooms", onlyRooms);
+        model.addAttribute("fragmentPath", "fragments/all-rooms.html");
+        model.addAttribute("fragmentName", "fgt-all-rooms");
 
-    return "layout/connectedLayout";
-}
+        return "layout/connectedLayout";
+    }
 }

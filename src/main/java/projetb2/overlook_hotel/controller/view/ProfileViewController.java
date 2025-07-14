@@ -18,7 +18,7 @@ public class ProfileViewController {
     @Autowired
     private HotelUserService hotelUserService;
 
-    @GetMapping("/profile")
+    @GetMapping("/view/profile")
     public String showUserHotelProfile(@AuthenticationPrincipal UserDetails currentUser, Model model) {
         Optional<HotelUser> userOpt = hotelUserService.findByEmail(currentUser.getUsername());
         if (userOpt.isPresent()) {
@@ -30,7 +30,7 @@ public class ProfileViewController {
         return "layout/connectedLayout";
     }
 
-    @GetMapping("/profile/edit")
+    @GetMapping("/edit")
     public String showEditProfile(@AuthenticationPrincipal UserDetails currentUser, Model model) {
         Optional<HotelUser> userOpt = hotelUserService.findByEmail(currentUser.getUsername());
         if (userOpt.isPresent()) {

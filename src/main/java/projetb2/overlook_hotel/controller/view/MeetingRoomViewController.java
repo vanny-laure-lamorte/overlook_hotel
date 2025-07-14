@@ -11,7 +11,7 @@ public class MeetingRoomViewController {
      * Handles the meeting room page view.
      * Displays the meeting fragment in the connected layout.
      */
-    @GetMapping("/meeting-room")
+    @GetMapping("/view/meeting-room")
     public String showMeetingRoom(Model model) {
         model.addAttribute("fragmentPath", "fragments/meeting-room.html");
         model.addAttribute("fragmentName", "fgt-meeting-room");

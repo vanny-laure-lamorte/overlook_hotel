@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
 import projetb2.overlook_hotel.model.Booking;
 import projetb2.overlook_hotel.model.HotelUser;
 import projetb2.overlook_hotel.service.HotelUserService;
@@ -46,9 +45,10 @@ public class BookingViewController {
     }
 
     @GetMapping("/process")
-    public String processSearch(@RequestParam int adultCount,
-                                @RequestParam int childCount,
-                                Model model) {
+    public String processSearch(
+        @RequestParam int adultCount,
+        @RequestParam int childCount,
+        Model model) {
         model.addAttribute("adultsCount", adultCount);
         model.addAttribute("childrenCount", childCount);
         return "layout/connectedLayout";
@@ -58,7 +58,6 @@ public class BookingViewController {
     public String showPastBooking(
         Model model,
         @AuthenticationPrincipal UserDetails currentUser) {
-
             Optional<HotelUser> userOpt = hotelUserService.findByEmail(currentUser.getUsername());
             model.addAttribute("fragmentPath", "fragments/past-booking");
             model.addAttribute("fragmentName", "fgt-past-booking");
