@@ -1,7 +1,7 @@
 <div th:fragment="booking-search-widget" id="booking-search-widget">
     <div class="search-inner">
         <h2 class="search-title">Book your hotel</h2>
-        <form th:action="@{/search}" method="get" class="search-form">
+        <form th:action="@{/rooms-search}" method="get" class="search-form">
             <div class="search-fields-container">
                 <!-- Destination Field -->
                 <div class="search-field destination-field">
@@ -11,8 +11,7 @@
                             <i class="fas fa-map-marker-alt field-icon"></i>
                             <span class="separator-line"></span>
                         </div>
-                        <input type="text" id="destination" name="destination" placeholder="City, town or hotel name"
-                            required>
+                        <input type="text" id="destination" name="destination" placeholder="City, town or hotel name">
                     </div>
                 </div>
                 <!-- Check-in Field -->
@@ -24,7 +23,7 @@
                             <span class="separator-line"></span>
                         </div>
                         <input type="text" id="check-in" name="checkIn" class="datepicker" placeholder="Add date"
-                            readonly required>
+                            readonly>
                     </div>
                 </div>
                 <!-- Check-out Field -->
@@ -36,7 +35,7 @@
                             <span class="separator-line"></span>
                         </div>
                         <input type="text" id="check-out" name="checkOut" class="datepicker" placeholder="Add date"
-                            readonly required>
+                            readonly>
                     </div>
                 </div>
                 <!-- Two-Part: Rooms & Guests -->

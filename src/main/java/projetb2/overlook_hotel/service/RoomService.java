@@ -29,6 +29,16 @@ public class RoomService {
         return roomRepository.findById(id).orElse(null);
     }
 
+
+    /**
+     * Finds rooms that can accommodate a minimum number of guests.
+     * @param minCapacity the minimum capacity required for the rooms.
+     * @return a List<Room> containing rooms that meet the capacity requirement.
+     */
+    public List<Room> findRoomsByMinimumCapacity(int minCapacity) {
+        return roomRepository.findByCapacityGreaterThanEqual(minCapacity);
+    }
+
     /**
      * Creates a new room in the repository.
      */
