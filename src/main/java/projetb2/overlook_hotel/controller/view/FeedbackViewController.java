@@ -73,7 +73,7 @@ public class FeedbackViewController {
         model.addAttribute("hotelUser", hotelUser);
         model.addAttribute("booking", booking);
         model.addAttribute("fragmentPath", "fragments/feedback-form.html");
-        model.addAttribute("fragmentName", "fgt-feedback");
+        model.addAttribute("fragmentName", "fgt-feedback-form");
         return "layout/connectedLayout";
     }
 
@@ -127,7 +127,7 @@ public class FeedbackViewController {
         model.addAttribute("feedback", new Feedback());
         model.addAttribute("hotelUser", hotelUser);
         model.addAttribute("fragmentPath", "fragments/feedback-form.html");
-        model.addAttribute("fragmentName", "fgt-feedback");
+        model.addAttribute("fragmentName", "fgt-feedback-form");
         return new RedirectView("/view/booking/past-booking");
     }
 }
