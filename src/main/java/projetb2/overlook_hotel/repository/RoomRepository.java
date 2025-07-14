@@ -3,6 +3,7 @@ package projetb2.overlook_hotel.repository;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
 
 import projetb2.overlook_hotel.model.Room;
 
@@ -10,7 +11,9 @@ import projetb2.overlook_hotel.model.Room;
 public interface RoomRepository extends JpaRepository<Room, Integer> {
     /*
      * Finds all rooms with a capacity greater than or equal to the specified value.
-     * 
+     *
      */
     List<Room> findByCapacityGreaterThanEqual(int capacity);
+
+    Optional<Room> findByRoomTitle(int roomTitle);
 }

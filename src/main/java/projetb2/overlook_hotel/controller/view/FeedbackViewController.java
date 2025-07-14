@@ -72,10 +72,29 @@ public class FeedbackViewController {
         model.addAttribute("feedback", feedback);
         model.addAttribute("hotelUser", hotelUser);
         model.addAttribute("booking", booking);
-        model.addAttribute("fragmentPath", "fragments/feedbacks.html");
+        model.addAttribute("fragmentPath", "fragments/feedback-form.html");
         model.addAttribute("fragmentName", "fgt-feedback");
         return "layout/connectedLayout";
     }
+
+    /**
+     * Display the feedback form for a specific booking.
+     */
+    @GetMapping("/reviews")
+    public String showAllReviews(
+        @AuthenticationPrincipal UserDetails currentUser,
+        Model model) {
+        Optional<HotelUser> hotelUserOpt = hotelUserService.findByEmail(currentUser.getUsername());
+        if (hotelUserOpt.isEmpty()) {
+            return "redirect:/login";
+        }
+        // model.addAttribute("hotelUser",hotelUser);
+
+        model.addAttribute("fragmentPath", "fragments/feedback-reviews.html");
+        model.addAttribute("fragmentName", "fgt-feedback-reviews");
+        return "layout/connectedLayout";
+    }
+
 
     /**
      * Submits the feedback for a booking.
@@ -107,7 +126,7 @@ public class FeedbackViewController {
         model.addAttribute("success", "Feedback soumis avec succès !");
         model.addAttribute("feedback", new Feedback());
         model.addAttribute("hotelUser", hotelUser);
-        model.addAttribute("fragmentPath", "fragments/feedbacks.html");
+        model.addAttribute("fragmentPath", "fragments/feedback-form.html");
         model.addAttribute("fragmentName", "fgt-feedback");
         return new RedirectView("/view/booking/past-booking");
     }
