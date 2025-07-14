@@ -28,7 +28,7 @@ public class RoomService {
     /*
      * Maps room title integers to their corresponding string labels.
      */
-    private String mapRoomTitle(int roomTitle) {
+    public String mapRoomTitle(int roomTitle) {
         return switch (roomTitle) {
             case 1 -> "Standard Queen Room";
             case 2 -> "Superior Sea View";

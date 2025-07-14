@@ -88,6 +88,10 @@ CREATE TABLE IF NOT EXISTS room (
 -- 4 Family Room
 -- 5 Deluxe King Room
 -- 6 Cozy City Room
+-- 7 Conference Room
+-- 8 Large Meeting Room
+-- 9 Spa with Jacuzzi
+-- 10 Spa Sauna & Massage
 
 INSERT INTO room (accommodation_type, price, capacity, room_description, amenities, room_title, room_image) VALUES
 ('Room', 250, 2, 'A cozy standard room featuring a comfortable queen-sized bed for restful nights. Perfect for couples or solo travelers seeking a relaxing stay.  Enjoy modern comforts in a bright and welcoming atmosphere.', 'Wi-Fi, Air conditioning, Private bathroom, TV', 1, 'standard-room-'),

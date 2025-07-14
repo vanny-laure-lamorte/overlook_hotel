@@ -13,7 +13,7 @@
             <div th:each="booking : ${pastBookings}"  class="booking-card">
                 <!-- Booking Header -->
                 <div class="booking-header">
-                    <div class="booking-title" th:text="${booking.room.roomTitle}"></div>
+                    <div class="booking-title" th:text="${booking.room.roomTitleLabel}"></div>
                     <div class="booking-date">
                         <i class="fas fa-calendar-alt me-2"></i><span>Stay</span>
                         <span th:text="${#temporals.format(booking.arrivingDate, 'dd/MM/yyyy') + ' → ' + #temporals.format(booking.departureDate, 'dd/MM/yyyy')}"></span><br>

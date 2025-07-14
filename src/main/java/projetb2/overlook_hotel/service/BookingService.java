@@ -75,6 +75,7 @@ public class BookingService {
             Room room = roomService.getRoomById(roomId);
             if (room == null)
                 return false;
+            room.setRoomTitleLabel(roomService.mapRoomTitle(room.getRoomTitle()));
 
             booking.setRoom(room);
             booking.setArrivingDate(arrival);
@@ -87,7 +88,14 @@ public class BookingService {
 
     public List<Booking> getPastBookingsForCurrentUser(Integer currentUserId) {
         LocalDate today = LocalDate.now();
-        return bookingRepo.findPastBookingsByUserId(currentUserId, today);
+        List<Booking> bookings = bookingRepo.findPastBookingsByUserId(currentUserId, today);
+        for (Booking booking : bookings) {
+            Room room = booking.getRoom();
+            if (room != null) {
+                room.setRoomTitleLabel(roomService.mapRoomTitle(room.getRoomTitle()));
+            }
+        }
+        return bookings;
     }
 
      /**
