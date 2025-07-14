@@ -90,4 +90,36 @@ public class HotelUserService {
         return hotelUserRepository.save(user);
     }
 
+    /**
+     * Calculates the profile completion percentage for a HotelUser.
+     *
+     * @param user the HotelUser to check
+     * @return the percentage of filled fields
+     */
+    public int findProfileCompletionHotelUser(HotelUser user) {
+        int filled = 0;
+        int totalFields = 6;
+
+        if (hasText(user.getFirstName()))
+            filled++;
+        if (hasText(user.getLastName()))
+            filled++;
+        if (user.getDob() != null)
+            filled++;
+        if (hasText(user.getUserAddress()))
+            filled++;
+        if (hasText(user.getPhoneNumber()))
+            filled++;
+        if (hasText(user.getEmail()))
+            filled++;
+
+        return (int) Math.round((filled * 100.0) / totalFields);
+    }
+
+    /** petite aide utilitaire */
+    private boolean hasText(String s) {
+        System.out.println("Checking if string has text: '" + s + "'");
+        return s != null && !s.isBlank();
+    }
+
 }

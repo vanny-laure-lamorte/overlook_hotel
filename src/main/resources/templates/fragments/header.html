@@ -7,10 +7,28 @@
                 <img th:src="@{/images/icone-logo/suite-dreams-logo-trans.png}" alt="Logo">
                 <span class="logo-text">Suite Dream</span>
             </a>
-            <div id="logoutMessage" class="alert alert-info" th:if="${logoutMessage}" th:text="${logoutMessage}"></div>
-            <div id="errorMessage" class="alert alert-info error-message" th:if="${errorMessage}" th:text="${errorMessage}"></div>
-            <div id="registerSuccess" class="alert alert-info" th:if="${registerSuccess}" th:text="${registerSuccess}"></div>
-            <div id="registerError" class="alert alert-info error-message" th:if="${registerError}" th:text="${registerError}"></div>
+            <div id="message">
+                <!-- Alertes -->
+                <div id="logoutMessage" class="alert alert-info" th:if="${logoutMessage}" th:text="${logoutMessage}">
+                </div>
+                <div id="errorMessage" class="alert alert-info error-message" th:if="${errorMessage}"
+                    th:text="${errorMessage}"></div>
+                <div id="registerSuccess" class="alert alert-info" th:if="${registerSuccess}"
+                    th:text="${registerSuccess}"></div>
+                <div id="registerError" class="alert alert-info error-message" th:if="${registerError}"
+                    th:text="${registerError}"></div>
+                <div class="alert alert-info" th:if="${profileCompletion != null}">
+                    Only <span th:text="${profileCompletion + '%'}">0%</span> of your profile information is completed :
+                    <form th:action="@{/view/profile}" method="get" style="display:inline;">
+                        <button type="submit" class="btn btn-link p-0"
+                            style="display:inline; text-decoration: underline; font-weight: bold;">
+                            Complete Profile
+                        </button>
+                    </form>
+                </div>
+
+
+            </div>
             <div class="right-items">
                 <!-- Language selector -->
                 <div class="dropdown">
