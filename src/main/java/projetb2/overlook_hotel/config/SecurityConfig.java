@@ -37,6 +37,7 @@ public class SecurityConfig {
                                                                 "/spa",
                                                                 "/meeting-room**",
                                                                 "/past-booking",
+                                                                "/past-booking",
                                                                 "/header/***")
                                                 .permitAll()
                                                 .requestMatchers(
