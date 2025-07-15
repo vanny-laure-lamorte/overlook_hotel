@@ -13,12 +13,4 @@ public class UserNotificationService {
     public void sendNotification(String message) {
         System.out.println("Notification sent: " + message);
     }
-
-    public void deleteNotification(int notificationId) {
-        System.out.println("Notification with ID " + notificationId + " deleted.");
-    }
-
-    public void viewNotifications() {
-        System.out.println("Viewing notifications...");
-    }
 }

@@ -30,6 +30,14 @@ public class ProfileApiController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
     }
 
+    /**
+     * Updates the profile of the currently authenticated user.
+     * This method accepts a HotelUser object with updated details and saves it.
+     * If the user is successfully updated, it redirects to the profile page.
+     * @param updatedUser The HotelUser object containing updated user details
+     * @param currentUser The currently authenticated user
+     * @return RedirectView to the profile page
+     */
     @PostMapping("/api/profile/update")
     public RedirectView updateProfile(
         @ModelAttribute("user") HotelUser updatedUser,

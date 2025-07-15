@@ -15,6 +15,16 @@ public class AuthApiController {
         this.hotelUserService = hotelUserService;
     }
 
+    /**
+     * Registers a new customer.
+     * If registration is successful, it redirects to the auth page with a success message.
+     * If registration fails, it redirects with an error message.
+     *
+     * @param fullName The full name of the customer
+     * @param email The email of the customer
+     * @param password The password for the customer account
+     * @return RedirectView to the auth page with a success or error message
+     */
     @PostMapping("/register")
     public RedirectView addCustomer(
             @RequestParam("registerFullName") String fullName,

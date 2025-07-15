@@ -19,6 +19,13 @@ public class GlobalUserAdvice {
         this.hotelUserService = hotelUserService;
     }
 
+    /**
+     * Adds the current user to the model if authenticated.
+     * This method checks if the user is authenticated and adds their details to the model.
+     * It also calculates the profile completion percentage and adds it to the model.
+     *
+     * @param model The model to which user details will be added
+     */
     @ModelAttribute
     public void addUserToModel(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

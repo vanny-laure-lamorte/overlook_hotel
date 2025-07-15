@@ -22,8 +22,6 @@ public class DataInitializer {
                     userHotelRepository.save(user);
                 }
             }
-
-            System.out.println("Mots de passe des utilisateurs encodés avec succès !");
         };
     }
 }

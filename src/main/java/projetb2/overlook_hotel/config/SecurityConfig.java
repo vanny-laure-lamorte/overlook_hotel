@@ -36,7 +36,6 @@ public class SecurityConfig {
                                                                 "/api/customers/delete",
                                                                 "/api/feedback/**",
                                                                 "/payment",
-                                                                "/all-rooms",
                                                                 "/spa",
                                                                 "/meeting-room**",
                                                                 "/past-booking",

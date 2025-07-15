@@ -23,14 +23,36 @@ public class HotelUserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Constructor for HotelUserService.
+     *
+     * @param hotelUserRepository the HotelUserRepository to be used by this service
+     * @param roleService the RoleService to be used by this service
+     */
     public List<HotelUser> getAllUsers() {
         return hotelUserRepository.findAll();
     }
 
+    /**
+     * Saves a HotelUser to the repository.
+     *
+     * @param user the HotelUser to save
+     * @return the saved HotelUser
+     */
     public HotelUser saveUser(HotelUser user) {
         return hotelUserRepository.save(user);
     }
 
+    /**
+     * Updates the details of a HotelUser.
+     *
+     * @param id the ID of the user to update
+     * @param firstName the new first name
+     * @param lastName the new last name
+     * @param dob the new date of birth
+     * @param address the new address
+     * @param roleName the new role name
+     */
     @Transactional
     public void updateUser(Integer id, String firstName, String lastName, Date dob, String address, String roleName) {
         HotelUser user = hotelUserRepository.findById(id).orElseThrow();
@@ -43,22 +65,50 @@ public class HotelUserService {
         hotelUserRepository.save(user);
     }
 
+    /**
+     * Finds a HotelUser by their email address.
+     *
+     * @param email the email of the user to find
+     * @return an Optional containing the HotelUser if found, or empty if not found
+     */
     public Optional<HotelUser> findByEmail(String email) {
         return hotelUserRepository.findByEmail(email);
     }
 
+    /**
+     * Deletes a HotelUser from the repository.
+     *
+     * @param user the HotelUser to delete
+     */
     public void deleteUser(HotelUser user) {
         hotelUserRepository.delete(user);
     }
 
+    /**
+     * Finds a HotelUser by their ID.
+     *
+     * @param id the ID of the user to find
+     * @return the HotelUser if found, or null if not found
+     */
     public List<HotelUser> findByRole(String roleName) {
         return hotelUserRepository.findByRole_RoleName(roleName);
     }
 
+    /**
+     * Finds a HotelUser by their ID.
+     *
+     * @param id the ID of the user to find
+     * @return the HotelUser if found, or null if not found
+     */
     public HotelUser findById(Integer id) {
         return hotelUserRepository.findById(id).orElse(null);
     }
 
+    /**
+     * Retrieves all employees and admins from the repository.
+     *
+     * @return a list of HotelUser objects representing employees and admins
+     */
     public List<HotelUser> getAllEmployeesAndAdmins() {
         List<HotelUser> employees = hotelUserRepository.findByRole_RoleName("employee");
         List<HotelUser> admins = hotelUserRepository.findByRole_RoleName("admin");
@@ -66,10 +116,24 @@ public class HotelUserService {
         return employees;
     }
 
+    /**
+     * Retrieves all customers from the repository.
+     *
+     * @return a list of HotelUser objects representing customers
+     */
     public List<HotelUser> getAllCustomers() {
         return hotelUserRepository.findByRole_RoleName("customer");
     }
 
+    /**
+     * Adds a new HotelUser with the specified details.
+     *
+     * @param firstName the first name of the user
+     * @param lastName the last name of the user
+     * @param email the email of the user
+     * @param rawPassword the raw password of the user
+     * @return the newly created HotelUser
+     */
     @Transactional
     public HotelUser addUser(String firstName,
             String lastName,
@@ -100,26 +164,19 @@ public class HotelUserService {
         int filled = 0;
         int totalFields = 6;
 
-        if (hasText(user.getFirstName()))
+        if (user.getFirstName() != null && !user.getFirstName().isEmpty())
             filled++;
-        if (hasText(user.getLastName()))
+        if (user.getLastName() != null && !user.getLastName().isEmpty())
             filled++;
-        if (user.getDob() != null)
+        if (user.getDob() != null && !user.getDob().toString().isEmpty())
             filled++;
-        if (hasText(user.getUserAddress()))
+        if (user.getUserAddress() != null && !user.getUserAddress().isEmpty())
             filled++;
-        if (hasText(user.getPhoneNumber()))
+        if (user.getPhoneNumber() != null && !user.getPhoneNumber().isEmpty())
             filled++;
-        if (hasText(user.getEmail()))
+        if (user.getEmail() != null && !user.getEmail().isEmpty())
             filled++;
 
         return (int) Math.round((filled * 100.0) / totalFields);
     }
-
-    /** petite aide utilitaire */
-    private boolean hasText(String s) {
-        System.out.println("Checking if string has text: '" + s + "'");
-        return s != null && !s.isBlank();
-    }
-
 }

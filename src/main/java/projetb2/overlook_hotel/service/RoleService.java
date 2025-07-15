@@ -12,15 +12,12 @@ public class RoleService {
     private RoleRepository roleRepository;
 
     /**
-     * Assigns a role to a user.
+     * Sets the user role based on the provided role name.
      *
-     * @param username the username of the user to whom the role is to be assigned
-     * @param role     the role to be assigned
+     * @param roleName the name of the role to set
+     * @return the Role object corresponding to the given role name
+     * @throws IllegalArgumentException if the role is not found
      */
-    public void assignRoleToUser(String username, String role) {
-        System.out.println("Role " + role + " assigned to user " + username);
-    }
-
     public Role setUserRole(String roleName) {
         return roleRepository.findByRoleName(roleName)
                 .orElseThrow(() -> new IllegalArgumentException("Role not found: " + roleName));

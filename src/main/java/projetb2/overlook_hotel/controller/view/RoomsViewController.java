@@ -33,8 +33,6 @@ public class RoomsViewController {
         .filter(room -> "Room".equalsIgnoreCase(room.getAccommodationType()))
         .toList();
 
-        System.out.println();
-
         model.addAttribute("rooms", onlyRooms);
         model.addAttribute("fragmentPath", "fragments/all-rooms.html");
         model.addAttribute("fragmentName", "fgt-all-rooms");

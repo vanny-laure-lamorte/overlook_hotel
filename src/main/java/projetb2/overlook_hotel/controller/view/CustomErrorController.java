@@ -15,6 +15,11 @@ import projetb2.overlook_hotel.security.CustomUserDetails;
 @Controller
 public class CustomErrorController implements ErrorController {
 
+    /**
+     * Handles errors by redirecting to a custom error page.
+     * It checks the HTTP status code and sets the appropriate fragment number.
+     * It also adds user authentication details to the model if available.
+     */
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request, Model model) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);

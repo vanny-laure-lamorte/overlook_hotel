@@ -1,6 +1,5 @@
 <div th:fragment="fgt-booking-list">
     <h2>Booking List</h2>
-
     <div class="sd-custom-table-wrapper">
         <table class="sd-custom-table" id="bookingTable">
             <thead>
@@ -20,17 +19,13 @@
                         ${booking.bookingStatus.name() == 'CANCELLED'} ? 'cancelled-booking' :
                         (${booking.bookingStatus.name() == 'DECLINED'} ? 'declined-booking' :
                         (${booking.bookingStatus.name() == 'ACCEPTED'} ? 'accepted-booking' : ''))">
-
                     <td th:text="${booking.bookingId}">1</td>
                     <td th:text="${booking.username}">John Doe</td>
-                    <td>
-                        <span th:text="${booking.roomTitle}">Deluxe Suite</span>
-                        (<span th:text="${booking.roomId}">5</span>)
-                    </td>
+                    <td><span th:text="${booking.roomTitle}">Deluxe Suite</span>
+                    (<span th:text="${booking.roomId}">5</span>)</td>
                     <td th:text="${booking.formattedArrivingDate}">10/07/2025</td>
                     <td th:text="${booking.formattedDepartureDate}">12/07/2025</td>
                     <td th:text="${booking.bookingStatus}">PENDING</td>
-
                     <!-- Edit -->
                     <td class="action-cell borderless">
                         <th:block th:switch="${booking.bookingStatus.name()}">
@@ -47,7 +42,6 @@
                             </button>
                         </th:block>
                     </td>
-
                     <!-- Decline -->
                     <td class="action-cell borderless">
                         <th:block th:switch="${booking.bookingStatus.name()}">
@@ -62,7 +56,6 @@
                             <i th:case="*" class="fas fa-times text-muted" title="Cannot decline this reservation"></i>
                         </th:block>
                     </td>
-
                     <!-- Accept -->
                     <td class="action-cell borderless">
                         <th:block th:switch="${booking.bookingStatus.name()}">
@@ -80,37 +73,30 @@
                 </tr>
             </tbody>
         </table>
-
         <!-- Modal -->
         <div id="editBookingModal"
             style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); z-index:1000; background:white; border:1px solid #ccc; padding:20px; box-shadow:0 0 15px rgba(0,0,0,0.3); border-radius:10px; max-width:500px; width:90%;">
             <h3>Edit Booking</h3>
             <form id="editBookingForm" th:action="@{/api/booking/edit}" method="post">
                 <input type="hidden" name="bookingId" id="editBookingId" />
-
                 <label for="editArrivingDate">Arriving Date:</label>
                 <input type="date" name="arrivingDate" id="editArrivingDate" required><br><br>
-
                 <label for="editDepartureDate">Departure Date:</label>
                 <input type="date" name="departureDate" id="editDepartureDate" required><br><br>
-
                 <label for="editRoomId">Room:</label>
                 <select name="roomId" id="editRoomId" required>
                     <option th:each="room : ${rooms}" th:value="${room.id}"
                         th:text="${room.roomTitle} + ' (' + ${room.capacity} + 'p)'"></option>
                 </select><br><br>
-
                 <label for="editBookingStatus">Status:</label>
                 <select name="bookingStatus" id="editBookingStatus" required>
                     <option th:each="status : ${status}" th:value="${status}" th:text="${status}"></option>
                 </select><br><br>
-
                 <button type="submit">Save Changes</button>
                 <button type="button" onclick="closeEditModal()">Cancel</button>
             </form>
         </div>
     </div>
-
     <script>
         let currentSortColumn = -1;
         let currentSortDir = "asc";

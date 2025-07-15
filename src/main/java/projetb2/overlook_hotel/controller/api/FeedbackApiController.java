@@ -26,6 +26,8 @@ public class FeedbackApiController {
 
      /**
      * Retrieve a single feedback by ID.
+     * @param id The ID of the feedback to retrieve
+     * @return ResponseEntity containing the feedback if found, or a 404 status if not
      */
     @GetMapping("/{id}")
     public ResponseEntity<Feedback> getFeedbackById(@PathVariable Integer id) {
@@ -35,6 +37,9 @@ public class FeedbackApiController {
 
      /**
      * Submit new feedback.
+     * This method accepts a Feedback object and saves it using the feedbackService.
+     * @param feedback The feedback to submit
+     * @return ResponseEntity indicating the result of the submission
      */
     @PostMapping
     public ResponseEntity<String> submitFeedback(@ModelAttribute Feedback feedback) {
@@ -44,6 +49,10 @@ public class FeedbackApiController {
 
     /**
      * Update feedback by ID.
+     * This method accepts an ID and a Feedback object to update the existing feedback.
+     * @param id The ID of the feedback to update
+     * @param updatedFeedback The updated feedback object
+     * @return ResponseEntity indicating the result of the update
      */
     @PutMapping("/{id}")
     public ResponseEntity<String> updateFeedback(@PathVariable Integer id, @RequestBody Feedback updatedFeedback) {
@@ -53,6 +62,9 @@ public class FeedbackApiController {
 
     /**
      * Delete feedback by ID.
+     * This method deletes the feedback with the specified ID.
+     * @param id The ID of the feedback to delete
+     * @return ResponseEntity indicating the result of the deletion
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteFeedback(@PathVariable Integer id) {

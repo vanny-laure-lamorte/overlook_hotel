@@ -16,16 +16,19 @@ import projetb2.overlook_hotel.model.BookingStatus;
 public class BookingApiController {
 
     private final BookingService bookingService;
+
     public BookingApiController(BookingService bookingService) {
         this.bookingService = bookingService;
     }
 
-    /*
+    /**
      * Accepts a booking by its ID.
      * If the booking is successfully accepted, it redirects to the bookings page
      * with a success message.
      * If the booking cannot be accepted (e.g., not in PENDING status), it redirects
      * with an error message.
+     * @param bookingId The ID of the booking to accept
+     * @return RedirectView to the bookings page with a success or error message
      */
     @PostMapping("/accept")
     public RedirectView acceptBooking(@RequestParam("bookingId") Integer bookingId,
@@ -35,27 +38,34 @@ public class BookingApiController {
         return new RedirectView("/view/dashboard/bookings");
     }
 
-    /*
+    /**
      * Declines a booking by its ID.
      * If the booking is successfully declined, it redirects to the bookings page
      * with a success message.
      * If the booking cannot be declined (e.g., not in PENDING status), it redirects
      * with an error message.
+     * @param bookingId The ID of the booking to decline
+     * @return RedirectView to the bookings page with a success or error message
      */
     @PostMapping("/decline")
     public RedirectView declineBooking(@RequestParam("bookingId") Integer bookingId,
             RedirectAttributes redirectAttributes) {
         boolean result = bookingService.declineBooking(bookingId);
         redirectAttributes.addFlashAttribute("message", result ? "Booking declined" : "Could not decline booking");
-        System.out.println("\n\n\nDeclining booking with ID: " + bookingId + "\n\n\n");
         return new RedirectView("/view/dashboard/bookings");
     }
 
-    /*
-     * Edits a booking by its ID.
-     * Updates the booking with the provided details and redirects to the bookings
-     * page with a success or error message.
-     */
+    /**
+    * Edits a booking by its ID.
+    * Updates the booking with the provided details and redirects to the bookings
+    * page with a success or error message.
+    * @param bookingId The ID of the booking to edit
+    * @param roomId The ID of the room to assign to the booking
+    * @param arrivingDate The new arrival date for the booking
+    * @param departureDate The new departure date for the booking
+    * @param bookingStatus The new status of the booking (optional)
+    * @return RedirectView to the bookings page with a success or error message
+    */
     @PostMapping("/edit")
     public RedirectView editBooking(
             @RequestParam Integer bookingId,

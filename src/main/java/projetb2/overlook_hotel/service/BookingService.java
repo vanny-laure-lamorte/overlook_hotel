@@ -107,7 +107,6 @@ public class BookingService {
     public void cancelBookingsByUserId(Integer userId) {
         List<Booking> bookings = bookingRepo.findByUser_Id(userId);
         for (Booking booking : bookings) {
-            System.out.println("\n\n\nCancelling booking with ID: " + booking.getId() + "\n\n\n");
             booking.setBookingStatus(BookingStatus.CANCELLED);
             booking.setUser(null);
             bookingRepo.save(booking);
@@ -125,4 +124,3 @@ public class BookingService {
         return (bookingCount / 3) * 10;
     }
 }
-

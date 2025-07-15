@@ -8,6 +8,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AuthViewController {
 
+    /**
+     * Redirects to the login page with appropriate messages based on request parameters.
+     *
+     * @param error Optional error message for invalid credentials or unauthorized access.
+     * @param logout Optional message indicating successful logout.
+     * @param register Optional message indicating successful registration.
+     * @param registerError Optional error message for registration failure.
+     * @param model Model to add attributes for the view.
+     * @return The name of the view to render.
+     */
     @GetMapping("/auth")
     public String loginRedirect(
             @RequestParam(value = "error", required = false) String error,

@@ -26,11 +26,8 @@ public class CustomUserDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        System.out.println("Attempting to load user by email: " + email);
         HotelUser user = userRepo.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-        System.out.println("User found: " + user.getEmail());
 
         return new CustomUserDetails(user, List.of(
                 new SimpleGrantedAuthority("ROLE_" + user.getRole().getRoleName().toUpperCase())));
