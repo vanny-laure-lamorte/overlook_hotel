@@ -2,20 +2,20 @@
     <div class="page-title">
         <h1 class="h1-purple">Nos Chambres</h1>
         <p class="page-description">
-            We are delighted to offer a range of <strong>comfortable</strong> and <strong>stylish</strong> rooms to suit every <strong>traveler</strong>.
+            We are delighted to offer a range of <strong>comfortable</strong> and <strong>stylish</strong> rooms to suit
+            every <strong>traveler</strong>.
             Whether you're here for business or leisure, you'll find the perfect space to relax and unwind.
-            Check our <strong>available rooms</strong> below and <strong>book now </strong>to enjoy a <strong>welcoming stay</strong> with us!
+            Check our <strong>available rooms</strong> below and <strong>book now </strong>to enjoy a <strong>welcoming
+                stay</strong> with us!
         </p>
     </div>
     <div class="rooms-list">
         <div class="room-card" th:each="room, stat : ${rooms}">
             <!-- Image -->
             <div class="image-container">
-                <img
-                    th:each="i : ${#numbers.sequence(1, 3)}"
+                <img th:each="i : ${#numbers.sequence(1, 3)}"
                     th:src="@{'/images/rooms/' + ${room.roomImage} + ${i} + '.jpg'}"
-                    th:alt="${room.roomTitle + ' image ' + i}"
-                    class="room-image"/>
+                    th:alt="${room.roomTitle + ' image ' + i}" class="room-image" />
             </div>
             <!-- Room title and description -->
             <div class="room-details">
@@ -39,9 +39,7 @@
                         </span>
                     </div>
                     <div>
-                       <span th:each="amenity : ${room.amenitiesWords}"
-                            class="badge"
-                            th:text="${amenity}"></span>
+                        <span th:each="amenity : ${room.amenitiesWords}" class="badge" th:text="${amenity}"></span>
                     </div>
                 </div>
                 <!-- price and booking button -->
@@ -51,7 +49,14 @@
                         € per night
                     </div>
                     <div class="book-now-section">
-                        <button class="book-btn">Book Now</button>
+                        <form th:action="@{/view/booking/summary}" method="get">
+                            <input type="hidden" name="roomId" th:value="${room.id}" />
+                            <input type="hidden" name="arrivalDate" th:value="${arrivalDate}" />
+                            <input type="hidden" name="departureDate" th:value="${departureDate}" />
+                            <input type="hidden" name="AdultsCount" th:value="${adultsCount}" />
+                            <input type="hidden" name="ChildrenCount" th:value="${childrenCount}" />
+                            <button class="book-btn">Book Now</button>
+                        </form>
                     </div>
                 </div>
             </div>

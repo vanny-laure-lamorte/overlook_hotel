@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import projetb2.overlook_hotel.dto.BookingDTO;
 import projetb2.overlook_hotel.model.HotelUser;
-import projetb2.overlook_hotel.model.Room;
 
 @Service
 public class DashboardService {

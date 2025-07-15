@@ -129,22 +129,5 @@ public class BookingService {
             return "Loyalty Level 4";
         }
     }
-
-    public String calculateLoyaltyLevel(Integer userId) {
-        List<Booking> pastBookings = getPastBookingsForCurrentUser(userId);
-        int bookingCount = pastBookings.size();
-
-        if (bookingCount < 3) {
-            return "Loyalty Level 1";
-        } else if (bookingCount < 5) {
-            return "Loyalty Level 1";
-        } else if (bookingCount < 10) {
-            return "Loyalty Level 2";
-        } else if (bookingCount < 20) {
-            return "Loyalty Level 3";
-        } else {
-            return "Loyalty Level 4";
-        }
-    }
 }
 
