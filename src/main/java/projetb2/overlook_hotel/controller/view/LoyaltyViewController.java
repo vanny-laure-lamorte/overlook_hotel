@@ -47,4 +47,30 @@ public class LoyaltyViewController {
         }
         return "layout/connectedLayout";
     }
+
+    /**
+     * Display the loyalty points for the current user.
+     */
+    @GetMapping("/level")
+    public String showLoyaltyLevel(
+        // @PathVariable Integer userId
+        // @AuthenticationPrincipal UserDetails currentUser,
+        Model model
+        ) {
+
+        // Optional<HotelUser> userOpt = hotelUserService.findByEmail(currentUser.getUsername());
+
+        model.addAttribute("fragmentPath", "fragments/loyalty-level.html");
+        model.addAttribute("fragmentName", "fgt-loyalty");
+
+        // if (userOpt.isPresent()) {
+        //     HotelUser user = userOpt.get();
+        //     model.addAttribute("user", user);
+
+        //     String loyaltyLevel = bookingService.calculateLoyaltyLevel(user.getId());
+        //     System.out.println("LOYALTYYYYY " + user.getId() + ": " + loyaltyLevel);
+        //     model.addAttribute("loyalty-level", loyaltyLevel);
+        // }
+        return "layout/connectedLayout";
+    }
 }
