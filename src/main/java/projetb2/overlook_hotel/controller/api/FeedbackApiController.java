@@ -15,7 +15,7 @@ import projetb2.overlook_hotel.model.Feedback;
 import projetb2.overlook_hotel.service.FeedbackService;
 
 @RestController
-@RequestMapping("/api-feedback")
+@RequestMapping("/api/feedback")
 public class FeedbackApiController {
 
     private final FeedbackService feedbackService;
