@@ -25,7 +25,6 @@ public class PaymentApiController {
     }
 
     @PostMapping("/create-checkout-session")
-    @ResponseBody
     public Map<String, String> createCheckoutSession(
             @RequestParam double amount,
             @RequestParam int roomId,

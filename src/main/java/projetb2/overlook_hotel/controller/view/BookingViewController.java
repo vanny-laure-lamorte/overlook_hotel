@@ -73,7 +73,7 @@ public class BookingViewController {
     @GetMapping("/summary")
     public String showBookingSummary(
             @RequestParam("roomId") Integer roomId,
-            @RequestParam(value = "userId", required = false) Integer userId,
+            @RequestParam(value = "userId", required = false, defaultValue = "-1") Integer userId,
             @RequestParam("AdultsCount") Integer adultsCount,
             @RequestParam("ChildrenCount") Integer childrenCount,
             @RequestParam(value = "arrivalDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate arrivalDate,
@@ -87,9 +87,7 @@ public class BookingViewController {
         if (departureDate == null) {
             departureDate = arrivalDate.plusDays(1);
         }
-        if (userId == null) {
-            userId = -1;
-        }
+
         model.addAttribute("arrivalDate", arrivalDate);
         model.addAttribute("departureDate", departureDate);
         model.addAttribute("roomName", roomService.mapRoomTitle(roomId));
@@ -98,14 +96,16 @@ public class BookingViewController {
         model.addAttribute("adultsCount", adultsCount);
         model.addAttribute("childrenCount", childrenCount);
         model.addAttribute("fragmentPath", "fragments/booking-summary");
-
-        model.addAttribute("stripePublicKey", stripeConfig.getPublicKey());
         model.addAttribute("fragmentName", "fgt-booking-summary");
+        model.addAttribute("stripePublicKey", stripeConfig.getPublicKey());
+
         if ("success".equals(paymentStatus)) {
             model.addAttribute("paymentMessage", "success");
         } else if ("cancel".equals(paymentStatus)) {
             model.addAttribute("paymentMessage", "cancel");
         }
+
         return "layout/connectedLayout";
     }
+
 }

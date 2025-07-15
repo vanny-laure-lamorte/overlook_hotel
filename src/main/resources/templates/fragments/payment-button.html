@@ -8,10 +8,11 @@
     <input type="hidden" name="arrivalDate" th:value="${arrivalDate}" />
     <input type="hidden" name="departureDate" th:value="${departureDate}" />
   </form>
+
   <button type="button" class="btn btn-primary" onclick="startStripePayment()">Pay now</button>
+
   <script src="https://js.stripe.com/v3/"></script>
   <script th:inline="javascript">
-    /*<![CDATA[*/
     const stripe = Stripe(/*[[${stripePublicKey}]]*/ '');
 
     function startStripePayment() {
@@ -22,13 +23,12 @@
         method: 'POST',
         body: new URLSearchParams(formData)
       })
-      .then(res => res.json())
-      .then(data => stripe.redirectToCheckout({ sessionId: data.id }))
-      .catch(error => {
-        console.error("Stripe redirect failed:", error);
-        alert("Payment could not be initiated. Try again.");
-      });
+        .then(res => res.json())
+        .then(data => stripe.redirectToCheckout({ sessionId: data.id }))
+        .catch(error => {
+          console.error("Stripe redirect failed:", error);
+          alert("Payment could not be initiated. Try again.");
+        });
     }
-    /*]]>*/
   </script>
 </div>
