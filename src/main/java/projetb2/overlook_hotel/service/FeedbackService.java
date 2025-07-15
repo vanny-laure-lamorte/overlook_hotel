@@ -1,14 +1,20 @@
 package projetb2.overlook_hotel.service;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 import projetb2.overlook_hotel.model.Feedback;
 import projetb2.overlook_hotel.repository.FeedbackRepository;
+
 @Service
 public class FeedbackService {
 
     @Autowired
     private FeedbackRepository feedbackRepository;
+
     public Feedback getFeedbackById(Integer id) {
         return feedbackRepository.findById(id).orElse(null);
     }
@@ -29,4 +35,11 @@ public class FeedbackService {
         feedbackRepository.deleteById(id);
     }
 
+    @Transactional
+    public void deleteFeedbackByUserId(Integer userId) {
+        List<Feedback> feedbacks = feedbackRepository.findByHotelUser_Id(userId);
+        for (Feedback feedback : feedbacks) {
+            feedback.setHotelUser(null);
+        }
+    }
 }

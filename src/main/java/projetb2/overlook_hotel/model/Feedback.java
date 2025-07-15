@@ -55,7 +55,7 @@ public class Feedback {
     }
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = true)
     private HotelUser hotelUser;
 
     @ManyToOne
