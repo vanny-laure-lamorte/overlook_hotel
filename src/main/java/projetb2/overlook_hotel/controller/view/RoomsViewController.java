@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.Optional;
 
 import projetb2.overlook_hotel.service.RoomService;
 import projetb2.overlook_hotel.model.Room;
@@ -18,6 +17,7 @@ import projetb2.overlook_hotel.model.Room;
 public class RoomsViewController {
 
     private final RoomService roomService;
+
     public RoomsViewController(RoomService roomService) {
         this.roomService = roomService;
     }
@@ -30,8 +30,8 @@ public class RoomsViewController {
     public String showRoomForm(Model model) {
         List<Room> allRooms = roomService.getAllRooms();
         List<Room> onlyRooms = allRooms.stream()
-        .filter(room -> "Room".equalsIgnoreCase(room.getAccommodationType()))
-        .toList();
+                .filter(room -> "Room".equalsIgnoreCase(room.getAccommodationType()))
+                .toList();
 
         model.addAttribute("rooms", onlyRooms);
         model.addAttribute("fragmentPath", "fragments/all-rooms.html");
@@ -42,17 +42,19 @@ public class RoomsViewController {
 
     @GetMapping("/filter")
     public String searchRooms(
-            @RequestParam(name = "adultCount", defaultValue = "2") int adults,
-            @RequestParam(name = "childCount", defaultValue = "0") int children,
+            @RequestParam(name = "adultsCount", defaultValue = "2") int adults,
+            @RequestParam(name = "childrenCount", defaultValue = "0") int children,
             Model model) {
 
         int totalGuests = adults + children;
         List<Room> matchingRooms = roomService.findRoomsByMinimumCapacity(totalGuests);
         List<Room> onlyRooms = matchingRooms.stream()
-            .filter(room -> "Room".equalsIgnoreCase(room.getAccommodationType()))
-            .toList();
+                .filter(room -> "Room".equalsIgnoreCase(room.getAccommodationType()))
+                .toList();
 
         model.addAttribute("rooms", onlyRooms);
+        model.addAttribute("adultsCount", adults);
+        model.addAttribute("childrenCount", children);
         model.addAttribute("fragmentPath", "fragments/all-rooms.html");
         model.addAttribute("fragmentName", "fgt-all-rooms");
 
