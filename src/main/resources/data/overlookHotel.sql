@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS hotel_user (
     email VARCHAR(255),
     user_password VARCHAR(255),
     role_id INT,
+    loyalty INT DEFAULT 0,
     CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES "role"(id)
 );
 

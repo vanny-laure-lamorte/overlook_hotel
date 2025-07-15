@@ -31,6 +31,7 @@ public class HotelUser implements Serializable {
     private String phoneNumber;
     private String email;
     private String userPassword;
+    private Integer loyalty;
 
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")

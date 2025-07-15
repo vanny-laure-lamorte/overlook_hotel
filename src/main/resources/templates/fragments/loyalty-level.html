@@ -15,7 +15,9 @@
                             <p class="card-subtitle">Current Points: <span id="user-points"></span></p>
                         </div>
                     </div>
-                    <span class="badge-level-loyalty">Active</span>
+                    <div>
+                        <span class="badge-level-loyalty">Active</span>
+                    </div>
                 </div>
                 <div class="card-content">
                     <h2 class="current-benefits-title">Your Current Benefits:</h2>
@@ -53,15 +55,14 @@
     </div>
 
     <script>
-        const userPoints = 750; // Example: User's current loyalty points
-        const userName = "John Doe"; // Example: User's name
-
+        const userPoints = [[${loyaltyPoint}]];
+        const userName = "John Doe";
         const loyaltyLevels = [
             {
                 name: "Genius Level 1",
                 pointsRequired: 0,
                 benefits: ["10% discount on selected properties", "Free room upgrades (subject to availability)"],
-                headerBg: "var(--purple-500)",
+                headerBg: "var(--purple-900)",
                 headerText: "var(--white)"
             },
             {
@@ -75,9 +76,20 @@
                 name: "Genius Level 3",
                 pointsRequired: 1500,
                 benefits: ["20% discount on selected properties", "Free airport transfers", "Dedicated concierge service", "Early check-in / Late check-out"],
-                headerBg: "var(--purple-700)",
+                headerBg: "var(--purple-900)",
                 headerText: "var(--white)"
             },
+            {
+                name: "Genius Level 4",
+                pointsRequired: 20,
+                benefits: [
+                    "20% discount on selected properties",
+                    "Late check-out",
+                    "Free room upgrades (subject to availability)"
+                ],
+                headerBg: "var(--purple-600)",
+                headerText: "var(--white)"
+            }
         ];
 
         document.getElementById('welcome-message').textContent = `${userName},  just a few more bookings and you’ll unlock your next reward level!`;

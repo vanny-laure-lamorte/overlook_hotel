@@ -30,7 +30,7 @@ public class BookingService {
         return bookingRepo.findAll();
     }
 
-    /*
+    /**
      * Accepts a booking by its ID.
      * If the booking is successfully accepted, it returns true.
      */
@@ -45,7 +45,7 @@ public class BookingService {
         }).orElse(false);
     }
 
-    /*
+    /**
      * Declines a booking by its ID.
      * If the booking is successfully declined, it returns true.
      */
@@ -60,7 +60,7 @@ public class BookingService {
         }).orElse(false);
     }
 
-    /*
+    /**
      * Updates a booking with the provided details.
      * If the booking is successfully updated, it returns true.
      */
@@ -99,8 +99,7 @@ public class BookingService {
     }
 
      /**
-     * Cancel all bookings associated with a user by their user ID.
-     *
+     * Cancel all bookings associated with a user by their user ID.     *
      * @param userId the ID of the user whose bookings are to be deleted
      */
     @Transactional
@@ -113,6 +112,10 @@ public class BookingService {
         }
     }
 
+    /**
+     * Calculate loyalty level according to past boonkings number.
+     * @param userId the ID of the user
+     */
     public String calculateLoyaltyLevel(Integer userId) {
         List<Booking> pastBookings = getPastBookingsForCurrentUser(userId);
         int bookingCount = pastBookings.size();
@@ -130,21 +133,5 @@ public class BookingService {
         }
     }
 
-    public String calculateLoyaltyLevel(Integer userId) {
-        List<Booking> pastBookings = getPastBookingsForCurrentUser(userId);
-        int bookingCount = pastBookings.size();
-
-        if (bookingCount < 3) {
-            return "Loyalty Level 1";
-        } else if (bookingCount < 5) {
-            return "Loyalty Level 1";
-        } else if (bookingCount < 10) {
-            return "Loyalty Level 2";
-        } else if (bookingCount < 20) {
-            return "Loyalty Level 3";
-        } else {
-            return "Loyalty Level 4";
-        }
-    }
 }
 
