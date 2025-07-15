@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Optional;
 
 import projetb2.overlook_hotel.model.Room;
 import projetb2.overlook_hotel.repository.RoomRepository;
@@ -86,5 +85,4 @@ public class RoomService {
         rooms.forEach(room -> room.setRoomTitleLabel(mapRoomTitle(room.getRoomTitle())));
         return rooms;
     }
-
 }
