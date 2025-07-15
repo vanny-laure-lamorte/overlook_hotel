@@ -1,0 +1,144 @@
+<div th:fragment="fgt-loyalty" id="loyalty">
+    <div class="container-loyalty">
+        <!-- Header section with loyalty program title and welcome message -->
+        <div class="header-loyalty">
+            <h1>Your Loyalty Program</h1>
+            <p id="welcome-message"></p>
+        </div>
+        <main>
+            <div class="card" id="loyalty-card">
+                <div class="card-header" id="loyalty-card-header">
+                    <div class="card-header-content">
+                        <span class="icon" aria-hidden="true">⭐</span>
+                        <div>
+                            <h2 class="card-title" id="current-level-name"></h2>
+                            <p class="card-subtitle">Current Points: <span id="user-points"></span></p>
+                        </div>
+                    </div>
+                    <span class="badge-level-loyalty">Active</span>
+                </div>
+                <div class="card-content">
+                    <h2 class="current-benefits-title">Your Current Benefits:</h2>
+                    <ul id="current-benefits-list">
+                    </ul>
+
+                    <div id="next-level-section" class="progress-section-points">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title" style="color: var(--black);">How to Earn Points</h2>
+                </div>
+                <div class="card-content how-to-earn-grid">
+                    <div class="earn-item">
+                        <span class="icon" aria-hidden="true">🏨</span>
+                        <h3>Book Stays</h3>
+                        <p>Earn points for every night you book at participating hotels.</p>
+                    </div>
+                    <div class="earn-item">
+                        <span class="icon" aria-hidden="true">🏷️</span>
+                        <h3>Special Offers</h3>
+                        <p>Look out for bonus point promotions and exclusive deals.</p>
+                    </div>
+                    <div class="earn-item">
+                        <span class="icon" aria-hidden="true">🎁</span>
+                        <h3>Refer Friends</h3>
+                        <p>Get points when your friends sign up and complete their first stay.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const userPoints = 750; // Example: User's current loyalty points
+        const userName = "John Doe"; // Example: User's name
+
+        const loyaltyLevels = [
+            {
+                name: "Genius Level 1",
+                pointsRequired: 0,
+                benefits: ["10% discount on selected properties", "Free room upgrades (subject to availability)"],
+                headerBg: "var(--purple-500)",
+                headerText: "var(--white)"
+            },
+            {
+                name: "Genius Level 2",
+                pointsRequired: 500,
+                benefits: ["15% discount on selected properties", "Free breakfast", "Priority customer support"],
+                headerBg: "var(--purple-900)",
+                headerText: "var(--white)"
+            },
+            {
+                name: "Genius Level 3",
+                pointsRequired: 1500,
+                benefits: ["20% discount on selected properties", "Free airport transfers", "Dedicated concierge service", "Early check-in / Late check-out"],
+                headerBg: "var(--purple-700)",
+                headerText: "var(--white)"
+            },
+        ];
+
+        document.getElementById('welcome-message').textContent = `${userName},  just a few more bookings and you’ll unlock your next reward level!`;
+        document.getElementById('user-points').textContent = userPoints;
+
+        const currentLevelIndex = loyaltyLevels.findIndex(
+            (level, index) =>
+                userPoints >= level.pointsRequired &&
+                (loyaltyLevels[index + 1]?.pointsRequired === undefined || userPoints < loyaltyLevels[index + 1]?.pointsRequired)
+        );
+        const currentLevel = loyaltyLevels[currentLevelIndex];
+        const nextLevel = loyaltyLevels[currentLevelIndex + 1];
+
+        // Update current level display
+        document.getElementById('current-level-name').textContent = currentLevel.name;
+        const loyaltyCardHeader = document.getElementById('loyalty-card-header');
+        loyaltyCardHeader.style.backgroundColor = currentLevel.headerBg;
+        loyaltyCardHeader.style.color = currentLevel.headerText;
+
+        const currentBenefitsList = document.getElementById('current-benefits-list');
+        currentLevel.benefits.forEach(benefit => {
+            const li = document.createElement('li');
+            li.innerHTML = `<span class="check-icon" aria-hidden="true">✔️</span><span>${benefit}</span>`;
+            currentBenefitsList.appendChild(li);
+        });
+
+        // Update next level progress
+        const nextLevelSection = document.getElementById('next-level-section');
+        if (nextLevel) {
+            const progressToNextLevel = ((userPoints - currentLevel.pointsRequired) / (nextLevel.pointsRequired - currentLevel.pointsRequired)) * 100;
+
+            nextLevelSection.innerHTML = `
+                <h2 class="current-benefits-title">Progress to ${nextLevel.name}:</h2>
+                <div class="progress-bar-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${Math.round(progressToNextLevel)}%;"></div>
+                    </div>
+                    <span class="progress-text">${Math.round(progressToNextLevel)}%</span>
+                </div>
+                <p class="points-needed">
+                    You need <strong>${nextLevel.pointsRequired - userPoints} more points</strong> to reach ${nextLevel.name} and unlock even more benefits!
+                </p>
+                <h3 class="current-benefits-title" style="font-size: 1.25rem; margin-bottom: 0.75rem;">Benefits of ${nextLevel.name}:</h3>
+                <ul id="next-benefits-list">
+                    <!-- Next benefits will be injected here by JS -->
+                </ul>
+            `;
+
+            const nextBenefitsList = nextLevelSection.querySelector('#next-benefits-list');
+            nextLevel.benefits.forEach(benefit => {
+                const li = document.createElement('li');
+                li.innerHTML = `<span class="award-icon" aria-hidden="true">🏆</span><span>${benefit}</span>`;
+                nextBenefitsList.appendChild(li);
+            });
+        } else {
+            nextLevelSection.innerHTML = `
+                <div class="text-center">
+                    <h2 class="current-benefits-title">Congratulations!</h2>
+                    <p class="points-needed">You have reached the highest loyalty level and enjoy all the exclusive benefits.</p>
+                </div>
+            `;
+        }
+    </script>
+</div>

@@ -1,6 +1,6 @@
-<div th:fragment="fgt-booking-list">
-    <h2>Booking List</h2>
-    <div class="sd-custom-table-wrapper">
+<div th:fragment="fgt-booking-list" id="booking-list" class="margin-fgt">
+    <h1>Booking List</h1>
+    <div>
         <table class="sd-custom-table" id="bookingTable">
             <thead>
                 <tr>
@@ -78,22 +78,32 @@
             style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); z-index:1000; background:white; border:1px solid #ccc; padding:20px; box-shadow:0 0 15px rgba(0,0,0,0.3); border-radius:10px; max-width:500px; width:90%;">
             <h3>Edit Booking</h3>
             <form id="editBookingForm" th:action="@{/api/booking/edit}" method="post">
-                <input type="hidden" name="bookingId" id="editBookingId" />
-                <label for="editArrivingDate">Arriving Date:</label>
-                <input type="date" name="arrivingDate" id="editArrivingDate" required><br><br>
-                <label for="editDepartureDate">Departure Date:</label>
-                <input type="date" name="departureDate" id="editDepartureDate" required><br><br>
-                <label for="editRoomId">Room:</label>
-                <select name="roomId" id="editRoomId" required>
-                    <option th:each="room : ${rooms}" th:value="${room.id}"
-                        th:text="${room.roomTitle} + ' (' + ${room.capacity} + 'p)'"></option>
-                </select><br><br>
-                <label for="editBookingStatus">Status:</label>
-                <select name="bookingStatus" id="editBookingStatus" required>
-                    <option th:each="status : ${status}" th:value="${status}" th:text="${status}"></option>
-                </select><br><br>
-                <button type="submit">Save Changes</button>
-                <button type="button" onclick="closeEditModal()">Cancel</button>
+                <input type="hidden" name="bookingId" id="editBookingId" class="input-grey"/>
+                <div>
+                    <label for="editArrivingDate"> Arriving Date</label><br>
+                    <input type="date" name="arrivingDate" id="editArrivingDate" class="input-grey" required>
+                </div>
+                <div>
+                    <label for="editDepartureDate"> Departure Date</label><br>
+                    <input type="date" name="departureDate" id="editDepartureDate" class="input-grey" required>
+                </div>
+                <div>
+                    <label for="editRoomId"> Room</label><br>
+                    <select name="roomId" id="editRoomId" class="input-grey" required>
+                        <option th:each="room : ${rooms}" th:value="${room.id}"
+                            th:text="${room.roomTitle} + ' (' + ${room.capacity} + 'p)'"></option>
+                    </select>
+                </div>
+                <div>
+                    <label for="editBookingStatus"> Status</label><br>
+                    <select name="bookingStatus" id="editBookingStatus" class="input-grey" required>
+                        <option th:each="status : ${status}" th:value="${status}" th:text="${status}"></option>
+                    </select>
+                </div>
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" onclick="closeEditModal()" class="btn btn-primary">Cancel</button>
+                </div>
             </form>
         </div>
     </div>

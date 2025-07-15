@@ -53,7 +53,6 @@ public class RoomService {
         return roomRepository.findById(id).orElse(null);
     }
 
-
     /**
      * Finds rooms that can accommodate a minimum number of guests.
      * @param minCapacity the minimum capacity required for the rooms.
