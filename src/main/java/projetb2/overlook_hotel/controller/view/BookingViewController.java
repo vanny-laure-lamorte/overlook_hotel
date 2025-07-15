@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import projetb2.overlook_hotel.config.StripeConfig;
 import projetb2.overlook_hotel.model.Booking;
 import projetb2.overlook_hotel.model.HotelUser;
 import projetb2.overlook_hotel.service.HotelUserService;
@@ -22,6 +24,8 @@ import projetb2.overlook_hotel.service.BookingService;
 @SessionAttributes({ "adultsCount", "childrenCount", "fragmentPath", "fragmentName" })
 public class BookingViewController {
 
+    @Autowired
+    private StripeConfig stripeConfig;
     private final BookingService bookingService;
     private final HotelUserService hotelUserService;
     private final RoomService roomService;
@@ -33,23 +37,6 @@ public class BookingViewController {
         this.bookingService = bookingService;
         this.hotelUserService = hotelUserService;
         this.roomService = roomService;
-    }
-
-    // Initialize default attributes used in Thymeleaf fragments
-    @ModelAttribute
-    public void initFragmentDefaults(Model model) {
-        if (!model.containsAttribute("fragmentPath")) {
-            model.addAttribute("fragmentPath", "fragments/home");
-        }
-        if (!model.containsAttribute("fragmentName")) {
-            model.addAttribute("fragmentName", "fgt-home");
-        }
-        if (!model.containsAttribute("adultsCount")) {
-            model.addAttribute("adultsCount", 2);
-        }
-        if (!model.containsAttribute("childrenCount")) {
-            model.addAttribute("childrenCount", 0);
-        }
     }
 
     @GetMapping("/process")
@@ -86,10 +73,12 @@ public class BookingViewController {
     @GetMapping("/summary")
     public String showBookingSummary(
             @RequestParam("roomId") Integer roomId,
+            @RequestParam(value = "userId", required = false) Integer userId,
             @RequestParam("AdultsCount") Integer adultsCount,
             @RequestParam("ChildrenCount") Integer childrenCount,
             @RequestParam(value = "arrivalDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate arrivalDate,
             @RequestParam(value = "departureDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate departureDate,
+            @RequestParam(value = "payment", required = false) String paymentStatus,
             Model model) {
 
         if (arrivalDate == null) {
@@ -98,15 +87,25 @@ public class BookingViewController {
         if (departureDate == null) {
             departureDate = arrivalDate.plusDays(1);
         }
+        if (userId == null) {
+            userId = -1;
+        }
         model.addAttribute("arrivalDate", arrivalDate);
         model.addAttribute("departureDate", departureDate);
         model.addAttribute("roomName", roomService.mapRoomTitle(roomId));
         model.addAttribute("room", roomService.getRoomById(roomId));
+        model.addAttribute("userId", userId);
         model.addAttribute("adultsCount", adultsCount);
         model.addAttribute("childrenCount", childrenCount);
         model.addAttribute("fragmentPath", "fragments/booking-summary");
-        model.addAttribute("fragmentName", "fgt-booking-summary");
 
+        model.addAttribute("stripePublicKey", stripeConfig.getPublicKey());
+        model.addAttribute("fragmentName", "fgt-booking-summary");
+        if ("success".equals(paymentStatus)) {
+            model.addAttribute("paymentMessage", "success");
+        } else if ("cancel".equals(paymentStatus)) {
+            model.addAttribute("paymentMessage", "cancel");
+        }
         return "layout/connectedLayout";
     }
 }

@@ -1,0 +1,34 @@
+<div th:fragment="fgt-payment-button(amount, stripePublicKey)">
+  <form id="stripe-form">
+    <input type="hidden" name="amount" th:value="${amount}" />
+    <input type="hidden" name="userId" th:value="${userId}" />
+    <input type="hidden" name="roomId" th:value="${room.id}" />
+    <input type="hidden" name="AdultsCount" th:value="${adultsCount}" />
+    <input type="hidden" name="ChildrenCount" th:value="${childrenCount}" />
+    <input type="hidden" name="arrivalDate" th:value="${arrivalDate}" />
+    <input type="hidden" name="departureDate" th:value="${departureDate}" />
+  </form>
+  <button type="button" class="btn btn-primary" onclick="startStripePayment()">Pay now</button>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    const stripe = Stripe(/*[[${stripePublicKey}]]*/ '');
+
+    function startStripePayment() {
+      const form = document.getElementById('stripe-form');
+      const formData = new FormData(form);
+
+      fetch('/api/checkout/create-checkout-session', {
+        method: 'POST',
+        body: new URLSearchParams(formData)
+      })
+      .then(res => res.json())
+      .then(data => stripe.redirectToCheckout({ sessionId: data.id }))
+      .catch(error => {
+        console.error("Stripe redirect failed:", error);
+        alert("Payment could not be initiated. Try again.");
+      });
+    }
+    /*]]>*/
+  </script>
+</div>
