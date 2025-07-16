@@ -42,4 +42,13 @@ public class FeedbackService {
             feedback.setHotelUser(null);
         }
     }
+
+    public List<Feedback> getFeedbackByRoomTitle(int roomTitle) {
+        return feedbackRepository.findByRoomTitle(roomTitle);
+    }
+
+    public Long countFeedbackByRoomTitle(Integer roomTitle) {
+        return feedbackRepository.countByBookingRoomRoomTitle(roomTitle);
+    }
+
 }

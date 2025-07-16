@@ -1,0 +1,318 @@
+<div th:fragment="fgt-feedback-review" id="feedback-review">
+
+    <h2>Avis pour la chambre</h2>
+    <style>
+        .avis-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .avis-header {
+            background: linear-gradient(135deg, #5a287d, #7a3a9d);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .avis-header h2 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 300;
+        }
+        
+        .avis-list {
+            display: grid;
+            gap: 25px;
+        }
+        
+        .avis-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(90, 40, 125, 0.1);
+            border: 1px solid rgba(90, 40, 125, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .avis-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(90, 40, 125, 0.15);
+        }
+        
+        .avis-header-card {
+            background: linear-gradient(90deg, #5a287d, #6d3291);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .avis-meta {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .rating {
+            display: flex;
+            gap: 2px;
+        }
+        
+        .star {
+            color: #ffd700;
+            font-size: 1.2rem;
+        }
+        
+        .star.empty {
+            color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .avis-body {
+            padding: 25px;
+        }
+        
+        .avis-section {
+            margin-bottom: 20px;
+        }
+        
+        .avis-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .section-title {
+            color: #5a287d;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .section-content {
+            color: #333;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .travel-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            background: #f8f6fb;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #5a287d;
+        }
+        
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .info-label {
+            font-size: 0.8rem;
+            color: #5a287d;
+            font-weight: 600;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+        
+        .info-value {
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .badge-work {
+            background: #e8f5e8;
+            color: #2d5a2d;
+        }
+        
+        .badge-leisure {
+            background: #fff3e0;
+            color: #cc6600;
+        }
+        
+        .likes-dislikes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .likes {
+            background: #f0f9f0;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .dislikes {
+            background: #fff5f5;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #f44336;
+        }
+        
+        .response-section {
+            background: #f8f6fb;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #5a287d;
+            margin-top: 15px;
+        }
+        
+        .response-title {
+            color: #5a287d;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .date-badge {
+            background: rgba(90, 40, 125, 0.1);
+            color: #5a287d;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .no-avis {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+        
+        .no-avis-icon {
+            font-size: 4rem;
+            color: #5a287d;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .avis-container {
+                padding: 15px;
+            }
+            
+            .avis-header h2 {
+                font-size: 2rem;
+            }
+            
+            .avis-meta {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+            
+            .likes-dislikes {
+                grid-template-columns: 1fr;
+            }
+            
+            .travel-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+   <!-- Fragment pour afficher la liste des feedbacks -->
+<div th:fragment="avis-list" class="avis-container">
+    <div th:if="${#lists.isEmpty(feedbacks)}" class="no-avis">
+        <div class="no-avis-icon">📝</div>
+        <h3>Aucun avis pour le moment</h3>
+        <p>Soyez le premier à laisser un avis !</p>
+    </div>
+    
+    <div th:unless="${#lists.isEmpty(feedbacks)}" class="avis-list">
+        <div th:each="feedback : ${feedbacks}" class="avis-card">
+            <!-- En-tête de l'avis -->
+            <div class="avis-header-card">
+                <div class="avis-meta">
+                    <!-- Utilisateur -->
+                    <span th:text="|Utilisateur #${feedback.hotelUser.id} (${feedback.hotelUser.firstName} ${feedback.hotelUser.lastName})|">
+                        Utilisateur #1
+                    </span>
+                    <span>•</span>
+                    <!-- Réservation -->
+                    <span th:text="|Réservation #${feedback.booking.id}|">Réservation #123</span>
+                    <!-- Voyage pour travail ou loisir -->
+                    <span th:if="${feedback.travelForWork}" class="badge badge-work">Voyage d'affaires</span>
+                    <span th:unless="${feedback.travelForWork}" class="badge badge-leisure">Voyage loisir</span>
+                </div>
+                <div class="rating">
+                    <!-- Affiche étoiles pleines ou vides selon rating (note de 1 à 5) -->
+                    <span th:each="i : ${#numbers.sequence(1, 5)}" 
+                          th:class="${i <= feedback.rating} ? 'star' : 'star empty'">★</span>
+                    <span th:text="|${feedback.rating}/5|" style="margin-left: 8px;">5/5</span>
+                </div>
+            </div>
+            
+            <!-- Corps de l'avis -->
+            <div class="avis-body">
+                <!-- Informations de voyage -->
+                <div class="travel-info">
+                    <div class="info-item" th:if="${feedback.travelCompanions}">
+                        <span class="info-label">Compagnons de voyage</span>
+                        <span class="info-value" th:text="${feedback.travelCompanions}">En famille</span>
+                    </div>
+                    <div class="info-item" th:if="${feedback.expectationMet}">
+                        <span class="info-label">Attentes satisfaites</span>
+                        <span class="info-value" th:text="${feedback.expectationMet}">Oui, complètement</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Date de l'avis</span>
+                        <span class="info-value" th:text="${#temporals.format(feedback.createdAt, 'dd/MM/yyyy')}">15/01/2024</span>
+                    </div>
+                </div>
+                
+                <!-- Résumé -->
+                <div th:if="${feedback.summary}" class="avis-section">
+                    <div class="section-title">Résumé</div>
+                    <div class="section-content" th:text="${feedback.summary}">
+                        Excellent séjour, je recommande vivement !
+                    </div>
+                </div>
+                
+                <!-- Points positifs et négatifs -->
+                <div th:if="${feedback.likes or feedback.dislikes}" class="likes-dislikes">
+                    <div th:if="${feedback.likes}" class="likes">
+                        <div class="section-title" style="color: #4caf50;">👍 Points positifs</div>
+                        <div class="section-content" th:text="${feedback.likes}">
+                            Service excellent, chambre propre, personnel accueillant
+                        </div>
+                    </div>
+                    <div th:if="${feedback.dislikes}" class="dislikes">
+                        <div class="section-title" style="color: #f44336;">👎 Points à améliorer</div>
+                        <div class="section-content" th:text="${feedback.dislikes}">
+                            Petit-déjeuner un peu limité
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Réponse de l'établissement -->
+                <div th:if="${feedback.response}" class="response-section">
+                    <div class="response-title">
+                        <span>💬 Réponse de l'établissement</span>
+                    </div>
+                    <div class="section-content" th:text="${feedback.response}">
+                        Merci pour votre retour ! Nous sommes ravis que votre séjour se soit bien passé.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
