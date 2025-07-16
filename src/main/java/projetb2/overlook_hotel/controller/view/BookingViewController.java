@@ -87,11 +87,14 @@ public class BookingViewController {
         if (departureDate == null) {
             departureDate = arrivalDate.plusDays(1);
         }
+        int duration = (int) (departureDate.toEpochDay() - arrivalDate.toEpochDay());
+        double totalPrice = (int) roomService.getRoomById(roomId).getPrice() * duration;
 
         model.addAttribute("arrivalDate", arrivalDate);
         model.addAttribute("departureDate", departureDate);
         model.addAttribute("roomName", roomService.mapRoomTitle(roomId));
         model.addAttribute("room", roomService.getRoomById(roomId));
+        model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("userId", userId);
         model.addAttribute("adultsCount", adultsCount);
         model.addAttribute("childrenCount", childrenCount);
@@ -102,9 +105,8 @@ public class BookingViewController {
         if ("success".equals(paymentStatus)) {
             model.addAttribute("paymentMessage", "success");
             boolean alreadyExists = bookingService.existsSimilarBooking(userId, roomId, arrivalDate, departureDate);
-            int price = (int)roomService.getRoomById(roomId).getPrice();
             if (!alreadyExists) {
-                bookingService.createBooking(userId, roomId, arrivalDate, departureDate, adultsCount, childrenCount, price);
+                bookingService.createBooking(userId, roomId, arrivalDate, departureDate, adultsCount, childrenCount, (int)totalPrice);
             }
         } else if ("cancel".equals(paymentStatus)) {
             model.addAttribute("paymentMessage", "cancel");

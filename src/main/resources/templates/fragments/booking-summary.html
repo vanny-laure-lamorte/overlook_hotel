@@ -33,11 +33,13 @@
                         <div>
                             <strong>Price:</strong>
                             <span th:text="${room.price} + ' € / night'">100 €</span>
+                            <strong>Total:</strong>
+                            <span th:text="${totalPrice} + ' €'">200 €</span>
                         </div>
                     </div>
                 </div>
                 <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                    <div th:replace="~{fragments/payment-button :: fgt-payment-button(${room.price}, ${stripePublicKey})}">
+                    <div th:replace="~{fragments/payment-button :: fgt-payment-button(${totalPrice}, ${stripePublicKey})}">
                     </div>
                     <button type="button" class="btn btn-tertiary" onclick="toggleDateEditor()">Modify dates</button>
                 </div>
