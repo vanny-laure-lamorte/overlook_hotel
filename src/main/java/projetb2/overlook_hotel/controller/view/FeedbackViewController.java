@@ -1,6 +1,7 @@
 package projetb2.overlook_hotel.controller.view;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -76,25 +78,6 @@ public class FeedbackViewController {
     }
 
     /**
-     * Display the feedback form for a specific booking.
-     */
-    @GetMapping("/reviews")
-    public String showAllReviews(
-        @AuthenticationPrincipal UserDetails currentUser,
-        Model model) {
-        Optional<HotelUser> hotelUserOpt = hotelUserService.findByEmail(currentUser.getUsername());
-        if (hotelUserOpt.isEmpty()) {
-            return "redirect:/login";
-        }
-        // model.addAttribute("hotelUser",hotelUser);
-
-        model.addAttribute("fragmentPath", "fragments/feedback-reviews.html");
-        model.addAttribute("fragmentName", "fgt-feedback-reviews");
-        return "layout/connectedLayout";
-    }
-
-
-    /**
      * Submits the feedback for a booking.
      */
     @PostMapping("/submit")
@@ -127,5 +110,25 @@ public class FeedbackViewController {
         model.addAttribute("fragmentPath", "fragments/feedback-form.html");
         model.addAttribute("fragmentName", "fgt-feedback-form");
         return new RedirectView("/view/booking/past-booking");
+    }
+
+    /**
+     * Display the feedback form for a specific booking.
+     */
+    @GetMapping("/reviews/{roomTitle}")
+    public String showAllReviews(
+        @PathVariable int roomTitle,
+        Model model) {
+
+        List<Feedback> feedbacks = feedbackService.getFeedbackByRoomTitle(roomTitle);
+        
+        model.addAttribute("feedbacks", feedbacks);
+        // System.out.println("FFFFFFFFFFFFf " + roomTitle + ": " + feedbacks.size());
+        System.out.println("FFFFFFFFFFFFf " + feedbacks);
+
+
+        model.addAttribute("fragmentPath", "fragments/feedback-review.html");
+        model.addAttribute("fragmentName", "fgt-feedback-review");
+        return "layout/connectedLayout";
     }
 }
