@@ -3,17 +3,6 @@
         <h2 class="search-title">Book your hotel</h2>
         <form th:action="@{/view/rooms/filter}" method="get" class="search-form">
             <div class="search-fields-container">
-                <!-- Destination Field -->
-                <div class="search-field destination-field">
-                    <label for="destination">Destination / Hotel</label>
-                    <div class="input-container">
-                        <div class="icon-wrapper">
-                            <i class="fas fa-map-marker-alt field-icon"></i>
-                            <span class="separator-line"></span>
-                        </div>
-                        <input type="text" id="destination" name="destination" placeholder="City, town or hotel name">
-                    </div>
-                </div>
                 <!-- Check-in Field -->
                 <div class="search-field date-field">
                     <label for="check-in">Check in</label>
