@@ -43,30 +43,30 @@ CREATE TABLE IF NOT EXISTS hotel_user (
 INSERT INTO hotel_user (first_name, last_name, dob, user_address, phone_number, email, user_password, role_id) VALUES
 ('Admin', 'AdminLN', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'a', 'a', 3),
 ('Test', 'TestLN', '1995-12-22', '1 Rue des Champs, Paris', '0123456789', 't', 't', 3),
-('Lucas', 'Martinie', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'alice.durand@example.com', 'password123', 3),
-('Vanny', 'Lamorte', '1993-12-25', '2 Boulevard de la Republique, Paris', '0987654321', 'bob.martin@example.com', 'password123', 3);
+('Lucas', 'Martinie', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'lucas@gmail.com', 'password123', 3),
+('Vanny', 'Lamorte', '1993-12-25', '2 Boulevard de la Republique, Paris', '0687654321', 'vanny@gmail.com', 'password123', 3);
 -- Employees
 INSERT INTO hotel_user (first_name, last_name, dob, user_address, phone_number, email, user_password, role_id) VALUES
 ('Employee', 'EmployeeLN', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'e', 'e', 2),
-('Frank', 'Meyer', '1992-04-12', '6 Rue de l eglise, Lille', '0612345679', 'frank.meyer@example.com', 'password123', 2),
-('Gina', 'Petit', '1988-07-08', '7 Place du Marche, Nice', '0623456789', 'gina.petit@example.com', 'password123', 2),
-('Hugo', 'Bernard', '1993-01-22', '8 Rue de la Gare, Bordeaux', '0687654321', 'hugo.bernard@example.com', 'password123', 2);
+('Frank', 'Meyer', '1992-04-12', '6 Rue de l eglise, Lille', '0612345679', 'frank.meyer@gmail.com', 'password123', 2),
+('Gina', 'Petit', '1988-07-08', '7 Place du Marche, Nice', '0623456789', 'gina.petit@gmail.com', 'password123', 2),
+('Hugo', 'Bernard', '1993-01-22', '8 Rue de la Gare, Bordeaux', '0687654321', 'hugo.bernard@gmail.com', 'password123', 2);
 -- Customers
 INSERT INTO hotel_user (first_name, last_name, dob, user_address, phone_number, email, user_password, role_id) VALUES
 ('Customer', 'CustomerLastName', '1995-12-24', '1 Rue des Champs, Paris', '0123456789', 'c', 'c', 1),
-('Charlie', 'Dupont', '1982-03-30', '3 Avenue des Tuileries, Lyon', '0601020304', 'charlie.dupont@example.com', 'password123', 1),
-('Diana', 'Lemoine', '1995-09-10', '4 Rue de la Paix, Marseille', '0712345678', 'diana.lemoine@example.com', 'password123', 1),
-('Eve', 'Blanchard', '1987-11-05', '5 Place de la Liberte, Toulouse', '0812345678', 'eve.blanchard@example.com', 'password123', 1),
-('Alice', 'Martin', '1990-04-12', '10 Rue de la Republique, Paris', '0611223344', 'alice.martin@example.com', 'password123', 1),
-('Benoît', 'Girard', '1985-08-19', '21 Boulevard Victor Hugo, Nice', '0622334455', 'benoit.girard@example.com', 'password123', 1),
-('Claire', 'Perrot', '1992-02-28', '33 Avenue Jean Jaures, Lille', '0633445566', 'claire.perrot@example.com', 'password123', 1),
-('Damien', 'Roux', '1988-06-17', '5 Rue Nationale, Nantes', '0644556677', 'damien.roux@example.com', 'password123', 1),
-('Elodie', 'Marchand', '1993-10-09', '8 Place Bellecour, Lyon', '0655667788', 'elodie.marchand@example.com', 'password123', 1),
-('François', 'Leclerc', '1980-12-03', '14 Rue des Remparts, Bordeaux', '0666778899', 'francois.leclerc@example.com', 'password123', 1),
-('Gabrielle', 'Picard', '1996-07-25', '2 Allee des Lilas, Rennes', '0677889900', 'gabrielle.picard@example.com', 'password123', 1),
-('Hugo', 'Meyer', '1983-11-14', '18 Avenue de Strasbourg, Strasbourg', '0688990011', 'hugo.meyer@example.com', 'password123', 1),
-('Isabelle', 'Renard', '1991-05-05', '7 Rue Saint-Michel, Montpellier', '0699001122', 'isabelle.renard@example.com', 'password123', 1),
-('Julien', 'Barbier', '1986-09-21', '12 Boulevard Haussmann, Paris', '0600112233', 'julien.barbier@example.com', 'password123', 1);
+('Charlie', 'Dupont', '1982-03-30', '3 Avenue des Tuileries, Lyon', '0601020304', 'charlie.dupont@gmail.com', 'password123', 1),
+('Diana', 'Lemoine', '1995-09-10', '4 Rue de la Paix, Marseille', '0712345678', 'diana.lemoine@gmail.com', 'password123', 1),
+('Eve', 'Blanchard', '1987-11-05', '5 Place de la Liberte, Toulouse', '0812345678', 'eve.blanchard@gmail.com', 'password123', 1),
+('Alice', 'Martin', '1990-04-12', '10 Rue de la Republique, Paris', '0611223344', 'alice.martin@gmail.com', 'password123', 1),
+('Benoît', 'Girard', '1985-08-19', '21 Boulevard Victor Hugo, Nice', '0622334455', 'benoit.girard@gmail.com', 'password123', 1),
+('Claire', 'Perrot', '1992-02-28', '33 Avenue Jean Jaures, Lille', '0633445566', 'claire.perrot@gmail.com', 'password123', 1),
+('Damien', 'Roux', '1988-06-17', '5 Rue Nationale, Nantes', '0644556677', 'damien.roux@gmail.com', 'password123', 1),
+('Elodie', 'Marchand', '1993-10-09', '8 Place Bellecour, Lyon', '0655667788', 'elodie.marchand@gmail.com', 'password123', 1),
+('François', 'Leclerc', '1980-12-03', '14 Rue des Remparts, Bordeaux', '0666778899', 'francois.leclerc@gmail.com', 'password123', 1),
+('Gabrielle', 'Picard', '1996-07-25', '2 Allee des Lilas, Rennes', '0677889900', 'gabrielle.picard@gmail.com', 'password123', 1),
+('Hugo', 'Meyer', '1983-11-14', '18 Avenue de Strasbourg, Strasbourg', '0688990011', 'hugo.meyer@gmail.com', 'password123', 1),
+('Isabelle', 'Renard', '1991-05-05', '7 Rue Saint-Michel, Montpellier', '0699001122', 'isabelle.renard@gmail.com', 'password123', 1),
+('Julien', 'Barbier', '1986-09-21', '12 Boulevard Haussmann, Paris', '0600112233', 'julien.barbier@gmail.com', 'password123', 1);
 
 -- room_type ENUM type for rooms
 CREATE TYPE ROOM_TYPE AS ENUM ('Room', 'Meeting', 'Spa');

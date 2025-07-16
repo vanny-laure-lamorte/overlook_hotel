@@ -22,8 +22,7 @@
                             <i class="far fa-calendar-alt field-icon"></i>
                             <span class="separator-line"></span>
                         </div>
-                        <input type="text" id="check-in" name="checkIn" class="datepicker" placeholder="Add date"
-                            readonly>
+                        <input type="date" id="check-in" name="checkIn" class="datepicker">
                     </div>
                 </div>
                 <!-- Check-out Field -->
@@ -34,8 +33,7 @@
                             <i class="far fa-calendar-alt field-icon"></i>
                             <span class="separator-line"></span>
                         </div>
-                        <input type="text" id="check-out" name="checkOut" class="datepicker" placeholder="Add date"
-                            readonly>
+                        <input type="date" id="check-out" name="checkOut" class="datepicker">
                     </div>
                 </div>
                 <!-- Two-Part: Rooms & Guests -->
@@ -80,4 +78,17 @@
             </div>
         </form>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkInInput = document.getElementById('check-in');
+            const checkOutInput = document.getElementById('check-out');
+            checkInInput.addEventListener('change', function () {
+                const checkInDate = this.value;
+                checkOutInput.min = checkInDate;
+                if (checkOutInput.value && checkOutInput.value <= checkInDate) {
+                    checkOutInput.value = '';
+                }
+            });
+        });
+    </script>
 </div>
