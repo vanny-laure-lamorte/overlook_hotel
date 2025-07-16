@@ -25,7 +25,10 @@
                         </div>
                         <div>
                             <strong>Dates:</strong>
-                            <span th:text="${arrivalDate} + ' → ' + ${departureDate}">2025-08-01 → 2025-08-03</span>
+                            <span
+                                th:text="${#temporals.format(arrivalDate, 'dd-MM-yyyy')} + ' → ' + ${#temporals.format(departureDate, 'dd-MM-yyyy')}">
+                                01-08-2025 → 03-08-2025
+                            </span>
                         </div>
                         <div>
                             <strong>Price:</strong>
@@ -34,7 +37,7 @@
                     </div>
                 </div>
                 <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                    <div th:replace="fragments/payment-button :: fgt-payment-button(${room.price}, ${stripePublicKey})">
+                    <div th:replace="~{fragments/payment-button :: fgt-payment-button(${room.price}, ${stripePublicKey})}">
                     </div>
                     <button type="button" class="btn btn-tertiary" onclick="toggleDateEditor()">Modify dates</button>
                 </div>
@@ -47,12 +50,12 @@
                     <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
                         <div>
                             <label><strong>Arrival:</strong></label>
-                            <input class="input-grey" type="date" name="arrivalDate" th:value="${arrivalDate}"
+                            <input class="input-grey" name="arrivalDate" th:value="${arrivalDate}"
                                 required />
                         </div>
                         <div>
                             <label><strong>Departure:</strong></label>
-                            <input class="input-grey" type="date" name="departureDate" th:value="${departureDate}"
+                            <input class="input-grey" name="departureDate" th:value="${departureDate}"
                                 required />
                         </div>
                         <div style="align-self: flex-end;">

@@ -44,6 +44,8 @@ public class RoomsViewController {
     public String searchRooms(
             @RequestParam(name = "adultsCount", defaultValue = "2") int adults,
             @RequestParam(name = "childrenCount", defaultValue = "0") int children,
+            @RequestParam(name = "arrivalDate", required = false) String arrivalDate,
+            @RequestParam(name = "departureDate", required = false) String departureDate,
             Model model) {
 
         int totalGuests = adults + children;
@@ -55,6 +57,8 @@ public class RoomsViewController {
         model.addAttribute("rooms", onlyRooms);
         model.addAttribute("adultsCount", adults);
         model.addAttribute("childrenCount", children);
+        model.addAttribute("arrivalDate", arrivalDate);
+        model.addAttribute("departureDate", departureDate);
         model.addAttribute("fragmentPath", "fragments/all-rooms.html");
         model.addAttribute("fragmentName", "fgt-all-rooms");
 
