@@ -4,13 +4,17 @@ import java.time.LocalDate;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import projetb2.overlook_hotel.model.Booking;
 import projetb2.overlook_hotel.model.BookingStatus;
+import projetb2.overlook_hotel.model.HotelUser;
 import projetb2.overlook_hotel.model.Room;
 import projetb2.overlook_hotel.repository.BookingRepository;
 
 @Service
 public class BookingService {
+    @Autowired
+    private HotelUserService hotelUserService;
 
     private final BookingRepository bookingRepo;
     private final RoomService roomService;
@@ -98,8 +102,9 @@ public class BookingService {
         return bookings;
     }
 
-     /**
-     * Cancel all bookings associated with a user by their user ID.     *
+    /**
+     * Cancel all bookings associated with a user by their user ID. *
+     * 
      * @param userId the ID of the user whose bookings are to be deleted
      */
     @Transactional
@@ -114,6 +119,7 @@ public class BookingService {
 
     /**
      * Calculate loyalty level according to past boonkings number.
+     * 
      * @param userId the ID of the user
      */
     public String calculateLoyaltyLevel(Integer userId) {
@@ -133,5 +139,26 @@ public class BookingService {
         }
     }
 
-}
+    @Transactional
+    public Booking createBooking(Integer userId, Integer roomId, LocalDate arrival, LocalDate departure, int adults,
+            int children, int price) {
+        HotelUser user = hotelUserService.findById(userId);
+        Room room = roomService.getRoomById(roomId);
 
+        Booking booking = new Booking();
+        booking.setUser(user);
+        booking.setRoom(room);
+        booking.setArrivingDate(arrival);
+        booking.setDepartureDate(departure);
+        booking.setAdults(adults);
+        booking.setChildren(children);
+        booking.setBill(price);
+        booking.setBookingStatus(BookingStatus.PENDING);
+
+        return bookingRepo.save(booking);
+    }
+
+    public boolean existsSimilarBooking(Integer userId, Integer roomId, LocalDate arrival, LocalDate departure) {
+        return bookingRepo.existsByUser_IdAndRoom_IdAndArrivingDateAndDepartureDate(userId, roomId, arrival, departure);
+    }
+}

@@ -27,4 +27,7 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
     List<Booking> findPastBookingsByUserId(Integer userId, LocalDate today);
 
     List<Booking> findByUser_Id(Integer userId);
+
+    boolean existsByUser_IdAndRoom_IdAndArrivingDateAndDepartureDate(
+            Integer userId, Integer roomId, LocalDate arrivingDate, LocalDate departureDate);
 }

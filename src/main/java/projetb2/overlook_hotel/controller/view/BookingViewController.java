@@ -101,6 +101,11 @@ public class BookingViewController {
 
         if ("success".equals(paymentStatus)) {
             model.addAttribute("paymentMessage", "success");
+            boolean alreadyExists = bookingService.existsSimilarBooking(userId, roomId, arrivalDate, departureDate);
+            int price = (int)roomService.getRoomById(roomId).getPrice();
+            if (!alreadyExists) {
+                bookingService.createBooking(userId, roomId, arrivalDate, departureDate, adultsCount, childrenCount, price);
+            }
         } else if ("cancel".equals(paymentStatus)) {
             model.addAttribute("paymentMessage", "cancel");
         }
