@@ -24,30 +24,19 @@ public class SecurityConfig {
                                                                 "/js/**",
                                                                 "/images/**",
                                                                 "/fonts/**",
-                                                                "/profile",
-                                                                "view/**",
-                                                                "api/**",
-                                                                "/feedback",
-                                                                "/feedback/**",
-                                                                "/api/auth/register",
-                                                                "/home",
-                                                                "/feedback",
-                                                                "/feedback/**",
-                                                                "/api/customers/delete",
-                                                                "/api/feedback/**",
-                                                                "/payment",
-                                                                "/spa",
-                                                                "/meeting-room**",
-                                                                "/past-booking",
-                                                                "/past-booking",
                                                                 "/header/***",
+                                                                "/api/auth/register",
                                                                 "/auth")
                                                 .permitAll()
                                                 .requestMatchers(
-                                                                "/admin/**")
+                                                                "/admin/**",
+                                                                "/view/dashboard/employees")
                                                 .hasRole("ADMIN")
                                                 .requestMatchers(
-                                                                "/view/dashboard/bookings")
+                                                                "/view/dashboard/bookings",
+                                                                "/view/dashboard/customers",
+                                                                "/api/customers/**",
+                                                                "api/booking/**")
                                                 .hasAnyRole("ADMIN", "EMPLOYEE")
                                                 .anyRequest().authenticated())
                                 .formLogin(form -> form
