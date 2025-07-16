@@ -12,6 +12,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import projetb2.overlook_hotel.model.HotelUser;
 import projetb2.overlook_hotel.service.HotelUserService;
 import projetb2.overlook_hotel.service.BookingService;
+import projetb2.overlook_hotel.service.FeedbackService;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -19,10 +20,12 @@ public class CustomersApiController {
 
     private final HotelUserService hotelUserService;
     private final BookingService bookingService;
+    private final FeedbackService feedbackService;
 
-    public CustomersApiController(HotelUserService hotelUserService, BookingService bookingService) {
+    public CustomersApiController(HotelUserService hotelUserService, BookingService bookingService, FeedbackService feedbackService) {
         this.hotelUserService = hotelUserService;
         this.bookingService = bookingService;
+        this.feedbackService = feedbackService;
     }
 
     /**
@@ -60,6 +63,7 @@ public class CustomersApiController {
     @PostMapping("/delete")
     public RedirectView deleteCustomer(@RequestParam("customerId") Integer id) {
         bookingService.cancelBookingsByUserId(id);
+        feedbackService.deleteFeedbackByUserId(id);
         HotelUser existingUser = hotelUserService.findById(id);
         if (existingUser != null) {
             hotelUserService.deleteUser(existingUser);

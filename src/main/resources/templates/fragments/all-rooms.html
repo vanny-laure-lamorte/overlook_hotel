@@ -51,6 +51,7 @@
                     <div class="book-now-section">
                         <form th:action="@{/view/booking/summary}" method="get">
                             <input type="hidden" name="roomId" th:value="${room.id}" />
+                            <input type="hidden" name="userId" th:value="${user.id}" />
                             <input type="hidden" name="arrivalDate" th:value="${arrivalDate}" />
                             <input type="hidden" name="departureDate" th:value="${departureDate}" />
                             <input type="hidden" name="AdultsCount" th:value="${adultsCount}" />
